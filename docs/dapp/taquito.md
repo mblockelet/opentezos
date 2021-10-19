@@ -536,5 +536,5 @@ Our three transfer transactions and our contract call are now indeed batched tog
 
 _Taquito_ facilitates developers' interactions with the Tezos network. It can read data from a blockchain, send transactions, originate a contract, etc.
 
-However, Dapps require the ability to manage keys. In our example, there was only a single key to manage. In production Dapps, each user will want to use a key that they owns. That is where _wallets_ come into play. Most Tezos wallets are built upon _Taquito_ and make Dapps more user-friendly and accessible. Let's take a deeper look at wallets in the next chapter.
+However, Dapps require the ability to manage keys. In our example, there was only a single key to manage. In production Dapps, each user will want to use a key that they own. That is where _wallets_ come into play. Most Tezos wallets are built upon _Taquito_ and make Dapps more user-friendly and accessible. Let's take a deeper look at wallets in the next chapter.
 

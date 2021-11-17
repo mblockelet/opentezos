@@ -18,12 +18,11 @@ The purpose of this chapter is to list the main explorers of the Tezos blockchai
 - [TezEdge - Tezos Node Explorer](https://tezedge.com/#/network)
 - [Tezos Notifier Bot (Telegram)](https://t.me/TezosNotifierBot)
 - [Better Call Dev - Smart Contract Explorer](https://better-call.dev/)
-- [SmartPy Contract Explorer](https://www.smartpy.io/dev/explorer)
+- [SmartPy Contract Explorer](https://smartpy.io/explorer.html)
 - [Misualizer - Smart Contract Explorer](https://misualizer.tezbridge.com/)
 - [Tezos Hubble Explorer](https://hubble.figment.network/tezos)
 - [Baking Bad - Delegation Explorer](https://baking-bad.org/)
 - [Mininax](https://mininax.io/mainnet)
-- [Blockchair](https://blockchair.com/tezos)
 
 ## Indexers potential features
 

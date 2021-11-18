@@ -61,7 +61,7 @@ The issue here is that buyers need to be confident that the bonds will payout. B
 <small className="figure">FIGURE 3: Recapitulation of the 3 types of stablecoins.</small>
 
 ## On Tezos
-- [Kolibri (kUSD)](https://kolibri.finance/), currently only on the testnet.
+- [Kolibri (kUSD)](https://kolibri.finance/), which uses CDPs (referred to as an `Oven`) backed by XTZ to collateralize a soft pegged USD-stable value asset, **kUSD** and is available on the mainnet with more than 6.5m **kUSD** in existence (at the time of writing). 
   
 - [Stably (USDS)](https://www.stably.io/), which is available on the mainnet and is fully backed by fiat reserves and regulated by _Prime Trust_, a Nevada-chartered trust company that also acts as the regulated administrator of USDS. 
 

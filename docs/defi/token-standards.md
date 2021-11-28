@@ -31,7 +31,7 @@ On Tezos, the latest token standard is [FA2](https://gitlab.com/tzip/tzip/-/blob
 - fungible (equivalent to [ERC-20](https://ethereum.org/en/developers/docs/standards/tokens/) on Ethereum),
 - non-fungible (equivalent to [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/) on Ethereum),
 - non-transferable (equivalent to [ERC-1238](https://ethereum.org/en/developers/docs/standards/tokens/) on Ethereum),
-- as well as multi-asset contracts (equivalent to [ERC-1151](https://ethereum.org/en/developers/docs/standards/tokens/) on Ethereum).
+- as well as multi-asset contracts (equivalent to [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/) on Ethereum).
 
 As you can see, FA2 is a very powerful standard that allows for many forms of tokens. It aims to provide significant expressivity to contract developers, allowing them to create new types of tokens while maintaining a common interface standard for wallet integrators and external developers. A variety of transfer permission policies can also be defined, such as how most tokens can be transferred, who can perform a transfer, and who can receive tokens. A token contract can be designed to support a single token type or multiple token types to optimize batch transfers and atomic swaps. A particular FA2 implementation may include hybrid implementations where multiple token kinds (fungible, non-fungible, non-transferable etc) can coexist (e.g. in a fractionalized NFT contract) [[2]](/defi/token-standards#references).
 

@@ -157,6 +157,23 @@ You can quickly check the correct installations of some files:
 ./tezos-admin-client --version
 ```
 
+### Other installations methods
+
+To have a pre-built binary distributions for some popular Linux distros refer to
+```shell
+https://tezos.gitlab.io/introduction/howtoget.html#setting-up-the-development-environment-from-scratch
+```
+
+To use a Docker installation refer to
+```shell
+https://tezos.gitlab.io/introduction/howtoget.html#using-docker-images
+```
+
+To easily setup a node and a baker refer to 
+```shell
+https://github.com/serokell/tezos-packaging/blob/master/docs/baking.md
+```
+
 ## References
 
 [1] https://tezos.gitlab.io/introduction/howtoget.html#setting-up-the-development-environment-from-scratch

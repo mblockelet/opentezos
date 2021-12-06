@@ -161,17 +161,17 @@ You can quickly check the correct installations of some files:
 
 To have a pre-built binary distributions for some popular Linux distros refer to
 ```shell
-https://tezos.gitlab.io/introduction/howtoget.html#setting-up-the-development-environment-from-scratch
+[link](https://tezos.gitlab.io/introduction/howtoget.html#setting-up-the-development-environment-from-scratch)
 ```
 
 To use a Docker installation refer to
 ```shell
-https://tezos.gitlab.io/introduction/howtoget.html#using-docker-images
+[link](https://tezos.gitlab.io/introduction/howtoget.html#using-docker-images)
 ```
 
 To easily setup a node and a baker refer to 
 ```shell
-https://github.com/serokell/tezos-packaging/blob/master/docs/baking.md
+[link](https://github.com/serokell/tezos-packaging/blob/master/docs/baking.md)
 ```
 
 ## References

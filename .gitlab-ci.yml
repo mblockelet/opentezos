@@ -1,13 +1,27 @@
-pages: 
-    stages:          # List of stages for jobs, and their order of execution
-       - deploy
-    script:
+image: node:15.12-alpine3.13
 
-    deploy-job:      # This job runs in the deploy stage.
-    stage: deploy  
-    only: 
-        - main# It only runs when *both* jobs in the test stage complete successfully.
-    script:
-        - echo "Deploying application..."
-        - echo "Application successfully deployed."
+stages:
+  - test
+  - deploy
 
+test:
+  stage: test
+  script:
+  - cd website
+  - yarn install
+  - yarn build
+  rules:
+    - if: $CI_COMMIT_REF_NAME != $CI_DEFAULT_BRANCH
+
+pages:
+  stage: deploy
+  script:
+  - cd website
+  - yarn install
+  - yarn build
+  - mv ./build ../public
+  artifacts:
+    paths:
+    - public
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH

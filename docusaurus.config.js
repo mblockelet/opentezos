@@ -30,7 +30,7 @@ module.exports = {
       },
       items: [
         {
-          href: 'https://gitlab.com/tezos-paris-hub/OpenTezos/',
+          href: 'https://gitlab.com/tezos-paris-hub/opentezos/',
           label: 'Gitlab',
           position: 'right',
         },
@@ -69,7 +69,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./src/sidebar/sidebar.js'),
           routeBasePath: '/',
-          editUrl: 'https://gitlab.com/tezos-paris-hub/OpenTezos/-/blob/main/',
+          editUrl: 'https://gitlab.com/tezos-paris-hub/opentezos/-/blob/main/',
           remarkPlugins: [math],
           rehypePlugins: [katex],
           showLastUpdateTime: true,

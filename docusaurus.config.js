@@ -30,7 +30,7 @@ module.exports = {
       },
       items: [
         {
-          href: 'https://github.com/octo-technology/OpenTezos/',
+          href: 'https://gitlab.com/tezos-paris-hub/OpenTezos/',
           label: 'Gitlab',
           position: 'right',
         },

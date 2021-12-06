@@ -14,6 +14,6 @@ pages:
     - yarn build:gitlab
   artifacts:
       paths:
-        - public
+        - /
   only:
     - master

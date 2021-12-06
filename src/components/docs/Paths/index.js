@@ -141,7 +141,7 @@ class Paths extends React.Component {
               to="/baking"
             />
           )}
-          {[paths.ALL, paths.DEV, paths.STARTUPPER].includes(
+          /*{[paths.ALL, paths.DEV, paths.STARTUPPER].includes(
             this.state.path,
           ) && (
             <OverlayCard
@@ -151,7 +151,7 @@ class Paths extends React.Component {
               title="Deploy Bakers"
               to="/baker"
             />
-          )}
+          )}*/
           {[paths.ALL, paths.DEV, paths.C_LEVEL, paths.STARTUPPER].includes(
             this.state.path,
           ) && (

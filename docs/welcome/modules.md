@@ -11,11 +11,11 @@ import NotificationBar from '../../src/components/docs/NotificationBar';
 import CardsWrapper from '../../src/components/docs/Cards/CardsWrapper';
 import OverlayCard from '../../src/components/docs/Cards/OverlayCard';
 
-Welcome Tezos Developers! Explore the technical and economic concepts behind the Tezos Network, experiment with our tutorials, or start building your own Tezos Dapp. Each module will teach you a full concept of Tezos, ending with a quiz that will get you an official completion certification if you succeed. 
+Welcome Tezos Developers! Explore the technical and economic concepts behind the Tezos Network, experiment with our tutorials, or start building your own Tezos Dapp. Each module will teach you a full concept of Tezos, ending with a quiz that will get you an official completion certification if you succeed.
 
 <NotificationBar>
   <p>
-    See an error somewhere? Fix it with a <a href="https://github.com/octo-technology/OpenTezos" target="_blank">Github Pull Request here</a>. OpenTezos is a constantly evolving platform that welcome all readers inputs. You can even add a new chapter or module if wish.
+    See an error somewhere? Fix it with a <a href="https://gitlab.com/tezos-paris-hub/opentezos" target="_blank">Gitlab Merge Request here</a>. OpenTezos is a constantly evolving platform that welcome all readers inputs. You can even add a new chapter or module if wish.
   </p>
 </NotificationBar>
 
@@ -49,6 +49,13 @@ Welcome Tezos Developers! Explore the technical and economic concepts behind the
       iconDark="img/icons/explorer-big-dark.svg"
       title="How to use an Explorer"
       to="/explorer"
+  />
+  <OverlayCard
+      description="Learn the basics of the Archetype smart contract language."
+      icon="img/icons/archetype-big-light.svg"
+      iconDark="img/icons/archetype-big-dark.svg"
+      title="Archetype"
+      to="/archetype"
   />
   <OverlayCard
       description="Learn the basics of the SmartPy smart contract language."

@@ -90,6 +90,17 @@ class Paths extends React.Component {
             this.state.path,
           ) && (
             <OverlayCard
+              description="Learn the basics of the Archetype smart contract language."
+              icon="img/icons/archetype-big-light.svg"
+              iconDark="img/icons/archetype-big-light.svg"
+              title="Archetype"
+              to="/archetype"
+            />
+          )}
+          {[paths.ALL, paths.DEV].includes(
+            this.state.path,
+          ) && (
+            <OverlayCard
               description="Learn the basics of the SmartPy smart contract language."
               icon="img/icons/smartpy-big-light.svg"
               iconDark="img/icons/smartpy-big-dark.svg"

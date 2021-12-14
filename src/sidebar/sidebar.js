@@ -60,6 +60,11 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Archetype',
+      items: ['archetype/introduction', 'archetype/completium', 'archetype/examples'],
+    },
+    {
+      type: 'category',
       label: 'SmartPy',
       items: ['smartpy/introduction', 'smartpy/installation', 'smartpy/write-contract-smartpy', 'smartpy/exam'],
     },

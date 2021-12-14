@@ -1,4 +1,4 @@
-const darkCodeTheme = require('prism-react-renderer/themes/palenight')
+const darkCodeTheme = require('prism-react-renderer/themes/nightOwl')
 const lightCodeTheme = require('prism-react-renderer/themes/github')
 const math = require('remark-math')
 const katex = require('rehype-katex')
@@ -59,7 +59,6 @@ module.exports = {
       darkTheme: darkCodeTheme,
       theme: lightCodeTheme,
     },
-    sidebarCollapsible: true,
     siteID: 'developers',
   },
   presets: [
@@ -73,7 +72,7 @@ module.exports = {
           remarkPlugins: [math],
           rehypePlugins: [katex],
           showLastUpdateTime: true,
-          showLastUpdateAuthor: true
+          showLastUpdateAuthor: true,
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

@@ -24,8 +24,8 @@
     "docker-install": "yarn run docker-build && yarn run docker-push && yarn run docker-patch && yarn run docker-deploy && yarn run docker-serve"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.0-alpha.75",
-    "@docusaurus/preset-classic": "^2.0.0-alpha.75",
+    "@docusaurus/core": "^2.0.0-beta.13",
+    "@docusaurus/preset-classic": "^2.0.0-beta.13",
     "@libra-opensource/diem-docusaurus-components": "^0.1.19",
     "@mdx-js/react": "^1.6.22",
     "@svgr/webpack": "^5.5.0",

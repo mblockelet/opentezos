@@ -1,3 +1,7 @@
+
+.docusaurus
+.vscode
+
 **/.env
 **/.env.development
 **/.env.production

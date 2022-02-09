@@ -2,6 +2,10 @@
   "name": "opentezos",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=14 "
+  },
+  "engineStrict" : true, 
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
@@ -51,10 +55,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-    "engines": {
-      "node": ">=14 ",
-      "npm": "please-use-yarn"
-    },
-    "engineStrict" : true 
+  }
 }

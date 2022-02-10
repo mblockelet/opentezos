@@ -16,7 +16,7 @@
 }
 
 .circleOverlay {
-  background-color: rgba(30,72,85,0.1);
+  background-color: var(--overlay-card-background);
   border-top-right-radius: 50%;
   border-bottom-right-radius: 50%;
   height: 263px;
@@ -70,6 +70,7 @@ html {
 
 html[data-theme='dark'] {
   --overlay-card-hover: #295daa;
+  --overlay-card-background: rgba(30,72,85,0.5)
 }
 
 /*html[data-theme='dark'] {

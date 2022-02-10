@@ -25,7 +25,7 @@ Dapps are first and foremost applications, and should to this end be designed wi
 
 In other modules, the interactions with deployed smart contracts have been performed with CLIs (Tezos client for instance) or libraries (Pytezos). However, these tools are meant for developers and not for the users, who need more user-friendly interfaces. Thus, for each smart contract, a frontend and possibily a backend (containing parts of the business logic) has to be developed to display information from the contract, make contract calls and to interact with off-chain services.
 
-In the [Ligo](/ligo/contracts-ligo) and [Smartpy](/docs/smartpy/write-contract-smartpy.md) modules, we have developed a _Raffle_ smart contract. In this module, we will use the LIGO version of this smart contract to create a Dapp. To do so, we will:
+In the [Ligo](/ligo/write-contract-ligo/1-raffle-contract) and [Smartpy](/smartpy/write-contract-smartpy) modules, we have developed a _Raffle_ smart contract. In this module, we will use the LIGO version of this smart contract to create a Dapp. To do so, we will:
 1. Learn how to make compilations and deployments easier during the Dapp development phase using a tool called _Truffle_.
 2. Interact with a _Tezos_ network using a Javascript library called _Taquito_. This library interacts with a node, and thus can fetch all kind of information about the network, can make transactions and call smart contracts.
 3. Discover an in-browser _Tezos_ wallet; _Temple_; that allows users to manage Tezos addresses and interact with the Tezos blockchain safely.

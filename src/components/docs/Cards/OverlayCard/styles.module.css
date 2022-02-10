@@ -69,9 +69,15 @@ html {
 }
 
 html[data-theme='dark'] {
-  --overlay-card-hover: inherit;
+  --overlay-card-hover: #295daa;
 }
 
-html[data-theme='dark'] .circleOverlay {
+/*html[data-theme='dark'] {
+  --overlay-card-hover: inherit;
+}
+*/
+
+/*html[data-theme='dark'] .circleOverlay {
   transition: none;
 }
+*/

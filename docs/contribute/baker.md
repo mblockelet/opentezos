@@ -4,13 +4,13 @@ title: Become a baker or a delegator
 authors: Aymeric Bethencourt
 ---
 
-Becoming a baker or a delegate on Tezos is a great way to contribute to the ecosystem while earning some profits. _Baking_ (also called _staking_) is the process of forming new blocks on Tezos. This process is part of the Proof-of-Stake consensus (more on that in the [Tezos basics module](/tezos-basics)). The more bakers, the more decentralized and statistically safe this process is. 
+Becoming a baker or a delegate on Tezos is a great way to contribute to the ecosystem while earning some profits. _Baking_ (also called _staking_) is the process of forming new blocks on Tezos. This process is part of the Proof-of-Stake consensus (more on that in the [Tezos basics module](/tezos-basics)). The more bakers, the more decentralized and statistically safe this process is.
 
 ## How to bake?
 
 Everyone with at least 8,000 Tez can produce, sign and validate blocks and get rewards in proportion to their stake. The only thing you need to exercise your baking rights is to run a node with baking software and keep it online and up to date.
 
-OpenTezos has dedicated modules on [How baking works](/baking) and [How to set up your baker](/baker). However, this might be pretty complicated for inexperienced users — a more accessible alternative is to delegate instead of baking.
+OpenTezos has dedicated modules on [How baking works](/baking) and [How to set up your baker](/contribute/baker). However, this might be pretty complicated for inexperienced users — a more accessible alternative is to delegate instead of baking.
 
 ## Delegation
 
@@ -25,18 +25,18 @@ Delegation in Tezos is safe! Your funds are not locked or frozen and do not move
 In short, delegation is much better for an average user. Yes, Tezos bakers get slightly more staking rewards. Still, they pay for hosting; they spend time maintaining a node, and they have a risk of losing money on double baking (e.g., if the node was misconfigured). Thus, delegation is the most preferred and safe way for an average user to participate in Tezos staking.
 
 ## How to delegate?
-Most wallet (e.g. [Atomex](https://atomex.me/), [Exodus](https://www.exodus.com/), etc.) offer built-in delegation, making the whole process very simple. Just open the wallet, select your Tez balance, click delegate and choose a baker from the list. 
+Most wallet (e.g. [Atomex](https://atomex.me/), [Exodus](https://www.exodus.com/), etc.) offer built-in delegation, making the whole process very simple. Just open the wallet, select your Tez balance, click delegate and choose a baker from the list.
 
 ![](../../static/img/contribute/delegate.gif)
 <small className="figure">FIGURE 1: Delegating your Tez on _Atomex_.</small>
 
-That's it. The only thing you should worry about is choosing an excellent and reliable Tezos baker or delegation service. 
+That's it. The only thing you should worry about is choosing an excellent and reliable Tezos baker or delegation service.
 
 [Baking Bad](https://baking-bad.org/docs/where-to-stake-tezos) or [Tezos Nodes](https://tezos-nodes.com/) allow you to browse through bakers. There are a few factors to consider when choosing a baker to delegate with:
 
-- *Fees*: How much of the rewards is the baker keeping? 
+- *Fees*: How much of the rewards is the baker keeping?
 
-- *Capacity*: Each baker has a capacity of how many coins it can accept, which is based on how many coins it currently holds itself. A baker is "over-delegated" when it has exceeded the amount of delegation it can take considering the coins they currently hold.    
+- *Capacity*: Each baker has a capacity of how many coins it can accept, which is based on how many coins it currently holds itself. A baker is "over-delegated" when it has exceeded the amount of delegation it can take considering the coins they currently hold.
 
 - *Reliability + Responsiveness*: Does this baker pay on time? Does this baker pay correctly? Will this baker respond to my questions about their services? Many bakers operate forums and chat rooms in which they engage with delegators.
 

@@ -7,7 +7,7 @@ authors: Benoit Rognier
 
 This section presents the Smart Contract language [Archetype](https://archetype-lang.org).
 
-Archetype is an elegant high-level domain-specific language to develop Smart Contracts on the Tezos blockchain. Besides all Michelson features, it provides new types (rational, duration) and design concepts (state machine ...) that ease the development and maintenance of smart contracts.
+Archetype is an elegant high-level generic purpose language to develop Smart Contracts on the Tezos blockchain. Besides all Michelson features, it provides new types (rational, duration) and design concepts (state machine ...) that ease the development and maintenance of smart contracts.
 
 It also enables formal verification of the contract by transcoding to the [Why3](http://why3.lri.fr/) language.
 

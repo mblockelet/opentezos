@@ -66,11 +66,12 @@
 
 html {
   --overlay-card-hover: #8ecfba;
+  --overlay-card-background : rgba(30,72,85,0.1)
 }
 
 html[data-theme='dark'] {
   --overlay-card-hover: #295daa;
-  --overlay-card-background: rgba(30,72,85,0.5)
+  --overlay-card-background: rgba(20,20,20,1)
 }
 
 /*html[data-theme='dark'] {

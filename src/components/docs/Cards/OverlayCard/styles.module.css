@@ -16,7 +16,7 @@
 }
 
 .circleOverlay {
-  background-color: rgba(30,72,85,0.1);
+  background-color: var(--overlay-card-background);
   border-top-right-radius: 50%;
   border-bottom-right-radius: 50%;
   height: 263px;
@@ -66,12 +66,20 @@
 
 html {
   --overlay-card-hover: #8ecfba;
+  --overlay-card-background : rgba(30,72,85,0.1)
 }
 
 html[data-theme='dark'] {
-  --overlay-card-hover: inherit;
+  --overlay-card-hover: #295daa;
+  --overlay-card-background: rgba(20,20,20,1)
 }
 
-html[data-theme='dark'] .circleOverlay {
+/*html[data-theme='dark'] {
+  --overlay-card-hover: inherit;
+}
+*/
+
+/*html[data-theme='dark'] .circleOverlay {
   transition: none;
 }
+*/

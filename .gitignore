@@ -8,7 +8,7 @@
 **/*.log
 **/node_modules
 **/dist
-# **/build
+**/build/*
 **/coverage
 **/.webpack
 **/downloads

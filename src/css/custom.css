@@ -19,7 +19,7 @@
 }
 */
 html[data-theme='dark'] {
-  --ifm-color-primary: #488ef8;
+  --ifm-color-primary: rgb(121, 182, 242);
   --doc-component-background: #242526;
 }
 

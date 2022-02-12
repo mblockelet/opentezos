@@ -8,6 +8,24 @@ authors: Benoit Rognier
 
 The [Completium CLI](https://completium.com/docs/cli) enables to deploy and interact with contracts from the command line.
 
+### Install
+
+The CLI is distributed as a npm package:
+
+```bash
+npm i -g @completium/completium-cli
+```
+
+### Import faucet
+
+The following command imports a faucet:
+
+```bash
+completium-cli import faucet faucet.json as alice
+```
+
+### Deploy and call contract
+
 For example, the following command deploys the contract _escrow.arl_:
 
 ```bash

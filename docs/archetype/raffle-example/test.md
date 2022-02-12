@@ -24,7 +24,7 @@ Run the test with:
 npm test
 ```
 
-The test scenario is made of 14 steps. Below is the test trace returned by the command above:
+The test scenario is made of 14 steps. Below is the trace returned by the command above:
 ```bash
   Deploy
     ✔ Raffle
@@ -93,7 +93,7 @@ const raffle_key = 123456
 const packed_raffle_keey = pack(raffle_key);
 ```
 
-Use the ocaml Tezos [Timelock library](http://doc.tzalpha.net/api/odoc/_html/tezos-crypto/Tezos_crypto/Timelock/index.html) to timelock a data. It is for example distributed as an [opam package](https://opam.ocaml.org/packages/tezos-crypto/).
+Use the ocaml Tezos [Timelock library](http://doc.tzalpha.net/api/odoc/_html/tezos-crypto/Tezos_crypto/Timelock/index.html) to timelock a data. You may use the Completium [Timelock Utils](https://github.com/completium/timelock-utils) built with this lib.
 
 The timelock encryption generates a chest value and its key to unlcock it. The chest value for the raffle_key is displayed below:
 

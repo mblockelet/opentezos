@@ -125,13 +125,13 @@ The `transfer_jackpot` may be called by anyone with the key to the `raffle_key` 
 It also transitions the contract to the `Transferred` state and transfers the ticket amount to the contract's owner.
 
 ```archetype
-transition transfer_jackpot(k : chest_key) {
+transition transfer_jackpot(k : chest_key, time : nat) {
   require {
     r4 : now > opt_get(close_date) otherwise "RAFFLE_OPEN";
   }
   from Running to Transferred
   with effect {
-    match unlock_raffle_key(k) with
+    match unlock_raffle_key(k, time) with
     | Success(raffle_key) -> begin
         transfer jackpot to player.nth(raffle_key % player.count());
         transfer (balance - jackpot) to owner;
@@ -152,10 +152,9 @@ enum unlock_result =
 | Success<nat>
 | Fail<string>
 
-function unlock_raffle_key(k : chest_key) : unlock_result {
-  var time : int = min_duration;
+function unlock_raffle_key(k : chest_key, time : nat) : unlock_result {
   return (
-    match open_chest(k, opt_get(locked_raffle_key), abs(time)) with
+    match open_chest(k, opt_get(locked_raffle_key), time) with
     | left(unlocked) ->
       match unpack<nat>(unlocked) with
       | some(raffle_key) -> Success(raffle_key)

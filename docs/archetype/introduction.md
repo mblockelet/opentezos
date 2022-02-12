@@ -13,9 +13,9 @@ It also enables formal verification of the contract by transcoding to the [Why3]
 
 [Get started here.](https://docs.archetype-lang.org/getting-started-1)
 
-## Exclusive types
+## Business logic
 
-Archetype provides `rational`, `date` and `duration` types to make business logic easy to express.
+Besides standard [Michelson](/michelson) types, Archetype provides `rational`, `date` and `duration` types to make business logic easy to express.
 
 ```archetype
 archetype business_logic(holder : address, value : tez, deadline : date)

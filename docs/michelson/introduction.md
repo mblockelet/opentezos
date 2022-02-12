@@ -5,7 +5,7 @@ slug: /michelson
 authors: Frank Hillard
 ---
 
-To write smart contracts for Tezos, one can either choose the official low-level language called **Michelson**, or a high-level language, such as [Archetype](/archetype/introduction), [LIGO](/ligo/introduction) or [SmartPy](/smartpy/introduction), which compiles into Michelson.
+To write smart contracts for Tezos, one can either choose the official low-level language called **Michelson**, or a high-level language, such as [Archetype](/archetype), [LIGO](/ligo) or [SmartPy](/smartpy), which compiles into Michelson.
 
 This module focuses on the **Michelson** language.
 

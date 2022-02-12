@@ -152,16 +152,14 @@ it("Alice unsuccessfully calls 'buy' by sending a wrong amount of tez.", async (
 
 ### Check Balance
 
-Use the `CheckBalance` method to check the impact of an operation on an account balance.
+Use the `checkBalanceDelta` method to check the impact of an operation on an account balance.
 
 ```js
 await checkBalanceDelta(owner.pkh,  2, async () => {
 await checkBalanceDelta(alice.pkh, 50, async () => {
 await checkBalanceDelta(jack.pkh,   0, async () => {
     await raffle.transfer_jackpot({
-        arg : {
-          k : CHEST_KEY
-        },
+        arg : { k : CHEST_KEY },
         as : alice.pkh
     })
 }) }) })

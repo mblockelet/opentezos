@@ -15,7 +15,7 @@ authors: Benoit Rognier
 
 | Link                                                                        | Description                                                                                                       |
 | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| [Multisig](https://completium.com/docs/templates/multisig) | Execcutes operations signed by a required number of operators. |
+| [Multisig](https://completium.com/docs/templates/multisig) | Executes operations signed by a required number of operators. |
 | [A2](https://gitlab.com/tezos-paris-hub/whitelist-smart-contract-archetype) | Whitelisting process following [TZIP15](https://gitlab.com/tezos/tzip/-/blob/master/proposals/tzip-15/tzip-15.md) |
 | [Auction](https://completium.com/docs/templates/auction)                    | Simple auction process                                                                                            |
 

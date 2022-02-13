@@ -98,7 +98,7 @@ transition open(cd : date, d : string, lrk : chest) {
 ### `buy`
 
 The `buy` entrypoint may be called by anyone to buy a ticket. It requires that:
-* the contract by in `Running` state
+* the contract be in `Running` state
 * the transferred amount of tez be equal to the ticket price
 * the close date be not reached
 

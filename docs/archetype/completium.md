@@ -6,7 +6,7 @@ authors: Benoit Rognier
 
 ## CLI
 
-The [Completium CLI](https://completium.com/docs/cli) enables to deploy and interact with contracts from the command line.
+Archetype compiler comes with the [Completium CLI](https://completium.com/docs/cli). You can deploy and interact with Archetype contracts from the command line.
 
 ### Install
 
@@ -14,6 +14,7 @@ The CLI is distributed as a npm package:
 
 ```bash
 npm i -g @completium/completium-cli
+completium-cli init
 ```
 
 ### Import faucet

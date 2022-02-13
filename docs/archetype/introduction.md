@@ -11,7 +11,7 @@ Archetype is an elegant high-level generic purpose language to develop Smart Con
 
 It also enables formal verification of the contract by transcoding to the [Why3](http://why3.lri.fr/) language.
 
-[Get started here.](https://docs.archetype-lang.org/getting-started-1)
+[How to install Archetype.](https://docs.archetype-lang.org/getting-started-1)
 
 ## Business logic
 

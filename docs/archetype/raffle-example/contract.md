@@ -22,7 +22,7 @@ The raffle key has several constraints:
 
 The solution is to keep the raffle key secret to everyone and then, when the raffle is closed, make it publically available so that anyone can transfer the jackpot to the winner. This is the purpose of the [timelock](https://tezos.gitlab.io/alpha/timelock.html?highlight=timelock) encryption feature of the Michelson `chest` data type.
 
-A _timelocked_ value is encrypted so that it takes a certain amount of time (passed as an argument to the encryption process) for a descent machine to crack it. That is to say that, beyond a certain amount of time, the value may be considered public.
+A _timelocked_ value is encrypted so that it takes a certain amount of time (passed as an argument to the encryption process) for a decent machine to crack it. That is to say that, beyond a certain amount of time, the value may be considered public.
 
 ## Raffle storage
 
@@ -33,7 +33,7 @@ archetype raffle(owner: address, min_duration : duration, jackpot : tez, ticket_
 ```
 where:
 * `owner` is the address of the contract administrator
-* `min_duration` is the minimum duration tickets can buy bought
+* `min_duration` is the minimum duration of the period during which players can buy a ticket
 * `jackpot` is the prize in tez
 * `ticket_price` speaks for itslef
 

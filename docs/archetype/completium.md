@@ -6,7 +6,7 @@ authors: Benoit Rognier
 
 ## CLI
 
-Archetype compiler comes with the [Completium CLI](https://completium.com/docs/cli). You can deploy and interact with Archetype contracts from the command line.
+The Archetype compiler comes with the [Completium CLI](https://completium.com/docs/cli). You can deploy and interact with Archetype contracts from the command line.
 
 ### Install
 
@@ -27,13 +27,13 @@ completium-cli import faucet faucet.json as alice
 
 ### Deploy and call contract
 
-For example, the following command deploys the contract _escrow.arl_:
+For example, the following command deploys the _escrow.arl_ contract:
 
 ```bash
 completium-cli deploy escrow.arl --as alice
 ```
 
-The following command calls the entrypoint _init_:
+The following command calls the _init_ entrypoint:
 
 ```bash
 completium-cli call escrow --entry init --amount 5tz --as alice
@@ -41,9 +41,9 @@ completium-cli call escrow --entry init --amount 5tz --as alice
 
 ## JS library
 
-The [Completium JS library](https://completium.com/docs/cli) enables to interact with smart contracts from a JS script.
+The [Completium JS library](https://completium.com/docs/cli) makes it easy to interact with smart contracts from a JS script.
 
-It is used to develop test scenarios that make sure the contract behaves as it is intended to.
+It is used to develop test scenarios that make sure the contract behaves as intended.
 
 ### Example
 

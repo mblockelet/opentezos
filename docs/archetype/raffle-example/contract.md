@@ -4,25 +4,30 @@ title: Raffle contract
 authors: Benoit Rognier
 ---
 
-This section presents the Archetype version of the _raffle_ contract, presented as well in the other languages ([Ligo](/ligo/write-contract-ligo/1-raffle-contract#raffle-smart-contract), [Smartpy](/smartpy/write-contract-smartpy#about-the-raffle-contract)). A raffle is a gambling game, where players buy tickets; a winning ticket is _randomly_ picked and its owner gets the jackpot prize.
+This section presents the Archetype version of a _raffle_ contract, inspired by the version presented for other languages ([Ligo](/ligo/write-contract-ligo/1-raffle-contract#raffle-smart-contract), [Smartpy](/smartpy/write-contract-smartpy#about-the-raffle-contract)). A raffle is a gambling game, where players buy tickets; a winning ticket is _randomly_ picked and its owner gets the jackpot prize.
 
-The [Michelson](/michelson) machine does **not** provide an instruction to generate a random number though; and current contract date (`now` value) cannot be used for random number generation purpose either, because a baker could influence the process by selecting the time to generate the block.
+The [Michelson](/michelson) language does **not** provide an instruction to generate a random number. We can't use the current date (value of `now`) as a source of randomness either. Indeed, bakers have some control on this value for the blocks they produce, and could therefore influence the result.
 
 :::info
-The code source of the raffle contract and the test scenario are available in this [repository](https://gitlab.com/completium/archetype-raffle).
+The source code of the raffle contract and the orresponding test scenario are available in this [repository](https://gitlab.com/completium/archetype-raffle).
 :::
 
 ## Picking the winning ticket
 
 The winning ticket id is obtained as the remainder of the euclidean division of an arbitraly large number, called here the _raffle key_, by the number of ticket buyers, called here _players_. For example, if the raffle key is 2022, and the number of raffle players is 87, then the winning ticket id is 21 (typically the 21st ticket).
 
-The raffle key has several constraints:
-* it cannot be publically hardcoded in the contract, because, if it is known by anyone, a player could influence the process by buying tickets until one of the tickets is the winning one.
-* it cannot either be known only by the admin, and passed by the admin to the contract when it is time to declare the winner. Indeed the admin could decide not to declare the winner.
+In this version, we let the admin select the _raffle key_. This means the admin could cheat, but we will ignore that possibility for now.
 
-The solution is to keep the raffle key secret to everyone and then, when the raffle is closed, make it publically available so that anyone can transfer the jackpot to the winner. This is the purpose of the [timelock](https://tezos.gitlab.io/alpha/timelock.html?highlight=timelock) encryption feature of the Michelson `chest` data type.
+There are several constraints:
+* the value of the _raffle key_ cannot be simply stored in the contract. Indeed, the storage of a contract is publicly available, and anyone could predict the result, and influencing it by changing the total number of tickets. This means a player could keep buying tickets until one of their tickets is the winning one.
+* the _raffle key_ cannot be a secret that only the admin knows, and that they will pass to the contract when it is time to announce the winner. Indeed, the admin could disappear, and no winner would ever be announced.
 
-A _timelocked_ value is encrypted so that it takes a certain amount of time (passed as an argument to the encryption process) for a decent machine to crack it. That is to say that, beyond a certain amount of time, the value may be considered public.
+One solution is to store the raffle key in the contract, but encrypt it using the [timelock](https://tezos.gitlab.io/alpha/timelock.html?highlight=timelock) encryption feature of the Michelson `chest` data type.
+
+A _timelocked_ value is encrypted stroungly enough that even the most powerful computer will take more than a certain amount of time to crack it, but weakly enough that given a bit more time, any decent computer will manage to crack it. That is to say that, beyond a certain amount of time, the value may be considered public.
+
+This means that if the admin doesn't reveal the value of the _raffle key_ when expected, someone else could run the necessary computation to unlock it, then reveal it and get a reward for their work, while the winner receives their prize.
+
 
 ## Raffle storage
 
@@ -43,7 +48,7 @@ The contract holds:
 ```archetype
 variable locked_raffle_key : option<chest>  = none
 ```
-* the date beyond which ticket cannot be bought, initialized to `none`:
+* the date beyond which tickets cannot be bought, initialized to `none`:
 ```archetype
 variable close_date : option<date> = none
 ```
@@ -51,13 +56,13 @@ variable close_date : option<date> = none
 ```archetype
 variable desc : option<string> = none
 ```
-* the collection of the player addresses:
+* a collection that will contain the addresses of all players:
 ```archetype
 asset player {
   id : address
 }
 ```
-* a state of 3 possible values:
+* a state with 3 possible values:
 ```archetype
 states =
 | Created initial
@@ -73,11 +78,13 @@ where:
 
 ### `open`
 
-The `open` entrypoint is called by the contract admin (called "owner"). It requires that:
-* the minimum duration be respected by the close date
-* the transferred amount of tez be equal to the storage value `jackpot`
+The `open` entrypoint is called by the contract admin (called "owner"), who provides a deadline, a description, and a chest that contains the encrypted _raffle key_.
 
-It transition from `Created` state to `Running`, and sets the raffle parameters.
+It requires that:
+* the minimum duration be respected by the close date
+* the transferred amount of tez be equal to the `jackpot` storage value 
+
+It transitions from `Created` state to `Running`, and sets the raffle parameters.
 
 ```archetype
 transition open(cd : date, d : string, lrk : chest) {
@@ -100,7 +107,7 @@ transition open(cd : date, d : string, lrk : chest) {
 The `buy` entrypoint may be called by anyone to buy a ticket. It requires that:
 * the contract be in `Running` state
 * the transferred amount of tez be equal to the ticket price
-* the close date be not reached
+* the close date not be reached
 
 It records the caller's address in the `player` collection.
 
@@ -115,11 +122,11 @@ entry buy () {
 }
 ```
 
-Note that the `add` method fails with the error `(Pair "KeyExists" "player")` if the caller already has bought a ticket.
+Note that the `add` method fails with the error `(Pair "KeyExists" "player")` if the caller has already bought a ticket.
 
-### `transfer_prize`
+### `transfer_jackpot`
 
-The `transfer_jackpot` may be called by anyone with the key to the `raffle_key` chest for the jackpot to be transferred to the winner. It requires that:
+The `transfer_jackpot` entry point may be called by anyone with the key to the `raffle_key` chest for the jackpot to be transferred to the winner. It requires that:
 * the close date has been reached
 
 It also transitions the contract to the `Transferred` state and transfers the ticket amount to the contract's owner.

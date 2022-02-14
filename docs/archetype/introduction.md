@@ -11,9 +11,11 @@ Archetype is an elegant high-level generic purpose language to develop Smart Con
 
 It also enables formal verification of the contract by transcoding to the [Why3](http://why3.lri.fr/) language.
 
-[Get started here.](https://docs.archetype-lang.org/getting-started-1)
+[How to install Archetype.](https://docs.archetype-lang.org/getting-started-1)
 
-## Elegant busines logic
+## Business logic
+
+Besides standard [Michelson](/michelson) types, Archetype provides `rational`, `date` and `duration` types to make business logic easy to express.
 
 ```archetype
 archetype business_logic(holder : address, value : tez, deadline : date)
@@ -29,14 +31,16 @@ Archetype language provides exlcusive types to easily implement readable busines
 
 ## Explicit execution conditions
 
+Archetype provides specific syntax to establish execution conditions so that the contract is easy to read and check.
+
 ```archetype
 archetype exec_cond_demo(admin : address, value : nat)
 
 entry setvalue (v : nat) {
   called by admin
   require {
-    r1: transferred > value;
-    r2: now < 2022-01-01;
+    r1: transferred > value otherwise "Invalid transferred amount";
+    r2: now < 2023-01-01    otherwise "Too late";
   }
   effect {
     value := v;
@@ -46,9 +50,17 @@ entry setvalue (v : nat) {
 
 The entrypoint `setvalue` executes if the sender is _admin_, if the transferred amount is greater than _value_ and if it is called before 2022.
 
-Archetype provides specific syntax to establish execution conditions so that the contract is easy to read and check. [Learn more...](https://docs.archetype-lang.org/archetype-language/action#sections)
+ [Learn more...](https://docs.archetype-lang.org/archetype-language/action#sections)
 
-## Smart Storage API
+## Rich Storage API
+
+The exclusive `asset` data container provides a rich API to access and manipulate collection of record data:
+* `add`, `addupate`, `remove`, `removeif`
+* `contains`, `get`, `nth`
+* `count`, `sum`
+* `sort`, `select`
+* `head`, `tail`
+* ...
 
 ```archetype
 archetype asset_demo
@@ -66,11 +78,13 @@ entry repair_oldest () {
 }
 ```
 
-The entrypoint `repair_oldest` increments the _nbrepairs_ field of the 3 vehicles with oldest date of repair, and with a number of repairs above zero.
+The entrypoint `repair_oldest` increments the _nbrepairs_ field of the 3 vehicles with oldest date of repair, and with a number of repairs equal to zero.
 
 An asset collection provides a rich API to read/write data (add, remove, update, addupdate, ...), and to iterate over the collection (select, sort, sum, head, tail, ...). [Learn more...](https://docs.archetype-lang.org/archetype-language/data-model)
 
 ## State Machine
+
+It is possible with Archetype to design the contract as a state machine. Transitions may have guard conditions (like _initialize_) and effect on the storage (like _terminate_).
 
 ```archetype
 archetype state_machine_demo(value : tez, holder : address)
@@ -91,11 +105,11 @@ transition terminate () {
 }
 ```
 
-It is possible with Archetype to design the contract as a state machine. Transitions may have guard conditions (like _initialize_) and effect on the storage (like _terminate_).
-
 State machines are convenient to make the overall process clear and transparent. [Learn more...](https://docs.archetype-lang.org/archetype-language/state-machine)
 
 ## Formal Specification
+
+Archetype provides a full-featured specification language for contract invariants and entry point postconditions.
 
 ```archetype
 specification entry repair_oldest () {
@@ -107,4 +121,4 @@ specification entry repair_oldest () {
 
 The postcondition `p1` of repair_oldest entry point specifies that the difference between the total number of repairs after the entry point's execution and before, is less or equal to 3.
 
-Archetype provides a full-featured specification language for contract invariants and entry point postconditions. [Learn more...](https://docs.archetype-lang.org/archetype-language/contract-specification)
+[Learn more...](https://docs.archetype-lang.org/archetype-language/contract-specification)

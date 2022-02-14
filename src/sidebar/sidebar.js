@@ -61,7 +61,16 @@ module.exports = {
     {
       type: 'category',
       label: 'Archetype',
-      items: ['archetype/introduction', 'archetype/completium', 'archetype/examples'],
+      items: [
+        'archetype/introduction',
+        'archetype/completium',
+        {
+          type: 'category',
+          label: 'Raffle example',
+          items: ['archetype/raffle-example/raffle-contract', 'archetype/raffle-example/unit-test'],
+        },
+        'archetype/examples'
+      ],
     },
     {
       type: 'category',

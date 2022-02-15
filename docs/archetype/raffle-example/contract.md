@@ -60,9 +60,14 @@ variable desc : option<string> = none
 asset player {
   id                 : address;
   locked_raffle_key  : chest;
+  chest_time         : nat;
   revealed           : bool = false;
 }
 ```
+
+:::info
+It is necessary to publish the chest time used to generate the chest in order to be able to break it.
+:::
 
 * the raffle key, updated when a player's partial key is revealed:
 ```archetype
@@ -125,13 +130,13 @@ It requires that:
 It records the caller's address in the `player` collection.
 
 ```archetype
-entry buy (lrk : chest) {
+entry buy (lrk : chest, t : nat) {
   state is Running
   require {
     r2 : transferred = ticket_price otherwise "INVALID_TICKET_PRICE";
     r3 : now < opt_get(close_date)  otherwise "RAFFLE_CLOSED"
   }
-  effect { player.add({ id = caller; locked_raffle_key = lrk }) }
+  effect { player.add({ id = caller; locked_raffle_key = lrk; chest_time = t }) }
 }
 ```
 
@@ -145,14 +150,14 @@ It requires that:
 * the close date has been reached
 
 ```archetype
-entry reveal(addr : address, k : chest_key, time : nat) {
+entry reveal(addr : address, k : chest_key) {
   state is Running
   require {
     r4 : now > opt_get(close_date) otherwise "RAFFLE_OPEN";
     r5 : not player[addr].revealed otherwise "PLAYER_ALREADY_REVEALED"
   }
   effect {
-    match open_chest(k, player[addr].locked_raffle_key, time) with
+    match open_chest(k, player[addr].locked_raffle_key, player[addr].chest_time) with
     | left (unlocked) -> raffle_key += opt_get(unpack<nat>(unlocked))
     | right(error)    -> fail("INVALID_TIMELOCK")
     end;

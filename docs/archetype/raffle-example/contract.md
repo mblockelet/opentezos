@@ -16,13 +16,13 @@ The source code of the raffle contract and the orresponding test scenario are av
 
 The winning ticket id is obtained as the remainder of the euclidean division of an arbitraly large number, called here the _raffle key_, by the number of ticket buyers, called here _players_. For example, if the raffle key is 2022, and the number of raffle players is 87, then the winning ticket id is 21 (typically the 21st ticket).
 
-The constraint is that this raffle key must not be known by anyone, nor the players or even the admin. Indeed if someone knows in advance the raffle key, it is then possible to influence the outcome of the game by buying tickets until one of them is the winning one (there is only one ticket per addres, but someone can have several addresses). As a consequence:
+The constraint is that this raffle key must not be known by anyone, nor the players or even the admin. Indeed if someone knows in advance the raffle key, it is then possible to influence the outcome of the game by buying tickets until one of them is the winning one (there is only one ticket per address, but someone can have several addresses). As a consequence:
 * the _raffle key_ cannot be simply stored in the contract.
 * the _raffle key_ cannot be a secret that only the admin knows (for the reason above), and that the admin would pass to the contract when it is time to announce the winner. Indeed, the admin could disappear, and no winner would ever be announced.
 
 For the admin not to be the only one to know the key, each player must possess a part of the key (called here _partial key_), such that the raffle key is the sum of each player's partial key. For the player's partial key not to be known by the other players, it must be encrpypted by the player. However, it must also be possible for anyone to know any player's partial key when it is time to declare the winning ticket. Otherwise one player could decide to block the game by not decrypting its key.
 
-The [timelock](https://tezos.gitlab.io/alpha/timelock.html?highlight=timelock) encryption feature of the Michelson `chest` data type provides the required propoerty: a _timelocked_ value is encrypted strongly enough that even the most powerful computer will take more than a certain amount of time to crack it, but weakly enough that given a bit more time, any decent computer will manage to crack it. That is to say that, beyond a certain amount of time, the value may be considered public.
+The [timelock](https://tezos.gitlab.io/alpha/timelock.html?highlight=timelock) encryption feature of the Michelson `chest` data type provides the required property: a _timelocked_ value is encrypted strongly enough that even the most powerful computer will take more than a certain amount of time to crack it, but weakly enough that given a bit more time, any decent computer will manage to crack it. That is to say that, beyond a certain amount of time, the value may be considered public.
 
 This means that if a player doesn't reveal the value of its partial _raffle key_ when expected, someone else could run the necessary computation to unlock it, then reveal it and get a reward for their work, while the winner receives their prize.
 
@@ -51,10 +51,11 @@ The contract holds:
 ```archetype
 variable close_date : option<date> = none
 ```
-* some information about the raffle, initialized to `none`:
+* The time used to generate the timelocked value of the raffle key (it should be high enough to be compliant with the close date), initialized to `none`:
 ```archetype
-variable desc : option<string> = none
+variable chest_time : option<nat> = none
 ```
+
 * a collection that will contain the addresses of all players and their raffle key :
 ```archetype
 asset player {
@@ -64,10 +65,6 @@ asset player {
   revealed           : bool = false;
 }
 ```
-
-:::info
-It is necessary to publish the chest time used to generate the chest in order to be able to break it.
-:::
 
 * the raffle key, updated when a player's partial key is revealed:
 ```archetype
@@ -104,7 +101,7 @@ It requires that:
 It transitions from `Created` state to `Running`, and sets the raffle parameters.
 
 ```archetype
-transition open(cd : date, d : string) {
+transition open(cd : date, t : nat) {
   called by owner
   require {
     r0 : now + min_duration < cd   otherwise "INVALID_CLOSE_DATE";
@@ -113,7 +110,7 @@ transition open(cd : date, d : string) {
   from Created to Running
   with effect {
     close_date        := some(cd);
-    desc              := some(d);
+    chest_time        := some(t);
   }
 }
 ```
@@ -130,13 +127,13 @@ It requires that:
 It records the caller's address in the `player` collection.
 
 ```archetype
-entry buy (lrk : chest, t : nat) {
+entry buy (lrk : chest) {
   state is Running
   require {
     r2 : transferred = ticket_price otherwise "INVALID_TICKET_PRICE";
     r3 : now < opt_get(close_date)  otherwise "RAFFLE_CLOSED"
   }
-  effect { player.add({ id = caller; locked_raffle_key = lrk; chest_time = t }) }
+  effect { player.add({ id = caller; locked_raffle_key = lrk }) }
 }
 ```
 
@@ -157,7 +154,7 @@ entry reveal(addr : address, k : chest_key) {
     r5 : not player[addr].revealed otherwise "PLAYER_ALREADY_REVEALED"
   }
   effect {
-    match open_chest(k, player[addr].locked_raffle_key, player[addr].chest_time) with
+    match open_chest(k, player[addr].locked_raffle_key, chest_time) with
     | left (unlocked) -> raffle_key += opt_get(unpack<nat>(unlocked))
     | right(error)    -> fail("INVALID_TIMELOCK")
     end;

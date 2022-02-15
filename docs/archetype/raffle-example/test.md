@@ -26,6 +26,7 @@ npm test
 
 The test scenario is made of 14 steps. Below is the trace returned by the command above:
 ```bash
+
   Deploy
     ✔ Raffle
 
@@ -43,14 +44,15 @@ The test scenario is made of 14 steps. Below is the trace returned by the comman
     ✔ Alice unsuccessfully calls 'buy' entrypoint because she has already bought one.
     ✔ Jack successfully calls 'buy' entrypoint.
 
-  Test 'transfer_jackpot' entrypoint (at this point a raffle is open and two players participated)
-    ✔ Alice unsuccessfully calls 'transfer_jackpot' entrypoint because it is before the 'close_date'.
-    ✔ Alice unsuccessfully calls 'transfer_jackpot' entrypoint because of an invalid chest key.
-    ✔ Alice successfully calls 'transfer_jackpot' entrypoint.
-    ✔ Alice unsuccessfully calls 'transfer_jackpot' entrypoint because jackpot is already transferred.
+  Players reveal their raffle key (at this point a raffle is open and two players participated)
+    ✔ Alice unsuccessfully calls 'reveal' entrypoint because it is before the 'close_date'.
+    ✔ Alice unsuccessfully calls 'reveal' entrypoint because of an invalid chest key.
+    ✔ Alice successfully calls 'reveal' entrypoint and gets the reveal fee.
+    ✔ Alice unsuccessfully calls 'reveal' entrypoint because jackpot is already transferred.
+    ✔ Owner successfully calls 'reveal' entrypoint to reveal Jack's raffle key; jackpot is transferred.
 
 
-  15 passing (30s)
+  16 passing (34s)
 ```
 
 ## Mockup mode
@@ -85,9 +87,9 @@ setMockupNow(now)
 
 ## Raffle key chest
 
-The raffle key used in this test is the integer `123456`. The value is first packed (turned into bytes) before being timlocked with a number of iterations of 3600.
+Player Alice's partial key is `123456` and Player Jack's is `234567`.
 
-The following tezos client command packs the value:
+To get the timelocked value, the value is first packed (turned into bytes) with the following tezos client command `hash data`:
 ```bash
 $ tezos-client-hangzhou hash data '123456' of type nat
 Warning:

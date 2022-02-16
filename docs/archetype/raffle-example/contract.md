@@ -33,19 +33,20 @@ The contract is originated with the following parameters:
 * `min_duration` is the minimum duration of the period during which players can buy a ticket
 * `jackpot` is the prize in tez
 * `ticket_price` speaks for itslef
-* `reveal_fee` is the pourcentage of ticket price transferred when revealing a player's raffle key
 
 ```archetype
 archetype raffle(
   owner        : address,
   min_duration : duration,
   jackpot      : tez,
-  ticket_price : tez,
-  reveal_fee   : rational)
+  ticket_price : tez)
 ```
 
 The contract holds:
-
+* the reveal fee, initialized to `none`:
+```archetype
+variable reveal_fee : option<rational> = none
+```
 * the date beyond which tickets cannot be bought, initialized to `none`:
 ```archetype
 variable close_date : option<date> = none
@@ -92,6 +93,7 @@ states =
 The `open` entrypoint is called by the contract admin (called "_owner_") to allow players to buy tickets. It sets the main raffle parameters:
 * _close date_ is the date beyond which players cannot buy ticket
 * _chest time_ is the difficulty to break players' partial raffle key encryption
+* _reveal fee_ the pourcentage of ticket price transferred when revealing a player's raffle key
 
 :::info
 Currently you may count from a chest time of 500&nbsp;000 per second on a standard computer, to a chest time value of 500&nbsp;000&nbsp;000 per second on dedicated hardware.
@@ -99,21 +101,24 @@ Currently you may count from a chest time of 500&nbsp;000 per second on a standa
 
 It requires that:
 * the minimum duration be respected by the close date
+* th reveal fee be equal to or less than 1
 * the transferred amount of tez be equal to the `jackpot` storage value
 
 It transitions from `Created` state to `Running`, and sets the raffle parameters.
 
 ```archetype
-transition open(cd : date, t : nat) {
+transition open(cd : date, t : nat, rf : rational) {
   called by owner
   require {
     r0 : now + min_duration < cd   otherwise "INVALID_CLOSE_DATE";
-    r1 : transferred = jackpot     otherwise "INVALID_AMOUNT"
+    r1 : rf <= 1                   otherwise "INVALID_REVEAL_FEE";
+    r2 : transferred = jackpot     otherwise "INVALID_AMOUNT"
   }
   from Created to Running
   with effect {
-    close_date        := some(cd);
-    chest_time        := some(t);
+    close_date := some(cd);
+    chest_time := some(t);
+    reveal_fee := some(rf)
   }
 }
 ```
@@ -167,7 +172,7 @@ entry reveal(addr : address, k : chest_key) {
     player[addr].revealed := true;
     if nb_revealed = player.count() then
       transfer 0tz to entry self.transfer_jackpot();
-    transfer (reveal_fee * ticket_price) to caller;
+    transfer (opt_get(reveal_fee) * ticket_price) to caller;
   }
 }
 ```

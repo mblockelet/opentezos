@@ -55,9 +55,9 @@ The test scenario is made of 14 steps. Below is the trace returned by the comman
 
 ## Mockup mode
 
-Completium library allows running contracts on any network (mainnet, testnet, sandbox) but also in mockup mode.
+The Completium library allows running contracts on any network (mainnet, testnet, sandbox) but also in mockup mode.
 
-Mockup mode runs contracts locally and quickly, it is then adapted to testing the contract. The following JS instruction enables using the mockup mode within the test script:
+Mockup mode runs contracts locally and quickly, so it is suitable for testing contracts. The following JS instruction activates the mockup mode within the test script:
 ```js
 setEndpoint('mockup')
 ```
@@ -85,9 +85,9 @@ setMockupNow(now)
 
 ## Raffle key chest
 
-The raffle key used in this test is the integer `123456`. The value is first packed (turned into bytes) before being timlocked with a number of iteration of 3600.
+The raffle key used in this test is the integer `123456`. The value is first packed (turned into bytes) before being timlocked with a number of iterations of 3600.
 
-The following tezos client command enables to pack the value:
+The following tezos client command packs the value:
 ```bash
 $ tezos-client-hangzhou hash data '123456' of type nat
 Warning:
@@ -99,7 +99,7 @@ Warning:
 Raw packed data: 0x050080890f
 ```
 
-Then use the Completium [timelock-utils](https://github.com/completium/timelock-utils) tool to timlock the packed data with the following command:
+We then use the Completium [timelock-utils](https://github.com/completium/timelock-utils) tool to timelock the packed data:
 ```bash
 $ timelock-utils --lock --data 050080890f --time 3600
 {
@@ -109,9 +109,9 @@ $ timelock-utils --lock --data 050080890f --time 3600
     "a0aceddfb3c9fbe1b8c382c7d5a7dedbe2e5adf9edcfc3e9d084caa6aeb9818ff1e985cb9efe8fa089ceeaa0f5d0bcb583e2f29196f2d3908fffffdcda868faffcb78fb697e7eaf3e7dca9d4b5dda2c3e4f8adf8abf484ecae85f7d6e0f2d28cb69af1d7b19082e8d8d7ba96e7e1e0bb8ac9b9fcf0a9e5b7c1a499c4faf4c8a3a9c8e4d09aa780eac6cee1b78a97a3e983abf9a5f1e8d2a2a2b5e3bcb8c4effeb7a3a68a85a497cd91c9a2c096c3f596deb8d1aca3a5aff28effb8cfc9c7ced892e3a7c09deeb8c8ec9387a3b384b5c8bccaafc7a9a2c1cfd8c7becfd7d6828a9af8f4988fe4ead3b59ecfb8ff8cabf8be90d4c8bdbddfce9cd7c2bb81edc4b7ad80a59a978f8c9debe7aaf08cf0c588f3eaade6b9f4e4e6edf1ed9c9988e48d9ba0aa8f01d18bac92b886db9dd798b5f6fdc891a28da2c4c48da1918897a2b7c2dfa0b78ab8e291b68fb1a2bfa5e8b88e9cabb0b5b0feabcffc9cfeee888ac4afeed9dc8bf5a4eaa9ae89a3838cf6cfd4f8acff8fa7aef7a9889fbbc7d8f6dde4edf3e58096e580e299e5b082b9cf85f3fe8ac6c0998eb1bcbab9bfb8fba39faea7bce0f6fed9ea86dfdad58cf7cbc7fcc4ecf7e2e898d3b19582e38c8092b7e4a0cddc83eb8bc38d91fefed6be869496b8e4fc99d5fae5c6a2b2dcabe2a4ea85b68b87b182d7e8cac29fe0b9efd6d0eb999ffa98aaaf9bf09fe7c4b39d81db97e4e7bbaef0e3bfedd69d9089bc8d91b292afa6c8b389fc9fb7aaa8decab6d9b493a6eafaa5baffe8fb85f2d483ecd1f2d1e58f938df9d8d5e385fe96c5f58ae1e0b09bf2b3c2931f"
 }
 ```
-The timelock encryption generates a chest value and its key to unlcock it.
+The timelock encryption generates a chest value, and the key to unlcock it.
 
-## Writing test
+## Test script
 
 ### Deploy contract
 

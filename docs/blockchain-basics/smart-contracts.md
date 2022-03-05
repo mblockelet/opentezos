@@ -44,7 +44,7 @@ The fact that *Bitcoin Script* is a low-level and stack-based language does not 
 
 The first limitation is the number and types of usable *OP_codes*. For security purposes, various *OP_codes* are either absent, or have been disabled [[1]](/blockchain-basics/smart-contracts#references) following the discovery of vulnerabilities.
 
-Certain absences of *OP_codes* are also voluntary. They could lead to errors and out-of-control operations. This means *Bitcoin Script* is **willingly non-turing complete**. For instance, it is impossible to create a **loop** with *Bitcoin Script*.
+Certain absences of *OP_codes* are also voluntary. They could lead to errors and out-of-control operations. This means *Bitcoin Script* is **deliberately non-turing complete**. For instance, it is impossible to create a **loop** with *Bitcoin Script*.
 
 The transaction's structure also limits possibilities. Two critical points should be understood while programming with Bitcoin Script:
 - a Bitcoin script is unable to know and handle the **transaction amount** inside

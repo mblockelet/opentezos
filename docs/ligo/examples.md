@@ -12,17 +12,17 @@ So the following function takes a string `my_ship` as input, modifies the third 
 
 ```js
 type ship_code is string
-var my_ship : ship_code := "020433"
-function modify_ship_code (const my_ship : ship_code) : ship_code is
-  block {
-    const modified_ship = String.sub(0n, 2n, my_ship) ^ "1" ^ String.sub(3n, 3n, my_ship)
-  } with modified_ship
+
+// Example of ship_code : "020433"
+function modify_ship_code (const my_ship : ship_code) : ship_code is {
+  const modified_ship = String.sub(0n, 2n, my_ship) ^ "1" ^ String.sub(3n, 3n, my_ship);
+} with modified_ship
 ```
 
 You can call the function `modify_ship_code` defined above by using the LIGO dev tools:
 
 ```shell
-ligo run-function function_example.ligo modify_ship_code '020433'
+ligo run evaluate-call examples/function_example.ligo --entry-point modify_ship_code '("020433")'
 # Outputs: '021433'
 ```
 
@@ -32,18 +32,18 @@ The structured type `record` is here, used to define the coordinates of a planet
 
 ```js
 type coordinates is
-    record [
-        x : int;
-        y : int;
-        z : int
-    ]
+  record [
+    x : int;
+    y : int;
+    z : int
+  ]
 
 var earth_coordinates : coordinates :=
-    record [
-        x = 2;
-        y = 7;
-        z = 1
-    ]
+  record [
+    x = 2;
+    y = 7;
+    z = 1
+  ]
 
 patch earth_coordinates with record [z = 5]
 ```
@@ -61,7 +61,7 @@ In the example below:
 
 ```js
 type parameter is
-  Set_ship_code of string
+| Set_ship_code of string
 | Go_to of string
 
 type storage is record [
@@ -78,10 +78,10 @@ function go_to (const input_string : string; const store : storage) : return is
   ((nil : list (operation)), store with record [destination = input_string])
 
 function main (const action : parameter; const store : storage): return is
-  case action of
-    Set_ship_code (input_string) -> set_ship_code (input_string, store)
+  case action of [
+  | Set_ship_code (input_string) -> set_ship_code (input_string, store)
   | Go_to (input_string) -> go_to (input_string, store)
-  end
+  ]
 ```
 
 ## Option
@@ -97,22 +97,20 @@ We write a pattern matching the `main_laser_power`:
 ```js
 type weapon_power is map (string, int)
 
-function main (const p : unit; const store : unit) : (list(operation) * unit) is
-  block {
-    const weapons : weapon_power =
-        map [
-            "Main Laser" -> 5;
-            "Right Laser" -> 2;
-            "Left Laser" -> 3;
-        ];
+function main (const p : unit; const store : unit) : (list(operation) * unit) is {
+  const weapons : weapon_power =
+    map [
+      "Main Laser" -> 5;
+      "Right Laser" -> 2;
+      "Left Laser" -> 3;
+    ];
 
-    const main_laser_power : option(int) = weapons["Main Laser"];
-    case main_laser_power of
-      Some(i) -> weapons["Main Laser"] := i + 1
-    | None -> failwith("Weapon not found")
-    end
-
-  } with ((nil: list(operation)), unit)
+  const main_laser_power : option(int) = weapons["Main Laser"];
+  case main_laser_power of [
+  | Some(i) -> weapons["Main Laser"] := i + 1
+  | None -> failwith("Weapon not found")
+  ]
+} with ((nil: list(operation)), unit)
 ```
 
 # Full example - FundAdvisor
@@ -146,7 +144,7 @@ Therefore an entrypoint with `ChangeAlgorithm` is provided to modify the algorit
 
 ## Requirement
 
-1. A LIGO compiler, and a code editor installed. If not, go [there](https://opentezos.com/ligo/installation).
+1. A LIGO compiler, and a code editor installed. If not, go [there](/ligo/installation).
 2. A sandboxed mode ready.
 
 ## Sandboxed mode
@@ -200,10 +198,12 @@ Let's create a file `indice_types.ligo` to put all the needed type definitions.
 
 ```js
 // indice_types.ligo
-
 type indiceStorage is int
 
-type indiceEntrypoints is Increment of int | Decrement of int | SendValue of unit
+type indiceEntrypoints is
+| Increment of int
+| Decrement of int
+| SendValue of unit
 
 type indiceFullReturn is list(operation) * indiceStorage
 ```
@@ -216,22 +216,23 @@ Now let's move to the file `indice.ligo` that includes the previous file `indice
 
 ```js
 // indice.ligo
-`#include "indice_types.ligo"`
+#include "indice_types.ligo"
 
-function indiceMain(const ep : indiceEntrypoints; const store : indiceStorage) : indiceFullReturn is
-block { skip } with ((nil: list(operation)), store )
+function indiceMain(const ep : indiceEntrypoints; const store : indiceStorage) : indiceFullReturn is {
+    skip
+} with ((nil: list(operation)), store)
 ```
 
 Let's keep the block empty for now and see if it compiles correctly.
 
 ```shell
-ligo compile-contract indice.ligo indiceMain
+ligo compile contract --entry-point indiceMain indice.ligo
 ```
 
 This should return:
 
 ```js
-{ parameter or (or (int %decrement) (int %increment) (unit %sendValue)) ;
+{ parameter (or (or (int %decrement) (int %increment)) (unit %sendValue)) ;
   storage int ;
   code { CDR ; NIL operation ; PAIR } }
 ```
@@ -243,14 +244,11 @@ Now let's implement the three entrypoints:
 `#include "indice_types.ligo"`
 
 function indiceMain(const ep : indiceEntrypoints; const store : indiceStorage) : indiceFullReturn is
-block { 
-    const ret : indiceFullReturn = case ep of 
-    | Increment(p) -> increment(p, store)
-    | Decrement(p) -> decrement(p, store)
-    | SendValue(p) -> sendValue(p, store)
-    end;
-    
- } with ret
+  case ep of [
+  | Increment(p) -> increment(p, store)
+  | Decrement(p) -> decrement(p, store)
+  | SendValue(p) -> sendValue(p, store)       
+  ]
 ```
 
 ### Defining the entrypoints
@@ -268,8 +266,8 @@ This function's return type is `indiceFullReturn` and returns:
 ```js
 //indice.ligo
 
-function increment(const param : int; const s : indiceStorage) : indiceFullReturn is 
-block { skip } with ((nil: list(operation)), s + param)
+function increment(const param : int; const s : indiceStorage) : indiceFullReturn is
+  ((nil: list(operation)), s + param)
 ```
 
 #### Decrement
@@ -285,8 +283,8 @@ This function's return type is `indiceFullReturn` and returns:
 ```js
 //indice.ligo
 
-function decrement(const param : int; const s : indiceStorage) : indiceFullReturn is 
-block { skip } with ((nil: list(operation)), s - param)
+function decrement(const param : int; const s : indiceStorage) : indiceFullReturn is
+  ((nil: list(operation)), s - param)
 ```
 
 #### SendValue
@@ -309,22 +307,22 @@ When the function `get_entrypoint_opt` does not find any contract at a given `ad
 ```js
 //indice.ligo
 
-function sendValue(const param : unit; const s : indiceStorage) : indiceFullReturn is 
-block { 
-    const c_opt : option(contract(int)) = Tezos.get_entrypoint_opt("%receiveValue", Tezos.sender);
-    const receiver : contract(int) = case c_opt of
+function sendValue(const param : unit; const s : indiceStorage) : indiceFullReturn is { 
+  const c_opt : option(contract(int)) = Tezos.get_entrypoint_opt("%receiveValue", Tezos.sender);
+  const receiver : contract(int) =
+    case c_opt of [
     | Some(c) -> c
     | None -> (failwith("sender cannot receive indice value") : contract(int))
-    end;
-    const op : operation = Tezos.transaction(s, 0mutez, receiver);
-    const txs : list(operation) = list [ op; ];
- } with (txs, s)
+    ];
+  const op : operation = Tezos.transaction(s, 0mutez, receiver);
+  const txs : list(operation) = list [ op; ];
+} with (txs, s)
 ```
 
 Let's compile again the main function to be sure we made no mistakes.
 
 ```shell
-ligo compile-contract indice.ligo indiceMain
+ligo compile contract --entry-point indiceMain indice.ligo
 ```
 
 ## Second contract - Advisor
@@ -349,12 +347,15 @@ In a new file called `advisor_types.ligo` we define:
 type advisorAlgo is int -> bool
 
 type advisorStorage is record [
-    indiceAddress : address;
-    algorithm : advisorAlgo;
-    result : bool;
+  indiceAddress : address;
+  algorithm : advisorAlgo;
+  result : bool;
 ]
 
-type advisorEntrypoints is ReceiveValue of int | RequestValue of unit | ChangeAlgorithm of advisorAlgo
+type advisorEntrypoints is
+| ReceiveValue of int
+| RequestValue of unit
+| ChangeAlgorithm of advisorAlgo
 
 type advisorFullReturn is list(operation) * advisorStorage
 ```
@@ -367,14 +368,12 @@ Let's create another file `advisor.ligo` that will include the previous file `ad
 //advisor.ligo
 #include "advisor_types.ligo"
 
-function advisorMain(const ep : advisorEntrypoints; const store : advisorStorage) : advisorFullReturn is
-block { 
-    const ret : advisorFullReturn = case ep of 
-    | ReceiveValue(p) -> execute(p, store)
-    | RequestValue(p) -> request(p, store)
-    | ChangeAlgorithm(p) -> change(p, store)
-    end;
- } with ret
+function advisorMain(const ep : advisorEntrypoints; const store : advisorStorage) : advisorFullReturn is 
+  case ep of [
+  | ReceiveValue(p) -> execute(p, store)
+  | RequestValue(p) -> request(p, store)
+  | ChangeAlgorithm(p) -> change(p, store)
+  ]
 ```
 
 ### Defining the entrypoints
@@ -394,15 +393,15 @@ This function's return type is `advisorFullReturn` and returns:
 ```js
 //advisor.ligo
 
-function request(const p : unit; const s : advisorStorage) : advisorFullReturn is
-block { 
-    const c_opt : option(contract(unit)) = Tezos.get_entrypoint_opt("%sendValue", s.indiceAddress);
-    const receiver : contract(unit) = case c_opt of
+function request(const p : unit; const s : advisorStorage) : advisorFullReturn is { 
+  const c_opt : option(contract(unit)) = Tezos.get_entrypoint_opt("%sendValue", s.indiceAddress);
+  const receiver : contract(unit) =
+    case c_opt of
     | Some(c) -> c
     | None -> (failwith("indice cannot send its value") : contract(unit))
-    end;
-    const op : operation = Tezos.transaction(unit, 0mutez, receiver);
-    const txs : list(operation) = list [ op; ];
+    ];
+  const op : operation = Tezos.transaction(unit, 0mutez, receiver);
+  const txs : list(operation) = list [ op; ];
  } with (txs, s)
 ```
 
@@ -419,10 +418,9 @@ This function's return type is `advisorFullReturn` and returns:
 ```js
 //advisor.ligo
 
-function execute(const indiceVal : int; const s : advisorStorage) : advisorFullReturn is
-block { 
-    s.result := s.algorithm(indiceVal)
- } with ((nil : list(operation)), s)
+function execute(const indiceVal : int; var s : advisorStorage) : advisorFullReturn is { 
+  s.result := s.algorithm(indiceVal)
+} with ((nil : list(operation)), s)
 ```
 
 #### ChangeAlgorithm
@@ -447,7 +445,7 @@ block {
 Let's compile the main function.
 
 ```shell
-ligo compile-contract advisor.ligo advisorMain
+ligo compile contract --entry-point advisorMain advisor.ligo
 ```
 
 ## Dry-run, compilation and deployment
@@ -458,32 +456,29 @@ ligo compile-contract advisor.ligo advisorMain
 //indice.ligo
 #include "indice_types.ligo"
 
-function increment(const param : int; const s : indiceStorage) : indiceFullReturn is 
-block { skip } with ((nil: list(operation)), s + param)
+function increment(const param : int; const s : indiceStorage) : indiceFullReturn is
+  ((nil: list(operation)), s + param)
 
-function decrement(const param : int; const s : indiceStorage) : indiceFullReturn is 
-block { skip } with ((nil: list(operation)), s - param)
+function decrement(const param : int; const s : indiceStorage) : indiceFullReturn is
+  ((nil: list(operation)), s - param)
 
-function sendValue(const param : unit; const s : indiceStorage) : indiceFullReturn is 
-block { 
-    const c_opt : option(contract(int)) = Tezos.get_entrypoint_opt("%receiveValue", Tezos.sender);
-    const receiver : contract(int) = case c_opt of
+function sendValue(const _param : unit; const s : indiceStorage) : indiceFullReturn is { 
+  const c_opt : option(contract(int)) = Tezos.get_entrypoint_opt("%receiveValue", Tezos.sender);
+  const receiver : contract(int) =
+    case c_opt of [
     | Some(c) -> c
     | None -> (failwith("sender cannot receive indice value") : contract(int))
-    end;
-    const op : operation = Tezos.transaction(s, 0mutez, receiver);
-    const txs : list(operation) = list [ op; ];
- } with (txs, s)
+    ];
+  const op : operation = Tezos.transaction(s, 0mutez, receiver);
+  const txs : list(operation) = list [ op; ];
+} with (txs, s)
 
 function indiceMain(const ep : indiceEntrypoints; const store : indiceStorage) : indiceFullReturn is
-block { 
-    const ret : indiceFullReturn = case ep of 
-    | Increment(p) -> increment(p, store)
-    | Decrement(p) -> decrement(p, store)
-    | SendValue(p) -> sendValue(p, store)
-    end;
-    
- } with ret
+  case ep of [
+  | Increment(p) -> increment(p, store)
+  | Decrement(p) -> decrement(p, store)
+  | SendValue(p) -> sendValue(p, store)       
+  ]
 ```
 
 #### Simulation
@@ -491,7 +486,7 @@ block {
 Let's simulate the indice contract with the increment action using `5` as a parameter and initial storage of `0`.
 
 ```shell
-ligo dry-run indice.ligo indiceMain 'Increment(5)' '0'
+ligo run dry-run --entry-point indiceMain indice.ligo 'Increment(5)' '0'
 ```
 
 This should return:
@@ -505,7 +500,7 @@ As expected, there is an empty list of operations, and the storage has been incr
 To be sure let's modify the initial value of the storage to `4`.
 
 ```shell
-ligo dry-run indice.ligo indiceMain 'Increment(5)' '4'
+ligo run dry-run --entry-point indiceMain indice.ligo 'Increment(5)' '4'
 ```
 
 This should return:
@@ -517,7 +512,7 @@ This should return:
 Let's simulate another entrypoint, `sendValue`:
 
 ```shell
-ligo dry-run indice.ligo indiceMain 'SendValue(unit)' '3'
+ligo run dry-run --entry-point indiceMain indice.ligo 'SendValue(unit)' '3'
 ```
 
 This command should return:
@@ -533,22 +528,22 @@ This is because the contract is not deployed yet. This is the limit of this simu
 Now, let's prepare the parameters and the storage.
 
 ```shell
-ligo compile-storage indice.ligo indiceMain '0'
+ligo compile storage --entry-point indiceMain indice.ligo '0'
 #output: 0
 ```
 
 ```shell
-ligo compile-parameter indice.ligo indiceMain 'Increment(5)'
+ligo compile parameter --entry-point indiceMain indice.ligo 'Increment(5)'
 #output: (Left (Right 5))
 ```
 
 ```shell
-ligo compile-parameter indice.ligo indiceMain 'Decrement(5)'
+ligo compile parameter --entry-point indiceMain indice.ligo 'Decrement(5)'
 #output: (Left (Left 5))
 ```
 
 ```shell
-ligo compile-parameter indice.ligo indiceMain 'SendValue(unit)'
+ligo compile parameter --entry-point indiceMain indice.ligo 'SendValue(unit)'
 #output: (Right Unit)
 ```
 
@@ -557,7 +552,7 @@ ligo compile-parameter indice.ligo indiceMain 'SendValue(unit)'
 We can now compile the main function and save the output in an `indice.tz` file.
 
 ```shell
-ligo compile-contract indice.ligo indiceMain > indice.tz
+ligo compile contract --entry-point indiceMain indice.ligo > indice.tz
 ```
 
 This should return:
@@ -565,10 +560,7 @@ This should return:
 ```js
 { parameter (or (or (int %decrement) (int %increment)) (unit %sendValue)) ;
   storage int ;
-  code { DUP ;
-         CDR ;
-         SWAP ;
-         CAR ;
+  code { UNPAIR ;
          IF_LEFT
            { IF_LEFT
                { SWAP ; SUB ; NIL operation ; PAIR }
@@ -578,9 +570,7 @@ This should return:
              CONTRACT %receiveValue int ;
              IF_NONE { PUSH string "sender cannot receive indice value" ; FAILWITH } {} ;
              PUSH mutez 0 ;
-             DIG 2 ;
-             DUP ;
-             DUG 3 ;
+             DUP 3 ;
              TRANSFER_TOKENS ;
              SWAP ;
              NIL operation ;
@@ -663,36 +653,31 @@ Write down your indice contract address somewhere because you will need it to in
 //advisor.ligo
 #include "advisor_types.ligo"
 
-function request(const p : unit; const s : advisorStorage) : advisorFullReturn is
-block { 
-    const c_opt : option(contract(unit)) = Tezos.get_entrypoint_opt("%sendValue", s.indiceAddress);
-    const receiver : contract(unit) = case c_opt of
+function request(const p : unit; const s : advisorStorage) : advisorFullReturn is { 
+  const c_opt : option(contract(unit)) = Tezos.get_entrypoint_opt("%sendValue", s.indiceAddress);
+  const receiver : contract(unit) =
+    case c_opt of [
     | Some(c) -> c
     | None -> (failwith("indice cannot send its value") : contract(unit))
-    end;
-    const op : operation = Tezos.transaction(unit, 0mutez, receiver);
-    const txs : list(operation) = list [ op; ];
- } with (txs, s)
+    ];
+  const op : operation = Tezos.transaction(unit, 0mutez, receiver);
+  const txs : list(operation) = list [ op; ];
+} with (txs, s)
 
-function execute(const indiceVal : int; const s : advisorStorage) : advisorFullReturn is
-block { 
-    s.result := s.algorithm(indiceVal)
- } with ((nil : list(operation)), s)
+function execute(const indiceVal : int; var s : advisorStorage) : advisorFullReturn is { 
+  s.result := s.algorithm(indiceVal)
+} with ((nil : list(operation)), s)
 
+function change(const p : advisorAlgo; var s : advisorStorage) : advisorFullReturn is { 
+  s.algorithm := p;
+} with ((nil : list(operation)), s)
 
-function change(const p : advisorAlgo; const s : advisorStorage) : advisorFullReturn is
-block { 
-    s.algorithm := p;
- } with ((nil : list(operation)), s)
-
-function advisorMain(const ep : advisorEntrypoints; const store : advisorStorage) : advisorFullReturn is
-block { 
-    const ret : advisorFullReturn = case ep of 
-    | ReceiveValue(p) -> execute(p, store)
-    | RequestValue(p) -> request(p, store)
-    | ChangeAlgorithm(p) -> change(p, store)
-    end;
- } with ret
+function advisorMain(const ep : advisorEntrypoints; const store : advisorStorage) : advisorFullReturn is 
+  case ep of [
+  | ReceiveValue(p) -> execute(p, store)
+  | RequestValue(p) -> request(p, store)
+  | ChangeAlgorithm(p) -> change(p, store)
+  ]
 ```
 
 #### Simulation
@@ -702,22 +687,34 @@ Let's simulate the advisor contract with an initial storage of:
 
 Note that we choose a simple algorithm function that is `function(const i : int) is False` therefore the saved result is `False` too.
 
-Let's simulate again with `ReceiveValue(5)` as an action.
+Let's simulate with `ReceiveValue(5)` as an action.
 
 ```shell
-ligo dry-run advisor.ligo advisorMain 'ReceiveValue(5)' 'record[indiceAddress=("KT1D99kSAsGuLNmT1CAZWx51vgvJpzSQuoZn" : address); algorithm=(function(const i : int) is False); result=False];'
+ligo run dry-run --entry-point advisorMain advisor.ligo 'ReceiveValue(5)' 'record[indiceAddress=("KT1D99kSAsGuLNmT1CAZWx51vgvJpzSQuoZn" : address); algorithm=(function(const i : int) is False); result=False]' 
+#output: 
+# ( LIST_EMPTY() ,
+#   record[algorithm -> "[lambda of type: (lambda %algorithm int bool) ]" ,
+#          indiceAddress -> @"KT1D99kSAsGuLNmT1CAZWx51vgvJpzSQuoZn" ,
+#          result -> False(unit)] )
+
 ```
 
-Let's simulate with `RequestValue(unit)` as an action.
+Let's simulate again with `RequestValue(unit)` as an action.
 
 ```shell
-ligo dry-run advisor.ligo advisorMain 'RequestValue(unit)' 'record[indiceAddress=("KT1D99kSAsGuLNmT1CAZWx51vgvJpzSQuoZn" : address); algorithm=(function(const i : int) is False); result=False]'
+ligo run dry-run --entry-point advisorMain advisor.ligo 'RequestValue(unit)' 'record[indiceAddress=("KT1D99kSAsGuLNmT1CAZWx51vgvJpzSQuoZn" : address); algorithm=(function(const i : int) is False); result=False]'
+#output: failwith("indice cannot send its value")
 ```
 
 Let's simulate with `ChangeAlgorithm(function(const i : int) is if i < 10 then True else False)` as action.
 
 ```shell
-ligo dry-run advisor.ligo advisorMain 'ReceiveValue(5)' 'record[indiceAddress=("KT1D99kSAsGuLNmT1CAZWx51vgvJpzSQuoZn" : address); algorithm=(function(const i : int) is False); result=False]'
+ligo run dry-run --entry-point advisorMain advisor.ligo 'ChangeAlgorithm(function(const i : int) is if i < 10 then True else False)' 'record[indiceAddress=("KT1D99kSAsGuLNmT1CAZWx51vgvJpzSQuoZn" : address); algorithm=(function(const i : int) is False); result=False]'
+#output:
+# ( LIST_EMPTY() ,
+#   record[algorithm -> "[lambda of type: (lambda %algorithm int bool) ]" ,
+#          indiceAddress -> @"KT1D99kSAsGuLNmT1CAZWx51vgvJpzSQuoZn" ,
+#          result -> False(unit)] )
 ```
 
 #### Compilation
@@ -725,12 +722,12 @@ ligo dry-run advisor.ligo advisorMain 'ReceiveValue(5)' 'record[indiceAddress=("
 Now, let's prepare the parameters and the storage.
 
 ```shell
-ligo compile-parameter advisor.ligo advisorMain 'ReceiveValue(5)'
+ligo compile parameter --entry-point advisorMain advisor.ligo 'ReceiveValue(5)'
 #output: (Left (Right 5))
 ```
 
 ```shell
-ligo compile-parameter advisor.ligo advisorMain 'RequestValue(unit)'
+ligo compile parameter --entry-point advisorMain advisor.ligo 'RequestValue(unit)'
 #output: (Right Unit)
 ```
 
@@ -738,45 +735,43 @@ Let's say we want to change the algorithm to a more interesting one while still 
 *if the indice of a stock (indice storage) is under 20, one should invest*.
 
 ```shell
-ligo compile-parameter advisor.ligo advisorMain 'ChangeAlgorithm(function(const i : int) is if i < 20 then True else False)'
-#output: (Left (Left { PUSH int 20 ; SWAP ; COMPARE ; LT ; IF { PUSH bool True ] [ PUSH bool False } }))
+ligo compile parameter --entry-point advisorMain advisor.ligo 'ChangeAlgorithm(function(const i : int) is if i < 20 then True else False)'
+#output:
+# (Left (Left { PUSH int 20 ;
+#               SWAP ;
+#               COMPARE ;
+#               LT ;
+#               IF { PUSH bool True } { PUSH bool False } }))
 ```
 
 Let's compile the storage with a similar business logic as an initial state.
 
 ```shell
-ligo compile-storage advisor.ligo advisorMain 'record[indiceAddress=("KT1D99kSAsGuLNmT1CAZWx51vgvJpzSQuoZn" : address); algorithm=(function(const i : int) is if i < 10 then True else False); result=False]'
-```
-
-This command should return:
-
-```js
-(Pair (Pair { PUSH int 10 ;
-              SWAP ;
-              COMPARE ;
-              LT ;
-              IF { PUSH bool True ] [ PUSH bool False } }
-            "KT1D99kSAsGuLNmT1CAZWx51vgvJpzSQuoZn")
-      False) 
+ligo compile storage --entry-point advisorMain advisor.ligo 'record[indiceAddress=("KT1D99kSAsGuLNmT1CAZWx51vgvJpzSQuoZn" : address); algorithm=(function(const i : int) is if i < 10 then True else False); result=False]'
+#output:
+# (Pair (Pair { PUSH int 10 ;
+#               SWAP ;
+#               COMPARE ;
+#               LT ;
+#               IF { PUSH bool True } { PUSH bool False } }
+#             "KT1D99kSAsGuLNmT1CAZWx51vgvJpzSQuoZn")
+#       False)
 ```
 
 Once everything looks ok, we can compile the main function and save the output in an `advisor.tz` file.
 
 ```shell
-ligo compile-contract advisor.ligo indiceMain > advisor.tz
+ligo compile contract --entry-point advisorMain advisor.ligo > advisor.tz
 ```
 
-This should return:
+The `advisor.tz` file should contain:
 
 ```js
 { parameter
     (or (or (lambda %changeAlgorithm int bool) (int %receiveValue)) (unit %requestValue)) ;
   storage
     (pair (pair (lambda %algorithm int bool) (address %indiceAddress)) (bool %result)) ;
-  code { DUP ;
-         CDR ;
-         SWAP ;
-         CAR ;
+  code { UNPAIR ;
          IF_LEFT
            { IF_LEFT
                { SWAP ;

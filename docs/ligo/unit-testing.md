@@ -257,7 +257,7 @@ class TestContract(TestCase):
 
 To compile LIGO code into Michelson:
 ```shell
-ligo compile-contract file.ligo main > contract.tz
+ligo compile contract file.ligo > contract.tz
 ```
 
 Remember to recompile after any modification of the contract.
@@ -297,28 +297,28 @@ type indiceEntrypoints is Increment of int | Decrement of int
 type indiceFullReturn is list(operation) * indiceStorage
 
 function increment(const param : int; const s : indiceStorage) : indiceFullReturn is
-if Tezos.source =/= s.administrator then  (failwith("administrator not recognized") : indiceFullReturn)
-    else ((nil : list (operation)), s with record [counter=s.counter + param])
+  if Tezos.source =/= s.administrator
+  then  (failwith("administrator not recognized") : indiceFullReturn)
+  else ((nil : list (operation)), s with record [counter=s.counter + param])
 
 function decrement(const param : int; const s : indiceStorage) : indiceFullReturn is
-if Tezos.source =/= s.administrator then  (failwith("administrator not recognized") : indiceFullReturn)
-    else ((nil : list (operation)), s with record [counter=s.counter - param])
+  if Tezos.source =/= s.administrator
+  then  (failwith("administrator not recognized") : indiceFullReturn)
+  else ((nil : list (operation)), s with record [counter=s.counter - param])
     
 function main(const ep : indiceEntrypoints; const store : indiceStorage) : indiceFullReturn is
-block {
-    const ret : indiceFullReturn = case ep of
+  case ep of [
     | Increment(p) -> increment(p, store)
     | Decrement(p) -> decrement(p, store)
-    end;
-} with ret
+  ]
 ```
 
 Let's compile this contract and save the result in a Michelson file `counter.tz`.
 ```shell
-ligo compile-contract counter.ligo main > counter.tz
+ligo compile contract counter.ligo > counter.tz
 ```
 
-The output is:
+The `counter.tz` file should contain:
 ```js
 { parameter (or (int %decrement) (int %increment)) ;
   storage (pair (address %administrator) (int %counter)) ;
@@ -366,7 +366,8 @@ First, let's test the **increment** entrypoint if the user is the administrator.
 
 >Note that only the administrator is allowed to modify the storage and if anyone else tries to do it then the contract will return an error.
 >```js
->if Tezos.source =/= s.administrator then  (failwith("administrator not recognized") : indiceFullReturn)
+> if Tezos.source =/= s.administrator
+> then (failwith("administrator not recognized") : indiceFullReturn)
 >```
 
 #### Test increment entrypoint

@@ -16,7 +16,7 @@ There are different implementations of the Bitcoin protocol on other operating s
 
 The original implementation from _Satoshi Nakamoto_ is in C++ and is called [_Bitcoin Core_](https://bitcoincore.org/). Most of the nodes of the network use this version.
 
-The openness of the code, the permissionless access to the network, the free software all bring intoxicating freedom and appeal to the community. Note, however, that this induces a transfer of responsibility to the user. The best intentions do not drive all developers in the community, and many blockchain applications are pure scams. To prevent this, we encourage users to check the sources of applications and the blockchain they use.
+The openness of the code, the permissionless access to the network, the free software, all bring intoxicating freedom and appeal to the community. Note, however, that this induces a transfer of responsibility to the user. Not all developers in the community have good intentions, and many blockchain applications are pure scams. To prevent this, we encourage users to check the sources of applications and the blockchain they use.
 
 ## Peer-to-Peer network and shared ledger
 Developers have a lot of power, but their code still has to be accepted and used. The Bitcoin P2P network, like most blockchains, has a mesh design spread all over the planet (and space[[1]](/blockchain-basics/main-properties#references)). The more nodes enforcing the rules, the more the protocol is distributed and secured.
@@ -151,7 +151,7 @@ In conclusion, the distributed network's parameters allow for anyone to agree as
 ## What have we learned so far?
 This chapter described some of the pillars of the Bitcoin protocol and how they are articulated around the Nakamoto Consensus. You now understand that the Nakamoto Consensus integrates the Proof-of-Work consensus algorithm and a form of *social* consensus based on simple Economy principles.
 
-In the next chapter, we'll dig into the Proof-of-Work consensus mechanism to understand how it works in details.
+In the next chapter, we'll dig into the Proof-of-Work consensus mechanism to understand how it works in detail.
 
 ## References
 [1] https://blockstream.com/satellite/

@@ -65,19 +65,19 @@ Here is an example of a _Counter_ contract that handles a single integer `counte
 type storage is int
 
 type parameter is
-  Increment of int
+| Increment of int
 | Decrement of int
 | Reset
 
 type return is list (operation) * storage
 
 function main (const action : parameter; const store : storage) : return is
- ((nil : list (operation)),
-  case action of
-    Increment (n) -> store + n
+  ((nil : list (operation)),
+  case action of [
+  | Increment (n) -> store + n
   | Decrement (n) -> store - n
   | Reset         -> 0
- end)
+  ])
 ```
 
 </TabItem>
@@ -87,7 +87,7 @@ function main (const action : parameter; const store : storage) : return is
 type storage = int
 
 type parameter =
-  Increment of int
+| Increment of int
 | Decrement of int
 | Reset
 
@@ -96,9 +96,9 @@ type return = operation list * storage
 let main (action, store : parameter * storage) : return =
   ([] : operation list),
   (match action with
-     Increment n -> store + n
-   | Decrement n -> store - n
-   | Reset       -> 0)
+  | Increment n -> store + n
+  | Decrement n -> store - n
+  | Reset       -> 0)
 ```
 
 </TabItem>
@@ -108,7 +108,7 @@ let main (action, store : parameter * storage) : return =
 type storage = int;
 
 type parameter =
-  Increment (int)
+| Increment (int)
 | Decrement (int)
 | Reset;
 
@@ -117,9 +117,9 @@ type return = (list (operation), storage);
 let main = ((action, store): (parameter, storage)) : return => {
   (([] : list (operation)),
   (switch (action) {
-   | Increment (n) => store + n
-   | Decrement (n) => store - n
-   | Reset         => 0}));
+  | Increment (n) => store + n
+  | Decrement (n) => store - n
+  | Reset         => 0}));
 };
 ```
 
@@ -130,7 +130,7 @@ let main = ((action, store): (parameter, storage)) : return => {
 type storage = int;
 
 type parameter =
-  ["Increment", int]
+| ["Increment", int]
 | ["Decrement", int]
 | ["Reset"];
 

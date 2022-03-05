@@ -89,7 +89,7 @@ LIGO types are built on top of the Michelson's type system.
 
 LIGO supports all Michelson types, from basic primitives (such as `string` or `int`) to composite types (such as `option`, `list` or `map`), including contract-specific types (such as `address` or `tez`).
 
-You can find all built-in types on the [LIGO gitlab](https://gitlab.com/ligolang/ligo/-/tree/dev#L35).
+You can find all built-in types on the [LIGO gitlab](https://gitlab.com/ligolang/ligo/-/blob/dev/src/environment/environment.ml).
 
 Below is a table of the most used built-in types. Most of them will be used in the raffle smart contract:
 
@@ -158,7 +158,7 @@ function <functionName> (const param1 : <param2Type>, const param2 : <param2Type
     <code>
 ```
 
-Functions will be detailed below. At this point, since the main function does nothing, it will use a [blockless function](/docs/ligo/write-contracts-ligo#blockless-functions) definition.
+Functions will be detailed below. At this point, since the main function does nothing, it will use a [blockless function](/ligo/write-contract-ligo/2-launch-raffle#blockless-functions) definition.
 
 #### Main function
 Every LIGO smart contract must define a `main` function. This `main` function defines _operations_ and updates the contract _storage_, depending on the contract parameter. It takes two parameters, the **contract parameter** and the **on-chain storage**, and returns a pair made of a **list of operations** and a **(new) on-chain storage**. 
@@ -181,10 +181,10 @@ type returnMainFunction is list (operation) * storage
 
 #### LIGO compilation
 
-TheLigocode above should now compile with this command:
+The Ligo code above should now compile with this command:
 
 ```shell
-$Ligocompile-contract <ligoFile> <mainFunction>
+$ ligo compile contract <ligoFile>
 ```
 
 If the compilation is successful, the output will be the Michelson code of the contract.
@@ -222,7 +222,7 @@ The last part of a smart contract is the code definition. A smart contract can e
 1. a list of operations
 2. the storage
 
-TheLigocompiler expects the smart contract to have at least one function, which is the `main` function. It does not have to be named that way but it is good practice to do so:
+The Ligo compiler expects the smart contract to have at least one function, which is the `main` function. It does not have to be named that way but it is good practice to do so:
 
 ```js
 type storage is unit
@@ -237,7 +237,7 @@ This `main` function returns return an empty list of operations and the same sto
 The raffle smart contract can now be compiled:
 
 ```shell
-$Ligocompile-contract raffle.ligo main
+$ ligo compile contract raffle.ligo
 ```
 
 ### Summing-up

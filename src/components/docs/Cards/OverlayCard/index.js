@@ -1,11 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-
-import BaseContainer from '../BaseContainer'
-import WithBackgroundImage from '../../WithBackgroundImage'
-
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import PropTypes from 'prop-types'
+import React from 'react'
 
+import WithBackgroundImage from '../../WithBackgroundImage'
+import BaseContainer from '../BaseContainer'
 import styles from './styles.module.css'
 
 const OverlayCard = ({ description, icon, iconDark, overlay, title, to }) => (

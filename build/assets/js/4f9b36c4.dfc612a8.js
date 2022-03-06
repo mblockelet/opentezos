@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkopentezos=self.webpackChunkopentezos||[]).push([[2384],{6945:function(e){e.exports={blogPosts:[]}}}]);

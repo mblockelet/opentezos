@@ -4,10 +4,12 @@ import PropTypes from 'prop-types'
 import BaseContainer from '../BaseContainer'
 import WithBackgroundImage from '../../WithBackgroundImage'
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 import styles from './styles.module.css'
 
 const OverlayCard = ({ description, icon, iconDark, overlay, title, to }) => (
-  <BaseContainer className={styles.root} overlay={overlay} to={to}>
+  <BaseContainer className={styles.root} overlay={overlay} to={useBaseUrl(to)}>
     <div className={styles.circleOverlay} />
     <div className={styles.contents}>
       <WithBackgroundImage className={styles.image} imageLight={icon} imageDark={iconDark} />

@@ -2,7 +2,6 @@ import isInternalUrl from '@docusaurus/isInternalUrl';
 import classnames from 'classnames';
 import PropTypes from 'prop-types'
 import React from 'react';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 
 import styles from './styles.module.css';
 
@@ -23,7 +22,7 @@ const BaseContainer = ({
       [styles.hasRoundedCorners]: hasRoundedCorners,
       [styles.selected]: selected
     })}
-    href={useBaseUrl(to)}
+    href={to}
     target={isInternalUrl(to) ? '_self' : '_blank'}
   >
     <div className={classnames(styles.children, className)} onClick={onClick}>{children}</div>

@@ -113,7 +113,11 @@ module.exports = {
       label: 'Build a Dapp',
       items: [
         'dapp/introduction',
-        'dapp/truffle_compilation_migration',
+        {
+            type: 'category',
+            label: 'Deploy',
+            items: ['dapp/deploy/1-deploy-with-taquito', 'dapp/deploy/2-deploy-with-truffle']
+        },
         'dapp/taquito',
         'dapp/temple',
         'dapp/basics',

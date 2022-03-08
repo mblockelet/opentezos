@@ -69,6 +69,11 @@ module.exports = {
           label: 'Raffle example',
           items: ['archetype/raffle-example/raffle-contract', 'archetype/raffle-example/unit-test'],
         },
+        {
+          type: 'category',
+          label: 'Events',
+          items: ['archetype/events/emit-receive', 'archetype/events/event-example', 'archetype/events/dapp-event-example'],
+        },
         'archetype/examples'
       ],
     },

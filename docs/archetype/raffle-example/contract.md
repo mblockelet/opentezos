@@ -6,12 +6,14 @@ authors: Benoit Rognier
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import ThemedImage from '@theme/ThemedImage';
 
-This section presents the Archetype version of a _raffle_ contract, inspired by the version presented for other languages ([Ligo](/ligo/write-contract-ligo/1-raffle-contract#raffle-smart-contract), [Smartpy](/smartpy/write-contract-smartpy#about-the-raffle-contract)). A raffle is a gambling game, where players buy tickets; a winning ticket is _randomly_ picked and its owner gets the jackpot prize.
+This section presents the Archetype version of a _raffle_ contract, inspired by the version presented for other languages ([Ligo](/ligo/write-contract-ligo/1-raffle-contract#raffle-smart-contract), [Smartpy](/smartpy/write-contract-smartpy#about-the-raffle-contract)). The difference is that it uses the [timelock](https://tezos.gitlab.io/alpha/timelock.html?highlight=timelock) feature to securize the winning ticket picking process.
+
+A raffle is a gambling game, where players buy tickets; a winning ticket is _randomly_ picked and its owner gets the jackpot prize.
 
 The [Michelson](/michelson) language does **not** provide an instruction to generate a random number. We can't use the current date (value of `now`) as a source of randomness either. Indeed, bakers have some control on this value for the blocks they produce, and could therefore influence the result.
 
 :::info
-The source code of the raffle contract and the orresponding test scenario are available in this [repository](https://gitlab.com/completium/archetype-raffle).
+The source code of the raffle contract is available in this [repository](https://gitlab.com/completium/archetype-raffle).
 :::
 
 ## Picking the winning ticket

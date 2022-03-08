@@ -37,7 +37,7 @@ entry bid() {
 
 The [Crank](https://www.npmjs.com/package/@completium/event-well-crank) TS package receives events from contracts and executes event handler functions.
 
-For example, the `handleHBI` function below is executed when a `HighestBidIncreased` event is emitted by the contract, and is registered in the crank:
+For example, the `handleHBI` function below is executed when a `HighestBidIncreased` event is emitted by the contract:
 
 ```typescript
 import { startCrank } from '@completium/event-well-crank'

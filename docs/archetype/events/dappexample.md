@@ -14,7 +14,7 @@ The source code of the example is available [here](https://github.com/completium
 :::
 
 The bulb is switched on/off by receiving events from the bulb contract.
-The bulb demo is live at this [address](https://localhost).
+The bulb demo is live at this [address](https://completium.github.io/bulb-event-demo/).
 
 <BrowserWindow>
 <ThemedImage

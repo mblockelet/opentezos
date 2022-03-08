@@ -14,6 +14,7 @@ The source code of the example is available [here](https://github.com/completium
 :::
 
 The bulb is switched on/off by receiving events from the bulb contract.
+The bulb demo is live at this [address](https://localhost).
 
 <BrowserWindow>
 <ThemedImage
@@ -49,8 +50,21 @@ transition switchOff() {
   with effect { emit<SwitchedOff>({}) }
 }
 ```
+The bulb contract has been deployed on Hangzhounet and its address is `KT19EAMugKU416cbA9jL1XcukWArfpv4dLYu` . Click [here](https://better-call.dev/hangzhou2net/KT19EAMugKU416cbA9jL1XcukWArfpv4dLYu/operations) to view it on Better Call Dev indexer.
 
+## Switch on/off
 
+Use the [*Interact*](https://better-call.dev/hangzhou2net/KT19EAMugKU416cbA9jL1XcukWArfpv4dLYu/interact) tab in Better Call Dev to switch the bulb on and off.
 
+<BrowserWindow url="https://better-call.dev/hangzhou2net/KT19EAMugKU416cbA9jL1XcukWArfpv4dLYu/interact">
+<ThemedImage
+  alt="Buld Dapp"
+  width="100%"
+  sources={{
+    light: useBaseUrl('img/event-well/bulb-interact-bcd.png'),
+    dark: useBaseUrl('img/event-well/bulb-interact-bcd.png'),
+  }}
+/>
+</BrowserWindow>
 
 

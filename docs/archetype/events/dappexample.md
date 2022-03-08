@@ -13,10 +13,9 @@ The *Bulb* demo presented here illustrates how to integrate the crank process in
 The source code of the example is available [here](https://github.com/completium/bulb-event-demo)
 :::
 
-The bulb is switched on/off by receiving events from the bulb contract.
 The bulb demo is live at this [address](https://completium.github.io/bulb-event-demo/).
 
-<BrowserWindow>
+<BrowserWindow url="https://completium.github.io/bulb-event-demo/">
 <ThemedImage
   alt="Buld Dapp"
   width="100%"
@@ -29,7 +28,7 @@ The bulb demo is live at this [address](https://completium.github.io/bulb-event-
 
 ## Bulb contract
 
-The build is designed as a simplistic state machine with *On* and *Off* states. Two events `SwitchedOn` and `SwitchedOff` are defined and emitted respectively by `switchOn` and `switchOff` entrypoints:
+The bulb is switched on/off by receiving events from the bulb contract. The contract is designed as a simplistic state machine with *On* and *Off* states. Two events `SwitchedOn` and `SwitchedOff` are defined and emitted respectively by `switchOn` and `switchOff` entrypoints:
 
 ```archetype
 archetype bulb

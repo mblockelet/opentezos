@@ -26,7 +26,7 @@ $ touch index.mjs emitter.arl
 
 ## Emitter contract
 
-The emitter contract (`emitter.arl`) emits an event when the input natural integer is odd. Copy paste the code below in emitter.arl file:
+The emitter contract emits an event when the input natural integer is odd. Copy paste the code below in `emitter.arl` file:
 
 ```archetype
 archetype odd_emitter

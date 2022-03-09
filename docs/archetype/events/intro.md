@@ -6,7 +6,7 @@ authors: Benoit Rognier
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import ThemedImage from '@theme/ThemedImage';
 
-Archetype provides a seemless way to work with contract events.
+Archetype provides a seamless way to work with contract events.
 
 ## Emit
 

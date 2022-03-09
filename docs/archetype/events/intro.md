@@ -64,7 +64,7 @@ $ completium-cli generate bindings-ts bid.arl > bid-bindings.ts
 
 ## Event Well
 
-The event mecanism relies on a contract called *event well*. The `emit` instruction sends an operation to the event well, and the crank process indexes incoming well operations:
+The event mecanism relies on a contract called *event well*. The `emit` instruction sends an operation to the event well, and the crank process monitors incoming well operations:
 
 <ThemedImage
   alt="event well schema"
@@ -75,7 +75,16 @@ The event mecanism relies on a contract called *event well*. The `emit` instruct
   }}
 />
 
-The well contract is deployed on the mainnet at address [`KT1`](https://better-call-dev/) from the Archetype contract below:
+The well contract is deployed on the mainnet and testnets:
+
+| Network | Well address |
+| -- | -- |
+| mainnet | `KT1AHVF5m8XaWPQCGgfAsZ9eSJJZ7WVGV2hE` |
+| ithacanet | `KT1ReVgfaUqHzWWiNRfPXQxf7TaBLVbxrztw` |
+| hangzhounet | `KT1Aho6K97CKApDSCxXEzvP14qd1qTHhF4uH` |
+
+Its source code is available [here](https://github.com/completium/event-well-contract) and reproduced below:
+
 ```archetype
 archetype event_well
 

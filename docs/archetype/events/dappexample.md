@@ -66,4 +66,6 @@ Use the [*Interact*](https://better-call.dev/hangzhou2net/KT19EAMugKU416cbA9jL1X
 />
 </BrowserWindow>
 
-
+:::info
+You cannot switch on (off) a bulb already on (off). You then get the error `A FAILWITH instruction was reached with InvalidState`.
+:::

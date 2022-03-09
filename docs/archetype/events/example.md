@@ -78,22 +78,28 @@ const runTest = async () => {
   register_Odd(emitter.address, handleOdd);
   await runCrank({
     verbose: true,
-    endpoint: 'https://ithacanet.api.tez.ie',
-    well: 'KT1UsVVireDXZE5R1waCeyKnYD178g2cVDji'
+    endpoint: 'https://hangzhounet.api.tez.ie',
+    well: 'KT1Aho6K97CKApDSCxXEzvP14qd1qTHhF4uH'
   })
 }
 
 runTest()
 ```
 
+:::info
+Options to start the crank with may be found [here](https://github.com/completium/event-well-crank#startcrank).
+:::
+
 ## Execute
 
-Start the receiver aapplication with the following command:
+Start the receiver application with the following command:
 ```
 $ node index.mjs
 ```
 
-In verbose mode, the crank displays the block hashes read.
+:::info
+In verbose mode, the crank displays indexed blocks' hash in the console.
+:::
 
 In another shell, call the emitter contract with the following:
 ```bash

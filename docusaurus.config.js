@@ -7,7 +7,7 @@ module.exports = {
   title: 'OpenTezos',
   tagline: 'The full encyclopedia of Tezos',
   url: 'https://opentezos.com',
-  baseUrl: '/opentezos/',
+  baseUrl: '/',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',

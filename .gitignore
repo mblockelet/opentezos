@@ -1,6 +1,7 @@
 
 .docusaurus
 .vscode
+**/build
 
 **/.env
 **/.env.development

@@ -15,7 +15,7 @@ Run the following to install completium-cli:
 npm i -g @completium/completium-cli
 ```
 
-If it is already installed, check that the version is at least `0.3.31` with:
+If it is already installed, check that the version is at least `0.3.32` with:
 ```bash
 completium-cli version
 ```

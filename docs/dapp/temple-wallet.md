@@ -1,5 +1,5 @@
 ---
-id: temple
+id: temple-wallet
 disable_pagination: true
 title: Temple Wallet
 authors: Benjamin Pilia
@@ -32,9 +32,9 @@ You'll get to the main page:
 
 ## Faucet import
 
-Let's import a faucet for the _Florence_ network. First, download a faucet JSON from [faucet.tzalpha.net](https://faucet.tzalpha.net/).
+Let's import a faucet for the _Hangzhou_ network. First, download a faucet JSON from [teztnets.xyz](https://teztnets.xyz/hangzhounet-faucet).
 
-Then, open the Temple Wallet. Click on the network dropdown bar (1), select _Florence_ network. Then click on your account thumbnail (2), then "Import account" and finally "Faucet file". You can load your JSON file here.
+Then, open the Temple Wallet. Click on the network dropdown bar (1), select _Hangzhou_ network. Then click on your account thumbnail (2), then "Import account" and finally "Faucet file". You can load your JSON file here.
 
 Once the activation is confirmed, you will automatically be redirected to the _Temple_ main page with your activated account.
 
@@ -46,7 +46,7 @@ Now that you have an account with some funds from the faucet, let's send some of
 
 ![](../../static/img/dapp/temple3.png "Temple send page")
 
-You can send funds to any address by manually filling the recipient, or you can choose from one of your addresses by clicking on the list at the bottom of the page (third spot)
+You can send funds to any address by manually filling the recipient, or you can choose from one of your addresses by clicking on the list that appears when you click in the text box.
 
 Send 100 Tez (or another amount) to your first account. A confirmation page will pop up. You can review some information on this page: transaction amount, receiver and fees.
 
@@ -56,26 +56,26 @@ All the transaction information can be found under the "Raw" tab:
 
 ```json
 {
-  "branch": "BMBg53qGc5xM42Dd3ymNV6pV1KJCJmL73T6aGfmdEmrBL6ajnfS",
+  "branch": "BMLSNShUV2Q9AT55bbSaSkXqTgGFQb6Fx96ASM2waJEAocf5QeY",
   "contents": [
     {
       "kind": "reveal",
-      "source": "tz1cLMENL1FJYMBJ3WPg5UQAEFobdVPFrdpH",
-      "fee": "1420",
-      "counter": "162232",
-      "gas_limit": "10600",
+      "source": "tz1iEYotczM1u2Vny9C3ouT6PEziLLeKAfgC",
+      "fee": "982",
+      "counter": "3687196",
+      "gas_limit": "1100",
       "storage_limit": "0",
-      "public_key": "edpkvVNoJuAADKX3pYskzfXLpn8gBAnQjjcGQjQf22Amf9Kh4kfbnx"
+      "public_key": "edpkueF8F6SUUuUgHttJQ5yL1HmZZyajE9yryKwmbksNK5yE4RW159"
     },
     {
       "kind": "transaction",
-      "source": "tz1cLMENL1FJYMBJ3WPg5UQAEFobdVPFrdpH",
-      "fee": "507",
-      "counter": "162233",
-      "gas_limit": "1527",
+      "source": "tz1iEYotczM1u2Vny9C3ouT6PEziLLeKAfgC",
+      "fee": "608",
+      "counter": "3687197",
+      "gas_limit": "1520",
       "storage_limit": "257",
       "amount": "100000000",
-      "destination": "tz1beoZXxjqsXGoZnwW4TZD3MWGFpLHRxeFN"
+      "destination": "tz1NJ3n8XScMEMK6Px47s7ZJSNDNBYbuqzGq"
     }
   ]
 }

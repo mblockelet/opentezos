@@ -116,10 +116,14 @@ module.exports = {
         {
             type: 'category',
             label: 'Deploy',
-            items: ['dapp/deploy/1-deploy-with-taquito', 'dapp/deploy/2-deploy-with-truffle']
+            items: [
+                'dapp/deploy/introduction',
+                'dapp/deploy/deploy-with-taquito',
+                'dapp/deploy/deploy-with-truffle'
+            ]
         },
         'dapp/taquito',
-        'dapp/temple',
+        'dapp/temple-wallet',
         'dapp/basics',
         'dapp/front_user_experience',
         'dapp/exam',

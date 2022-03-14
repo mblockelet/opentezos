@@ -92,7 +92,7 @@ class Paths extends React.Component {
             <OverlayCard
               description="Learn the basics of the Archetype smart contract language."
               icon="img/icons/archetype-big-light.svg"
-              iconDark="img/icons/archetype-big-light.svg"
+              iconDark="img/icons/archetype-big-dark.svg"
               title="Archetype"
               to="/archetype"
             />
@@ -152,7 +152,7 @@ class Paths extends React.Component {
               to="/baking"
             />
           )}
-          /*{[paths.ALL, paths.DEV, paths.STARTUPPER].includes(
+          {[paths.ALL, paths.DEV, paths.STARTUPPER].includes(
             this.state.path,
           ) && (
             <OverlayCard
@@ -162,7 +162,7 @@ class Paths extends React.Component {
               title="Deploy Bakers"
               to="/baker"
             />
-          )}*/
+          )}
           {[paths.ALL, paths.DEV, paths.C_LEVEL, paths.STARTUPPER].includes(
             this.state.path,
           ) && (

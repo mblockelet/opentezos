@@ -1,6 +1,7 @@
 
 .docusaurus
 .vscode
+**/build
 
 **/.env
 **/.env.development
@@ -8,7 +9,6 @@
 **/*.log
 **/node_modules
 **/dist
-# **/build
 **/coverage
 **/.webpack
 **/downloads

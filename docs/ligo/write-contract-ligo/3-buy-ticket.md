@@ -27,14 +27,14 @@ Lists are **linear collections of elements of the same type**. Linear means that
 
 Lists are used for returning operations from a smart contract's main function and to store the same values several times in a collection
 
-For more details, see the [Ligolang `list` documentation](https://ligolang.org/docs/reference/list-reference)
+For more details, see the [Ligolang `list` documentation](https://ligolang.org/docs/language-basics/sets-lists-tuples#lists)
 
 #### Sets
 
 _Sets_ are **unordered collections of values of the same type** (as opposed to lists which are ordered collections).
 Like the mathematical _sets_ and _lists_, _sets_ can be empty and, if not, elements of _sets_ in LIGO are unique, even though they can be repeated in a _list_.
 
-For more details, see the [Ligolang `set` documentation](https://ligolang.org/docs/reference/set-reference)
+For more details, see the [Ligolang `set` documentation](https://ligolang.org/docs/language-basics/sets-lists-tuples#sets)
 
 #### Maps
 
@@ -86,7 +86,7 @@ type buyTicketParameter is unit
    
 ```js
 type raffleEntrypoints is
-OpenRaffle of openRaffleParameter
+| OpenRaffle of openRaffleParameter
 | BuyTicket of buyTicketParameter
 ```
 
@@ -94,12 +94,10 @@ OpenRaffle of openRaffleParameter
    
 ```js
 function main (const action : raffleEntrypoints; const store : storage): returnType is
-block {
-    const return : returnType = case action of
-    OpenRaffle (param) -> open_raffle (param.0, param.1, param.2, store)
+  case action of [
+    | OpenRaffle (param) -> open_raffle (param.0, param.1, param.2, store)
     | BuyTicket (param) -> buy_ticket(param, store)
-    end;
-} with return
+  ];
 ```
 
 ### Implementing the BuyTicket logic
@@ -107,33 +105,35 @@ block {
 The last step is to implement the logic of this entrypoint. Just as for the first entrypoint, this logic will be implemented in a function, `buy_ticket`:
 
 ```js
-  function buy_ticket (const param: unit; const store : storage) : returnType is
-    block { skip } with ((nil : list (operation)), store)
+function buy_ticket (const param: unit; const store : storage) : returnType is {
+  skip
+} with ((nil : list (operation)), store)
 ```
 
 Two variables have to be checked:
-1. is the buyer sending enough funds?
+1. is the buyer sending the right amount of tez?
 2. has the buyer not already bought a ticket?
 
 For the first point, this is the same check that is done for the first entrypoint. Checking if an address is calling the entrypoint for the first time (= a buyer cannot buy more than one ticket) means checking if the calling address is already in the payers `set`.
 
 ```js
-function buy_ticket (const param: unit; const store : storage) : returnType is
-  block {
-    if store.raffle_is_open then {
-      const ticket_price : tez = 1tez;
-      const current_player : address = Tezos.sender;
-      if Tezos.amount = ticket_price then failwith("The sender does not own enough tz to buy a ticket.")
+function buy_ticket (const param: unit; const store : storage) : returnType is {
+  if store.raffle_is_open then {
+    const ticket_price : tez = 1tez;
+    const current_player : address = Tezos.sender;
+    if Tezos.amount <> ticket_price
+    then failwith("The sender did not send the right tez amount.")
+    else {
+      if store.players contains current_player
+      then failwith("Each player can participate only once.")
       else {
-        if store.players contains current_player then failwith("Each player can participate only once.")
-        else {
-            skip
-        }
+        skip
       }
-    } else {
-      failwith("The raffle is closed.")
     }
-  } with ((nil : list (operation)), store)
+  } else {
+    failwith("The raffle is closed.")
+  }
+} with ((nil : list (operation)), store)
 ``` 
 
 Once these two checks have been performed, the buyer can receive a ticket. For this, the entrypoint needs to:
@@ -143,25 +143,30 @@ Once these two checks have been performed, the buyer can receive a ticket. For t
 
 These three steps use the methods described in the collections section.
 
+> Note that `const store` has been replaced by `var store` because it is modified.
+
+> Note that `const param` has been replaced by `const _param`. The `_` is used when a variable is unused.
+
 ```js
-function buy_ticket (const param: unit; const store : storage) : returnType is
-  block {
-    if store.raffle_is_open then {
-      const ticket_price : tez = 1tez;
-      const current_player : address = Tezos.sender;
-      if Tezos.amount = ticket_price then failwith("The sender does not own enough tz to buy a ticket.")
+function buy_ticket (const param: unit; var store : storage) : returnType is {
+  if store.raffle_is_open then {
+    const ticket_price : tez = 1tez;
+    const current_player : address = Tezos.sender;
+    if Tezos.amount =/= ticket_price
+    then failwith("The sender did not send the right tez amount.")
+    else {
+      if store.players contains current_player
+      then failwith("Each player can participate only once.")
       else {
-        if store.players contains current_player then failwith("Each player can participate only once.")
-        else {
-          const ticket_id : nat = Set.size(store.players);
-          store.players := Set.add(current_player, store.players);
-          store.sold_tickets[ticket_id] := current_player;
-        }
+        const ticket_id : nat = Set.size(store.players);
+        store.players := Set.add(current_player, store.players);
+        store.sold_tickets[ticket_id] := current_player;
       }
-    } else {
-      failwith("The raffle is closed.")
     }
-  } with ((nil : list (operation)), store)
+  } else {
+    failwith("The raffle is closed.")
+  }
+} with ((nil : list (operation)), store)
 ``` 
 
 Our contract now is:
@@ -171,8 +176,8 @@ type openRaffleParameter is tez * timestamp * option(string)
 type buyTicketParameter is unit
 
 type raffleEntrypoints is
-OpenRaffle of openRaffleParameter
-| BuyTicket of buyTicketParameter
+  | OpenRaffle of openRaffleParameter
+  | BuyTicket of buyTicketParameter
 
 type storage is record [
     admin : address;
@@ -182,67 +187,67 @@ type storage is record [
     raffle_is_open : bool;
     players : set (address);
     sold_tickets : big_map (nat, address);
-    ]
+  ]
 
 type returnType is list (operation) * storage
 
-function open_raffle (const jackpot_amount : tez; const close_date : timestamp; const description : option (string); const store : storage) : returnType is
-  block {
-    if Tezos.source =/= store.admin
-    then failwith ("Administrator not recognized.")
-    else {
-      if not store.raffle_is_open then {
-        if Tezos.amount < jackpot_amount then failwith ("The administrator does not own enough tz.")
+function open_raffle (const jackpot_amount : tez; const close_date : timestamp; const description : option (string); var store : storage) : returnType is {
+  if Tezos.source =/= store.admin
+  then failwith ("Administrator not recognized.")
+  else {
+    if not store.raffle_is_open then {
+      if Tezos.amount < jackpot_amount
+      then failwith ("The administrator does not own enough tz.")
+      else {
+        const today : timestamp = Tezos.now;
+        const seven_day : int = 7 * 86400;
+        const in_7_day : timestamp = today + seven_day;
+        const is_close_date_not_valid : bool = close_date < in_7_day;
+        if is_close_date_not_valid
+        then failwith("The raffle must remain open for at least 7 days.")
         else {
-          const today : timestamp = Tezos.now;
-          const seven_day : int = 7 * 86400;
-          const in_7_day : timestamp = today + seven_day;
-          const is_close_date_not_valid : bool = close_date < in_7_day;
-          if is_close_date_not_valid then failwith("The raffle must remain open for at least 7 days.")
-          else {
-            patch store with record [
+          patch store with record [
             jackpot = jackpot_amount;
             close_date = close_date;
             raffle_is_open = True;
-            ];
+          ];
 
-            case description of
-              Some(d) -> patch store with record [description=d]
-            | None -> {skip}
-            end
-          }
+          case description of [
+          | Some(d) -> patch store with record [description=d]
+          | None -> {skip}
+          ]
         }
       }
-      else {
-        failwith ("A raffle is already open.")
-      }
     }
-  } with ((nil : list (operation)), store)
+    else {
+      failwith ("A raffle is already open.")
+    }
+  }
+} with ((nil : list (operation)), store)
 
-function buy_ticket (const param: unit; const store : storage) : returnType is
-  block {
-    if store.raffle_is_open then {
-      const ticket_price : tez = 1tez;
-      const current_player : address = Tezos.sender;
-      if Tezos.amount = ticket_price then failwith("The sender does not own enough tz to buy a ticket.")
+function buy_ticket (const _param: unit; var store : storage) : returnType is {
+  if store.raffle_is_open then {
+    const ticket_price : tez = 1tez;
+    const current_player : address = Tezos.sender;
+    if Tezos.amount =/= ticket_price
+    then failwith("The sender did not send the right tez amount.")
+    else {
+      if store.players contains current_player
+      then failwith("Each player can participate only once.")
       else {
-        if store.players contains current_player then failwith("Each player can participate only once.")
-        else {
-          const ticket_id : nat = Set.size(store.players);
-          store.players := Set.add(current_player, store.players);
-          store.sold_tickets[ticket_id] := current_player;
-        }
+        const ticket_id : nat = Set.size(store.players);
+        store.players := Set.add(current_player, store.players);
+        store.sold_tickets[ticket_id] := current_player;
       }
-    } else {
-      failwith("The raffle is closed.")
     }
-  } with ((nil : list (operation)), store)
+  } else {
+    failwith("The raffle is closed.")
+  }
+} with ((nil : list (operation)), store)
 
 function main (const action : raffleEntrypoints; const store : storage): returnType is
-block {
-    const return : returnType = case action of
-    OpenRaffle (param) -> open_raffle (param.0, param.1, param.2, store)
+  case action of [
+    | OpenRaffle (param) -> open_raffle (param.0, param.1, param.2, store)
     | BuyTicket (param) -> buy_ticket(param, store)
-    end;
-} with return
+  ]
 ```

@@ -17,7 +17,7 @@ Remember we defined what a consensus is, in IT, in the *Main properties of the f
 </NotificationBar>
 
 ## Proof-of-Stake (PoS)
-The first rule of this mechanism is for blocks to be *validated* by **validators** that **have invested coins** in the system. The more a validator has coins in an escrow, the more chances he has to validate a block and earn rewards. This requires that coins are mined early enough so blocks can be validated from the launch.
+The key idea behind this mechanism is for blocks to be *validated* by **validators** that **have invested coins** in the system. The more coins a validator has in an escrow, the more chances he has to validate a block and earn rewards. This requires that coins are mined early enough so blocks can be validated from the launch.
 
 _PoS_ is a system where _validators_ are not the creators of coins, so that transaction fees provide their only rewards (no coinbase).
 
@@ -35,7 +35,7 @@ We'll go back to DPoS in the ["*Delegated Proof-of-Stake (DPoS)* section"](/tezo
 Examples: *Steem, Graphene, BitShares...*
 
 ## Liquid Proof-of-Stake (LPoS)
-Tezos has developed LPoS, an evolution of DPoS. Though delegation is optional. As opposed to DPoS, any user can become a validator if he has enough coins. If he doesn't, then he has the choice to delegate. The idea is to dilute even more the mining activity and to increase inclusion.
+Tezos has developed LPoS, an evolution of DPoS. Though delegation is optional. As opposed to DPoS, any user can become a validator if she has enough coins. If she doesn't, then she has the choice to delegate. The idea is to dilute even more the mining activity and to increase inclusion.
 
 In LPoS, a validator is called a **baker**. Any user owning enough coins can become a baker. Suppose a user wants to benefit from baking but doesn't own enough coins or doesn't have enough technical knowledge. In that case, he can _delegate_ his coins to _bakers_, thereby benefiting from a portion of the transaction fees.
 
@@ -46,14 +46,14 @@ We'll go into more details about LPoS in the [Tezos Basics Module](/tezos-basics
 ## Proof-of-Burn (PoB)
 Instead of investing computational power and electricity like in PoW, users in PoB must _burn_ some coins to gain a chance of becoming the next validator. _Burning_ coins means sending them to a locking address where they are irretrievable, thereby destroying them.
 
-The more a miner burns coins, the more likely he is to validate a block and win rewards.
+The more coins a miner burns, the more likely he is to validate a block and win rewards.
 
 This mimics the process of mining where miners have to invest some value, except, instead of electricity, they use the coins themselves.
 
 Examples: *Slimcoin*
 
 ## Proof-of-Capacity (PoC)
-This consensus first generates large data sets called "*Plots*". The more plots a *miner* records, the more lottery tickets he owns. Hence, the more hard-drive space (*capacity*) he has, the more chances of winning the rewards. This also mimics PoW mining: instead of accumulating hash power, you accumulate hard-drive capacity.
+This consensus first generates large data sets called "*Plots*". The more plots a *miner* records, the more lottery tickets she owns. Hence, the more hard-drive space (*capacity*) she has, the more chances of winning the rewards. This also mimics PoW mining: instead of accumulating hash power, you accumulate hard-drive capacity.
 
 Variants: *Proof-of-Storage, Proof-of-Space*
 
@@ -81,7 +81,7 @@ Each node chooses its multiple quorum slices to trust.
 The aim of this is to avoid **separated divergent quorums**, and to ensure that **all quorums converge**.  
 Quorum slices must be large enough to have **intersections** (shared nodes).
 
-To summarise, validator groups with sufficient base size can aggregate single nodes from other groups. In the end, agreed quorums would cover the majority of the network, reaching a consensus.
+To summarize, validator groups with sufficient base size can aggregate single nodes from other groups. In the end, agreed quorums would cover the majority of the network, reaching a consensus.
 
 Examples: *Stellar, Ripple*.
 
@@ -103,7 +103,7 @@ Proof-of-Activity is split into two ordered phases:
 
 2. PoS phase
 
-    A random group of validators is chosen to sign the new block. The more coins a validator owns, the more likely he has to be selected. When all the validators signed, the block is filled with transactions.
+    A random group of validators is chosen to sign the new block. The more coins a validator owns, the more likely he is to be selected. When all the validators have signed, the block is filled with transactions.
 
     If there are not enough validators for a valid block signing, another valid block and another group of validators are chosen.
 

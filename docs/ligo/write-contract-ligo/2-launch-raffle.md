@@ -58,14 +58,26 @@ function isSmall (const n : nat) : bool is
 if n < 10n then true else false
 ```
 
-1. For more than a simple expression we use a `block` expression: 
+2. For more than a simple expression we use a `block` expression: 
 ```js
 if x < y then {
   const z : nat = x;
   x := y; y := z
 }
-else skip;
+else skip
 ```
+
+> If a conditional has a branch `else skip`, that branch can be omitted
+
+The conditional above is better written as follows:
+
+```js
+if x < y then {
+  const z : nat = x;
+  x := y; y := z
+}
+```
+
 
 For more details, see the [Ligolang `if` documentation](https://ligolang.org/docs/language-basics/boolean-if-else#conditionals)
 
@@ -108,19 +120,17 @@ There are two syntaxes for functions in PascaLigo, _Block Functions_ and _Blockl
 Block functions in PascaLigo are defined using the following syntax:
 
 ```js
-function <name> (<parameters>) : <return_type> is 
-  block {
-   <operations and instructions>
-  } with <returned_value>
+function <name> (<parameters>) : <return_type> is {
+  <operations and instructions>
+} with <returned_value>
 ```
 
 If a placeholder is needed, the instruction `skip` leaves the state unchanged. The rationale for `skip` instead of a genuinely empty block is that it prevents you from writing an empty block by mistake.
 
 ```js
-function <name> (<parameters>) : <return_type> is 
-  block {
-   skip
-  } with <returned_value>
+function <name> (<parameters>) : <return_type> is {
+  skip
+} with <returned_value>
 ```
 
 ##### Blockless functions
@@ -155,7 +165,7 @@ Entrypoints are defined within a variant type:
 
 ```js
 type entrypoints is
-  <firstEntrypoint> of <firstEntrypointParameterType>
+| <firstEntrypoint> of <firstEntrypointParameterType>
 | <secondEntrypoint> of <secondEntrypointParameterType>
 | ...
 |  <nthEntrypoint> of <nthEntrypointParameterType>
@@ -169,30 +179,29 @@ Pattern matching can be used to route the program's control flow based on the va
 type bit is One | Zero
 
 function power_switch (const b : bit) : bit is
-  case b of
-    One -> Zero
+  case b of [
+  | One -> Zero
   | Zero -> One
-  end
+  ]
 ```
 
 The control is performed this way:
 
 ```js
 type entrypoints is
-  <firstEntrypoint> of <firstEntrypointParameterType>
+| <firstEntrypoint> of <firstEntrypointParameterType>
 | <secondEntrypoint> of <secondEntrypointParameterType>
 | ...
 |  <nthEntrypoint> of <nthEntrypointParameterType>
 
-function main (const action : entrypoints; const store : storage): returnType is
-block {
-    const return : returnType = case action of
-      <firstEntrypoint> (param) -> <firstEntrypointFunctionName> (param.0, param.1, param.2, param.3, store)
-    | <secondEntrypoint> (param) -> <secondEntrypointFunctionName>(param, store)
-    | ...
-    | <nthEntrypoint> (param) -> <nthEntrypointFunctionName> (param, store)
-    end;
- } with return
+function main (const action : entrypoints; const store : storage): returnType is {
+  const return : returnType = case action [
+  | <firstEntrypoint> (param) -> <firstEntrypointFunctionName> (param.0, param.1, param.2, param.3, store)
+  | <secondEntrypoint> (param) -> <secondEntrypointFunctionName> (param, store)
+  | ...
+  | <nthEntrypoint> (param) -> <nthEntrypointFunctionName> (param, store)
+  ];
+} with return
 ```
 
 ### Customizing the Raffle storage
@@ -253,10 +262,9 @@ In order to be exposed, `OpenRaffle` needs to be handled in a pattern matching, 
 
 ```js
 function main (const action : raffleEntrypoints; const store : storage):  list (operation) * storage is
-    case action of
-        OpenRaffle -> ((nil: list(operation)), store)
-    end;
-
+  case action of [
+    OpenRaffle -> ((nil: list(operation)), store)
+  ]
 ```
 
 > Notice that the contract **parameter** (_raffleEntrypoints_ variant) is requiring no parameter (`unit`).
@@ -274,15 +282,14 @@ type storage is record [
     jackpot : tez;
     description : string;
     raffle_is_open : bool;
-    ]
+  ]
 
 type returnType is list (operation) * storage
 
 function main (const action : raffleEntrypoints; const store : storage): returnType is
-    case action of
-        OpenRaffle -> ((nil: list(operation)), store)
-    end;
-
+  case action of [
+    OpenRaffle -> ((nil: list(operation)), store)
+  ]
 ```
 
 Despite the definition of a more complex storage, the execution of the smart contract still does nothing. The smart contract should at least require some parameters and update its storage.
@@ -317,22 +324,24 @@ type storage is record [
     jackpot : tez;
     description : string;
     raffle_is_open : bool;
-    ]
+  ]
 
 type returnType is list (operation) * storage
 
 function main (const action : raffleEntrypoints; const store : storage): returnType is
-    case action of
-        OpenRaffle (param) -> ((nil: list(operation)), store)
-    end;
-
+  case action of [
+    OpenRaffle (param) -> ((nil: list(operation)), store)
+  ]
 ```
 
 This outputs some Michelson code that does nothing, but there is a slight change in the parameter section:
 
 ```
 { parameter (pair (pair mutez timestamp) (option string)) ;
-  storage int ;
+  storage
+    (pair (pair (pair (address %admin) (timestamp %close_date))
+                (pair (string %description) (mutez %jackpot)))
+          (bool %raffle_is_open)) ;
   code { CDR ; NIL operation ; PAIR } }
 ```
 
@@ -345,124 +354,138 @@ The last step is to implement the logic of this entrypoint, in a function, which
 Let's create an empty function. This function expects the three needed parameters, and returns the standard list of operations and the updated store:
 
 ```js
-function open_raffle (const jackpot_amount : tez; const close_date : timestamp; const description : option(string); const store : storage) : returnType is
-    block { skip } with ((nil: list(operation)), store)
+function open_raffle (const jackpot_amount : tez; const close_date : timestamp; const description : option(string); const store : storage) : returnType is {
+  skip
+} with ((nil: list(operation)), store)
 ```
 
 The first step is to check if the entrypoint is called by the administrator. If not, it should raise an exception. The check is performed by the association of an `if` condition and a `failwith`. The address calling the entrypoint should match the address in the storage. This is called access control.
 
 ```js
-function open_raffle (const jackpot_amount : tez; const close_date : timestamp; const description : option(string); const store : storage) : returnType is
-    block {
-      if Tezos.source =/= store.admin then failwith("administrator not recognized")
-      else {
-        skip
-      }
-    } with ((nil: list(operation)), store)
+function open_raffle (const jackpot_amount : tez; const close_date : timestamp; const description : option(string); const store : storage) : returnType is {
+  if Tezos.source =/= store.admin
+  then failwith("administrator not recognized")
+  else {
+    skip
+  }
+} with ((nil: list(operation)), store)
 ```
 
 A second check has to be performed: a raffle cannot be opened if the previous one has not yet closed. A boolean gives this value in the storage: `raffle_is_open`
 
 ```js
-function open_raffle (const jackpot_amount : tez; const close_date : timestamp; const description : option(string); const store : storage) : returnType is
-    block {
-      if Tezos.source =/= store.admin then failwith("Administrator not recognized.")
-      else {
-        if not store.raffle_is_open then {
-            skip
-        } else {
-          failwith("A raffle is already open.")
-        }
-      }
-    } with ((nil: list(operation)), store)
+function open_raffle (const jackpot_amount : tez; const close_date : timestamp; const description : option(string); const store : storage) : returnType is {
+  if Tezos.source =/= store.admin
+  then failwith("Administrator not recognized.")
+  else {
+    if not store.raffle_is_open then {
+      skip
+    } else {
+      failwith("A raffle is already open.")
+    }
+  }
+} with ((nil: list(operation)), store)
 ```
 
 A third check is performed on the reward: the funds sent must match the raffle reward.
 
 ```js
-function open_raffle (const jackpot_amount : tez; const close_date : timestamp; const description : option (string); const store : storage) : returnType is
-  block {
-    if Tezos.source =/= store.admin
-    then failwith ("Administrator not recognized.")
-    else {
-      if not store.raffle_is_open then {
-        if Tezos.amount < jackpot_amount then failwith ("The administrator does not own enough tez.")
-        else {
-            skip
-        }
-      }
+function open_raffle (const jackpot_amount : tez; const close_date : timestamp; const description : option (string); const store : storage) : returnType is {
+  if Tezos.source =/= store.admin
+  then failwith ("Administrator not recognized.")
+  else {
+    if not store.raffle_is_open then {
+      if Tezos.amount < jackpot_amount
+      then failwith ("The administrator does not own enough tez.")
       else {
-        failwith ("A raffle is already open.")
+        skip
       }
     }
-  } with ((nil : list (operation)), store)
+    else {
+      failwith ("A raffle is already open.")
+    }
+  }
+} with ((nil : list (operation)), store)
 ```
 
 One final check is performed on the raffle closing date: the raffle should last at least a week.
 
 ```js
-function open_raffle (const jackpot_amount : tez; const close_date : timestamp; const description : option (string); const store : storage) : returnType is
-  block {
-    if Tezos.source =/= store.admin
-    then failwith ("Administrator not recognized.")
-    else {
-      if not store.raffle_is_open then {
-        if Tezos.amount < jackpot_amount then failwith ("The administrator does not own enough tez.")
+function open_raffle (const jackpot_amount : tez; const close_date : timestamp; const description : option (string); const store : storage) : returnType is {
+  if Tezos.source =/= store.admin
+  then failwith ("Administrator not recognized.")
+  else {
+    if not store.raffle_is_open then {
+      if Tezos.amount < jackpot_amount
+      then failwith ("The administrator does not own enough tez.")
+      else {
+        const today : timestamp = Tezos.now;
+        const seven_day : int = 7 * 86400;
+        const in_7_day : timestamp = today + seven_day;
+        const is_close_date_not_valid : bool = close_date < in_7_day;
+        if is_close_date_not_valid
+        then failwith("The raffle must remain open for at least 7 days.")
         else {
-          const today : timestamp = Tezos.now;
-          const seven_day : int = 7 * 86400;
-          const in_7_day : timestamp = today + seven_day;
-          const is_close_date_not_valid : bool = close_date < in_7_day;
-          if is_close_date_not_valid then failwith("The raffle must remain open for at least 7 days.")
-          else {
-            skip
-          }
+          skip
         }
       }
-      else {
-        failwith ("A raffle is already open.")
-      }
     }
-  } with ((nil : list (operation)), store)
+    else {
+      failwith ("A raffle is already open.")
+    }
+  }
+} with ((nil : list (operation)), store)
 ```
 
 We need to store the variables about the raffle: the reward, the closing date and the raffle description. In addition, the storage should indicate that there's an ongoing raffle. The storage needs to be updated with these variables. 
 
 > Note how the description is added to the storage as an `option`.
 
+> Note that `const store` has been replaced by `var store` because it is modified.
+
 ```js
-function open_raffle (const jackpot_amount : tez; const close_date : timestamp; const description : option (string); const store : storage) : returnType is
-  block {
-    if Tezos.source =/= store.admin
-    then failwith ("Administrator not recognized.")
-    else {
-      if not store.raffle_is_open then {
-        if Tezos.amount < jackpot_amount then failwith ("The administrator does not own enough tz.")
+function open_raffle (const jackpot_amount : tez; const close_date : timestamp; const description : option (string); var store : storage) : returnType is {
+  if Tezos.source =/= store.admin
+  then failwith ("Administrator not recognized.")
+  else {
+    if not store.raffle_is_open then {
+      if Tezos.amount < jackpot_amount
+      then failwith ("The administrator does not own enough tz.")
+      else {
+        const today : timestamp = Tezos.now;
+        const seven_day : int = 7 * 86400;
+        const in_7_day : timestamp = today + seven_day;
+        const is_close_date_not_valid : bool = close_date < in_7_day;
+        if is_close_date_not_valid
+        then failwith("The raffle must remain open for at least 7 days.")
         else {
-          const today : timestamp = Tezos.now;
-          const seven_day : int = 7 * 86400;
-          const in_7_day : timestamp = today + seven_day;
-          const is_close_date_not_valid : bool = close_date < in_7_day;
-          if is_close_date_not_valid then failwith("The raffle must remain open for at least 7 days.")
-          else {
-            patch store with record [
+          patch store with record [
             jackpot = jackpot_amount;
             close_date = close_date;
             raffle_is_open = True;
-            ];
+          ];
 
-            case description of
-              Some(d) -> patch store with record [description=d]
-            | None -> {skip}
-            end
-          }
+          case description of [
+          | Some(d) -> patch store with record [description=d]
+          | None -> {skip}
+          ]
         }
       }
-      else {
-        failwith ("A raffle is already open.")
-      }
     }
-  } with ((nil : list (operation)), store)
+    else {
+      failwith ("A raffle is already open.")
+    }
+  }
+} with ((nil : list (operation)), store)
+```
+
+Finally, we add this function to the main control flow :
+
+```js
+function main (const action : raffleEntrypoints; const store : storage): returnType is
+  case action of [
+    OpenRaffle (param) -> open_raffle (param.0, param.1, param.2, store)
+  ]
 ```
 
 > Keep in mind:

@@ -13,24 +13,23 @@ Michelson smart contracts are stored in a file with the `.tz` extension.
 Here is how to transform a LIGO code into a Michelson code using the LIGO compiler in the command line.
 
 ```shell
-ligo compile-contract SOURCE_LIGO_FILE MAIN_FUNCTION
+ligo compile contract SOURCE_LIGO_FILE
 ```
 
 Where:
 - **SOURCE_LIGO_FILE** is the path to your LIGO file containing the main function.
-- **MAIN_FUNCTION** is the name of your main function.
 
 Example:
 
 ```shell
-ligo compile-contract examples/counter.ligo main 
+ligo compile contract examples/counter.ligo
 ```
 
 The examples are detailed later in the chapter, see [here](#example).
 
 > You can store the Michelson output of the command above in .tz file in order to use it later when deploying the contract:
 > ```
-> ligo compile-contract SOURCE_LIGO_FILE ENTRY_POINT > MICHELSON_FILE
+> ligo compile contract SOURCE_LIGO_FILE > MICHELSON_FILE
 > ```
 
 
@@ -39,19 +38,18 @@ The examples are detailed later in the chapter, see [here](#example).
 Testing a contract would be pretty tricky if you always had to set up a live node to run tests. Fortunately, an easy alternative is to use LIGO's built-in dry-run feature. Dry-running is a simulated execution of the smart contract as if it was deployed on a real chain. It works by simulating the main execution-function, based on a mock storage value and a parameter.
 
 ```shell
-ligo dry-run [options] SOURCE_LIGO_FILE MAIN_FUNCTION 'ACTION(P)' 'STORAGE_STATE'
+ligo run dry-run [flags] SOURCE_LIGO_FILE 'ACTION(P)' 'STORAGE_STATE'
 ```
 
 where:
+- **ACTION(P)** is a LIGO expression used to specify the action that triggers the associated entrypoint with the corresponding parameter p.
 - **STORAGE_STATE** is the state of the storage when simulating the execution of the entrypoint.
 
 Example:
 
 ```shell
-ligo dry-run src/counter.ligo main "Increment(5)" 3
-// tuple[   list[]
-//          8
-// ]
+ligo run dry-run counter.ligo 'Increment(5)' 3
+// Outputs: ( LIST_EMPTY() , 8 )
 ```
 
 ## Defining the initial storage
@@ -59,7 +57,7 @@ ligo dry-run src/counter.ligo main "Increment(5)" 3
 The Michelson output of the following command can be used to init the storage when deploying the contract.
 
 ```shell
-ligo compile-storage SOURCE_LIGO_FILE MAIN_FUNCTION 'STORAGE_STATE'
+ligo compile storage SOURCE_LIGO_FILE 'STORAGE_STATE'
 ```
 
 where:
@@ -68,7 +66,7 @@ where:
 Example:
 
 ```shell
-ligo compile-storage src/counter.ligo main 5
+ligo compile storage counter.ligo 5
 // Outputs: 5
 ```
 
@@ -86,7 +84,7 @@ where:
 Example:
 
 ```shell
-ligo compile-parameter src/counter.ligo main 'Increment(5)'
+ligo compile parameter examples/counter.ligo main 'Increment(5)'
 // Outputs: (Right 5)
 ```
   
@@ -102,7 +100,7 @@ The deployment of a smart contract in Tezos is called "**_origination_**".
 Here is the syntax for the Tezos command line to deploy a smart contract:
 
 ```shell
-tezos-client originate contract CONTRACT_NAME for USER transferring AMOUNT_TEZ from FROM_USER \
+tezos-client originate contract CONTRACT_NAME transferring AMOUNT_TEZ from FROM_USER \
              running MICHELSON_FILE \
              --init 'INITIAL_STORAGE' --burn-cap GAZ_FEE
 ```
@@ -151,68 +149,43 @@ function sub (const n : int; const store : storage) : storage is store - n
 
 function main (const action : parameter; const store : storage) : return is
   ((nil : list(operation)),
-   case action of
-     Increment (n) -> add (n, store)
-   | Decrement (n) -> sub (n, store)
-   end)
+  case action of [
+    | Increment (n) -> add (n, store)
+    | Decrement (n) -> sub (n, store)
+  ])
 ```
 
 ### Compile
 
 ```shell
-ligo compile-contract examples/counter.ligo main > code.tz
+ligo compile contract counter.ligo > counter.tz
 ```
 
 The command above outputs the following Michelson code:
 
-> Note that the output has been saved in the Michelson file `code.tz`
+> Note that the output has been saved in the Michelson file `counter.tz`
 
 ```js
 { parameter (or (int %decrement) (int %increment)) ;
   storage int ;
-  code { DUP ;
-         CDR ;
-         DIP { DUP } ;
-         SWAP ;
-         CAR ;
-         IF_LEFT
-           { DUP ;
-             DIP { DIP { DUP } ; SWAP } ;
-             PAIR ;
-             DUP ;
-             CDR ;
-             DIP { DUP ; CAR } ;
-             SUB ;
-             DIP { DROP 2 } }
-           { DUP ;
-             DIP { DIP { DUP } ; SWAP } ;
-             PAIR ;
-             DUP ;
-             CDR ;
-             DIP { DUP ; CAR } ;
-             ADD ;
-             DIP { DROP 2 } } ;
-         NIL operation ;
-         PAIR ;
-         DIP { DROP 2 } } }
-
+  code { UNPAIR ; IF_LEFT { SWAP ; SUB } { ADD } ; NIL operation ; PAIR } }
 ```
 
 ### Initial storage
 
-However, in order to **originate** a Michelson contract on Tezos, we also need to provide its initial storage value, we can use `compile-storage` to compile the LIGO representation of the storage to Michelson.
+However, in order to **originate** a Michelson contract on Tezos, we also need to provide its initial storage value, we can use `compile storage` to compile the LIGO representation of the storage to Michelson.
 
 ```shell
-ligo compile-storage src/counter.ligo main 5
+ligo compile storage counter.ligo 5
 // Outputs: 5
 ```
 
 ### Invocation parameter
 
-The same rules apply for the parameters. We will need to use `compile-parameter` to compile our action variant into Michelson, here's how:
+The same rules apply for the parameters. We will need to use `compile parameter` to compile our action variant into Michelson, here's how:
 
 ```shell
-ligo compile-parameter src/counter.ligo main 'Increment(5)'
+ligo compile parameter counter.ligo 'Increment(5)'
 // Outputs: (Right 5)
 ```
 
@@ -223,10 +196,8 @@ We can now use `(Right 5)`, which is a Michelson value, to invoke our contract v
 To dry-run the counter-contract, we provide a `main` function with a variant _parameter_ of value `Increment (5)` and an initial storage value of `3`.
 
 ```shell
-ligo dry-run src/counter.ligo main "Increment(5)" 3
-// tuple[   list[]
-//          8
-// ]
+ligo run dry-run counter.ligo 'Increment(5)' 3
+// Outputs: ( LIST_EMPTY() , 8 )
 ```
 
 The simulation shows that our storage would have been incremented to 8.
@@ -245,7 +216,7 @@ tezos-client originate contract counterContract for boostrap1 transferring 1 fro
 
 ### Invoke
 
-Let's invoke the entrypoint `Increment(5)` of the smart contract. Remember that the output of the `compile-parameter` of this entrypoint was `(Right 5)`
+Let's invoke the entrypoint `Increment(5)` of the smart contract. Remember that the output of the `compile parameter` of this entrypoint was `(Right 5)`
 
 ```shell
 tezos-client transfer 5 from boostrap1 to counterContract --arg '(Right 5)'
@@ -270,7 +241,8 @@ Consider the following LIGO code snippet for the storage definition
 type coordinates is ( int * int * int)
 type storage is map (string, coordinates)
 
-[...]
+function main (const _action : unit; const store : storage) : list(operation) * storage is
+  ((nil : list(operation)), store)
 ```
 
 ### Maps
@@ -283,10 +255,10 @@ Initialization of the elements of a map follows the syntax:
 map[ KEY1 -> VALUE1; KEY2 -> VALUE2 ]
 ```
 
-Here is an example of a command-line `ligo compile-storage` for transpiling a map.
+Here is an example of a command-line `ligo compile storage` for transpiling a map.
 
 ```shell
-ligo compile-storage starmap.ligo main 'map [ "earth" -> (2,7,1); "sun" -> (0,0,0) ]'
+ligo compile storage starmap.ligo 'map [ "earth" -> (2,7,1); "sun" -> (0,0,0) ]'
 ```
 
 This command returns:
@@ -302,10 +274,10 @@ Initialization of the tuple elements is specified between `(` and `)`, and separ
 (VALUE1, VALUE2, VALUE3)
 ```
 
-Here is an example of a command-line `ligo compile-storage` for compiling a map containing a tuple.
+Here is an example of a command-line `ligo compile storage` for compiling a map containing a tuple.
 
 ```shell
-ligo compile-storage starmap.ligo main 'map [ "earth" -> (2,7,1) ]'
+ligo compile storage starmap.ligo 'map [ "earth" -> (2,7,1) ]'
 ```
 
 This command returns:
@@ -317,7 +289,7 @@ This command returns:
 When specifying an empty map, one must set the map [] into the expected type.
 
 ```shell
-ligo compile-storage starmap.ligo main '(map []: map(string,coordinates))'
+ligo compile storage starmap.ligo '(map []: map(string,coordinates))'
 ```
 
 ### Records
@@ -333,20 +305,21 @@ We should now have a record instead of a tuple for `coordinates`.
 
 ```js
 //starmap2.ligo
-type coordinates = record [
-  x = int;
-  y = int;
-  z = int
+type coordinates is record [
+  x : int;
+  y : int;
+  z : int
 ]
 type storage is map (string, coordinates)
 
-[...]
+function main (const _action : unit; const store : storage) : list(operation) * storage is
+  ((nil : list(operation)), store)
 ```
 
 We can compile the storage as follows:
 
 ```shell
-ligo compile-storage code.ligo main 'map [ "earth" -> record [x=2;y=7;z=1] ]'
+ligo compile storage starmap2.ligo 'map [ "earth" -> record [x=2;y=7;z=1] ]'
 ```
 
 This command returns:

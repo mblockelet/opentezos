@@ -85,7 +85,7 @@ html[data-theme='dark'] .root {
 }
 
 html[data-theme='dark'] .root:hover {
-  border-color: white;
+  border-color: #606770;
   transition: border-color 0.2s ease-in-out;
 }
 

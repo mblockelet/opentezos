@@ -7,23 +7,23 @@ authors: Maxime Sallerin and Benjamin Pilia
 There are currently four ways to get started with LIGO. You can choose to use a Docker image, a static Linux binary, install packages for your Debian Linux distribution, or you can try directly on the [online editor](https://ide.ligolang.org/).
 
 ## Dockerized installation (recommended)
-If you've [installed 🐳 Docker](https://docs.docker.com/install/), you are able to run the latest LIGO release 0.21.0:
+If you've [installed 🐳 Docker](https://docs.docker.com/install/), you are able to run the latest LIGO release 0.36.0:
 
 Linux or OSX:
 
 ```bash
-docker run --rm -v "$PWD":"$PWD" -w "$PWD" ligolang/ligo:0.21.0
+docker run --rm -v "$PWD":"$PWD" -w "$PWD" ligolang/ligo:0.36.0
 ```
 
 Note that this command is equivalent to running _ligo_ itself, so you might want to create an alias for it:
 ```
-alias ligo='docker run --rm -v "$PWD":"$PWD" -w "$PWD" ligolang/ligo:0.21.0'
+alias ligo='docker run --rm -v "$PWD":"$PWD" -w "$PWD" ligolang/ligo:0.36.0'
 ``` 
 
 Windows:
 
 ```bash
-docker run --rm -v "%CD%":/cd -w /cd ligolang/ligo:0.21.0
+docker run --rm -v "%CD%":/cd -w /cd ligolang/ligo:0.36.0
 ```
 
 Or if you want the development version, replace the version above with `next`.
@@ -81,6 +81,7 @@ You can then execute your code by choosing from the following features:
 Painters need a brush and a canvas. Developers need a good IDE experience. LIGO currently offers support for [VSCode](https://code.visualstudio.com), including syntax highlighting and on-the-fly compilation error reporting.
 
 Available extensions:
+- **[LIGO VSCode Plugin](https://marketplace.visualstudio.com/items?itemName=ligolang-publish.ligo-vscode)**
 - **[Syntax highlighting for PascaLigo](https://marketplace.visualstudio.com/items?itemName=LigoLang.pascaligo-vscode)**
 - **[On-the-fly compilation error reporting](https://marketplace.visualstudio.com/items?itemName=Ligo.ligo-tools)**
 

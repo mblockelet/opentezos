@@ -29,7 +29,7 @@ Operands are in-between "**<**" and "**>**", while operators are in capitals and
 If **the awaited _public key_** and a **valid corresponding _signature_** are provided, the vault is opened:
 
 ```xml
-<sig> <pubKey> 
+<sig> <pubKey>
 ```
 
 Because *Bitcoin Script* is stack-based, the complete code executed is:
@@ -44,13 +44,13 @@ The fact that *Bitcoin Script* is a low-level and stack-based language does not 
 
 The first limitation is the number and types of usable *OP_codes*. For security purposes, various *OP_codes* are either absent, or have been disabled [[1]](/blockchain-basics/smart-contracts#references) following the discovery of vulnerabilities.
 
-Certain absences of *OP_codes* are also voluntary. They could lead to errors and out-of-control operations. This means *Bitcoin Script* is **willingly non-turing complete**. For instance, it is impossible to create a **loop** with *Bitcoin Script*.
+Certain absences of *OP_codes* are also voluntary. They could lead to errors and out-of-control operations. This means *Bitcoin Script* is **deliberately non-turing complete**. For instance, it is impossible to create a **loop** with *Bitcoin Script*.
 
 The transaction's structure also limits possibilities. Two critical points should be understood while programming with Bitcoin Script:
 - a Bitcoin script is unable to know and handle the **transaction amount** inside
 - a Bitcoin script is **unaware of anything happening outside the stack**. It **can't access the blockchain data**.
 
-Finally, because of the "*vaults*" system, knowing the balance of someone means checking all his/her vaults [[6]](/blockchain-basics/smart-contracts#references). 
+Finally, because of the "*vaults*" system, knowing the balance of someone means checking all his/her vaults [[6]](/blockchain-basics/smart-contracts#references).
 This means you need to sum up the amounts of all the transactions sent to the same address in the ledger. This impacts the coding logic of Bitcoin's spending conditions, again because you can't use the balance of a private key inside the code.
 This is a significant difference with systems like Ethereum, which have an *account* point of view: you can directly use the amounts and balances inside your codes.
 
@@ -65,7 +65,7 @@ The very first definition of "*Smart Contracts*" is originally from Nick Szabo [
 
 This definition is pretty hard to understand because it is very generic.
 
-A smart contract is a **piece of code** stored inside the *blockchain*. It executes a set of pre-defined instructions (promises). Once deployed (stored), it becomes **immutable**. A smart contract is deployed using a **transaction**, so we embed spending conditions inside it, which are then **immutable**. We will go into more detail about this immutability in the [Tezos Basics module](/tezos-basics/introduction).
+A smart contract is a **piece of code** stored inside the *blockchain*. It executes a set of pre-defined instructions (promises). Once deployed (stored), it becomes **immutable**. A smart contract is deployed using a **transaction**, so we embed spending conditions inside it, which are then **immutable**. We will go into more detail about this immutability in the [Tezos Basics module](/tezos-basics).
 
 Strictly speaking, a Bitcoin transaction is a smart contract. The **promise** to open the *vault* from one party is fulfilled, given that the other party has the right *key* to open it. Note that *the way* this key is provided is also meaningful here. It must follow **protocols**.
 

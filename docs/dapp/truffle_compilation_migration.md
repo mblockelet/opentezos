@@ -6,17 +6,17 @@ authors: Benjamin Pilia
 
 import NotificationBar from '../../src/components/docs/NotificationBar';
 
-The first step to creating a Dapp is to deploy a smart contract on the _Tezos_ network, whether for testing or real-life use. There are several ways to do this, such as using the Tezos CLI.  
+The first step to creating a Dapp is to deploy a smart contract on the _Tezos_ network, whether for testing or real-life use. There are several ways to do this, such as using the Tezos CLI.
 
-However, during development, the smart contracts and the associated storage are likely to change: new field, field removal, structure change. For each change, a new deployment must be done. 
+However, during development, the smart contracts and the associated storage are likely to change: new field, field removal, structure change. For each change, a new deployment must be done.
 
-Thus, the way that the contract is deployed will change accordingly, especially the initial storage. A minimal change in the storage definition can make the next deployments tiresome when using the Tezos CLI, especially if changes are made several times. 
+Thus, the way that the contract is deployed will change accordingly, especially the initial storage. A minimal change in the storage definition can make the next deployments tiresome when using the Tezos CLI, especially if changes are made several times.
 
-Mooreover, there are times when you need to deploy several smart contracts that will interact with one another. The deployment of a smart contract depends on the deployment of a previous one to get its address. Instead of deploying one after the other the smart contracts and retrieving their address, it should be possible to have an automated script that performs these actions. 
+Mooreover, there are times when you need to deploy several smart contracts that will interact with one another. The deployment of a smart contract depends on the deployment of a previous one to get its address. Instead of deploying one after the other the smart contracts and retrieving their address, it should be possible to have an automated script that performs these actions.
 
 *Truffle*, developed and maintained by _ConsenSys Software Inc_, solves these difficulties. This tool uses scripts to perform smart contract deployments. It uses a CLI and a few configuration files to make deployments easier and faster.
 
-In this chapter, we will deploy the _Raffle_ smart contract, as developed in the [LIGO module](/docs/ligo) onto a testnet using _Truffle_.
+In this chapter, we will deploy the _Raffle_ smart contract, as developed in the [LIGO module](/ligo) onto a testnet using _Truffle_.
 
 # About The *Truffle* Suite
 
@@ -57,7 +57,7 @@ For more info, you can refer to the [official documentation](https://www.truffle
 
 # Setting-up a *Truffle* project
 
-As described below, *Truffle* is working with configuration files and scripts, which must be located in specific repositories. 
+As described below, *Truffle* is working with configuration files and scripts, which must be located in specific repositories.
 You can set up your *Truffle* project from scratch, but it is easier to use one of the two ways provided by *Truffle*:
 
 1. Initializing an empty project
@@ -105,7 +105,7 @@ A *Truffle* project follows this structure:
 
 * **build**: the folder containing the _Michelson_ code, compiled by *Truffle* and used for the contract deployments. The build folder will be created or updated after each compilation command.
 * **contracts**: the folder containing all the LIGO smart contracts that *Truffle* has to compile.
-* **migrations**: the folder containing the *Truffle* deployement scripts for the deployment of the contracts. 
+* **migrations**: the folder containing the *Truffle* deployement scripts for the deployment of the contracts.
 * **node_modules**: the node modules used by the *Truffle* project.
 * **package.json**: the file containing the script commands, which launches a sandbox with _Ganache_.
 * **scripts**: the folder containing scripts that can be run from the CLI to execute some operation on the smart contracts.
@@ -141,7 +141,7 @@ Compiling smart contracts can be done with:
 $ truffle compile
 ```
 
-Input: valid smart contracts (i.e compiling smart contracts), located in `contract` directory 
+Input: valid smart contracts (i.e compiling smart contracts), located in `contract` directory
 
 Output: *Truffle* artifacts, stored into the build/contracts directory.
 
@@ -252,7 +252,7 @@ Obviously faucet accounts can be imported into the `accounts.js` file as well.
 The networks are defined in the `truffle-config.js` file. It exports an object that defines networks. Each key in *networks* sets a network, which requires:
 - **host**: An RPC node ([https://tezostaquito.io/docs/rpc_nodes/](https://tezostaquito.io/docs/rpc_nodes/)) or a local node (as shown in the development network).
 - **port**: running node port.
-- **network_id**: each Tezos network has an id. For instance, _Florencenet_ id is `NetXxkAx4woPLyu`. `*` matches any network. 
+- **network_id**: each Tezos network has an id. For instance, _Florencenet_ id is `NetXxkAx4woPLyu`. `*` matches any network.
 - **type**: network type, here `tezos`.
 - A private key to create a transaction, either:
    - secretKey
@@ -311,7 +311,7 @@ module.exports = {
 
 ### Writing the migration scripts
 
-Now that the smart contracts and the deployment network are ready, the next step is to write the deployment script. Such scripts are also called _migrations_: they usually update the storage structure or initial data and the smart contract code. These scripts are located in the *migrations* directory. 
+Now that the smart contracts and the deployment network are ready, the next step is to write the deployment script. Such scripts are also called _migrations_: they usually update the storage structure or initial data and the smart contract code. These scripts are located in the *migrations* directory.
 
 Each migration is a _Javascript_ file, defining the deployment tasks. It can execute any _Javascript_ code. Each migration starts with a number, followed by a title. *Truffle* will run the migrations in an ascending order. For instance, the `tezos-example` box comes with tree migrations:
 
@@ -400,7 +400,7 @@ Any type and structure change in the LIGO smart contract storage must be mirrore
 
 #### Deployment
 
-The last step of the migration is the deployment definition. It's a function export, which defines how the contracts should be deployed. 
+The last step of the migration is the deployment definition. It's a function export, which defines how the contracts should be deployed.
 
 This function takes three arguments:
 * `deployer`: truffle object which deploys a contract.
@@ -571,7 +571,7 @@ Summary
 
 ```
 
-The most useful data here is the deployed contract address (to later interact with it), the cost of the origination and the transaction hash (to check its status on an explorer for instance). 
+The most useful data here is the deployed contract address (to later interact with it), the cost of the origination and the transaction hash (to check its status on an explorer for instance).
 
 You can find some of these data in the automatically generated JSON file under the `build/contracts` folder:
 ```
@@ -601,7 +601,7 @@ You can find some of these data in the automatically generated JSON file under t
 
 ## Interacting with a deployed contract
 
-Once the migration is done, it can be useful to verify that the contract is deployed correctly. There are many tools for this: CLI, libraries, explorers, etc. In this section, we'll keep it simple with a GUI. 
+Once the migration is done, it can be useful to verify that the contract is deployed correctly. There are many tools for this: CLI, libraries, explorers, etc. In this section, we'll keep it simple with a GUI.
 
 [tzstats.com](https://tzstats.com/) provides information about any public Tezos network: transactions, accounts, contracts (origination, storage, entrypoints), etc.
 
@@ -612,8 +612,8 @@ You should see _New Smart contract created by..._ line in the *Calls* section. T
 
 # Conclusion
 
-The first step in developing a Dapp is to deploy the smart contracts. _Truffle_ takes LIGO code, compiles it into Michelson code and deploys it onto any public or private network. 
+The first step in developing a Dapp is to deploy the smart contracts. _Truffle_ takes LIGO code, compiles it into Michelson code and deploys it onto any public or private network.
 
-Each migration needs an initial storage that is compliant with the storage type of the Michelson code. 
+Each migration needs an initial storage that is compliant with the storage type of the Michelson code.
 
 Thanks to its configuration and easily readable and versioned migration files, _Truffle_ is an essential tool throughout the development and deployment of a Dapp.

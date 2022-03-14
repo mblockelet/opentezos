@@ -12,10 +12,15 @@
   --ifm-spacing-horizontal: 1rem;
 }
 
-html[data-theme='dark'] {
+/*html[data-theme='dark'] {
   --ifm-background-color: #191f36;
   --ifm-background-surface-color: #2a3045;
   --doc-component-background: #2a3045;
+}
+*/
+html[data-theme='dark'] {
+  --ifm-color-primary: rgb(121, 182, 242);
+  --doc-component-background: #242526;
 }
 
 html[data-theme='light'] {
@@ -192,7 +197,7 @@ html[data-theme='light'] .menu > .menu__list > li:nth-child(16) > .menu__list-it
 html[data-theme='dark'] .menu > .menu__list > li:nth-child(16) > .menu__list-item-collapsible > a::before {
   background: url('/img/icons/contribute-small-dark.svg') no-repeat;
 }
-*/ .green {
+.green {
   color: #00ff28;
   margin-bottom: 10px;
 }

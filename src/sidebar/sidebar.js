@@ -113,6 +113,8 @@ module.exports = {
       label: 'Build a Dapp',
       items: [
         'dapp/introduction',
+        'dapp/taquito',
+        'dapp/temple-wallet',
         {
             type: 'category',
             label: 'Deploy',
@@ -122,10 +124,8 @@ module.exports = {
                 'dapp/deploy/deploy-with-truffle'
             ]
         },
-        'dapp/taquito',
-        'dapp/temple-wallet',
-        'dapp/basics',
-        'dapp/front_user_experience',
+        'dapp/frontend-basics',
+        'dapp/frontend-advanced',
         'dapp/exam',
       ],
     },

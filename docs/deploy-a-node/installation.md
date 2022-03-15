@@ -4,11 +4,13 @@ title: Installation
 authors: Maxime Sallerin and Thomas Zoughebi
 ---
 
-In this chapter, we will see how to install Tezos from the source with Unbuntu and macOS.
+In this chapter, we will see how to install Tezos from the source with Ubuntu and macOS.
 
-## Build from source (Ubuntu)
+## Ubuntu
 
-### Fisrt install the libraries that Tezos is dependent on
+### Build from sources
+
+#### Install the libraries that Tezos is dependent on
 
 ```shell
 sudo apt update && sudo apt install -y rsync git m4 build-essential patch unzip bubblewrap wget pkg-config libgmp-dev libev-dev libhidapi-dev
@@ -17,7 +19,7 @@ sudo apt update && sudo apt install -y rsync git m4 build-essential patch unzip 
 Type your password when prompted.
 `[sudo] password for username:`
 
-### Install Rust
+#### Install Rust
 
 Compiling Tezos requires, the Rust compiler and the Cargo package manager, to be installed.
 
@@ -25,11 +27,11 @@ Compiling Tezos requires, the Rust compiler and the Cargo package manager, to be
 cd $HOME
 wget https://sh.rustup.rs/rustup-init.sh
 chmod +x rustup-init.sh
-./rustup-init.sh --profile minimal --default-toolchain 1.44.0 -y
+./rustup-init.sh --profile minimal --default-toolchain 1.52.1 -y
 source $HOME/.cargo/env
 ```
 
-### Install Zcash Parameters
+#### Install Zcash Parameters
 
 Tezos binaries require the Zcash parameter files to run.
 
@@ -39,7 +41,7 @@ chmod +x fetch-params.sh
 ./fetch-params.sh
 ```
 
-### Install OPAM
+#### Install OPAM
 
 ```shell
 wget https://github.com/ocaml/opam/releases/download/2.0.3/opam-2.0.3-x86_64-linux
@@ -47,7 +49,7 @@ sudo cp opam-2.0.3-x86_64-linux /usr/local/bin/opam
 sudo chmod a+x /usr/local/bin/opam
 ```
 
-### Get sources
+#### Get sources
 
 ```shell
 git clone https://gitlab.com/tezos/tezos.git
@@ -55,7 +57,7 @@ cd tezos
 git checkout latest-release
 ```
 
-### Install Tezos dependencies
+#### Install Tezos dependencies
 
 ```shell
 opam init --bare
@@ -68,7 +70,7 @@ You may also be prompted for your `sudo` password.
 
 You may encounter a "switch" error, but you can ignore it. You may encounter failures in the processes of the `make build-deps` command. In that case, just re-type the command to re-initiate.
 
-### Compile sources
+#### Compile sources
 
 ```shell
 eval $(opam env)

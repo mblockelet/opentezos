@@ -33,17 +33,17 @@ Test networks have a list of built-in accounts with some provided funds. You can
 
 The last two built-in networks to be used as a test network are:
 
-- [Granadanet](https://tezos.gitlab.io/introduction/test_networks.html#granadanet)
-- [Florencenet](https://tezos.gitlab.io/introduction/test_networks.html#florencenet)
+- [Hangzhounet](https://tezos.gitlab.io/introduction/test_networks.html#hangzhounet)
+- [Ithacanet](https://tezos.gitlab.io/introduction/test_networks.html#ithacanet)
 
 ### Network configuration
 
 The simplest way to select the network to connect to is to use the `--network` option when you initialize your node configuration. For instance, to run on Florencenet:
 
 ```shell
-./tezos-node config init --data-dir /tezos-florencenet --network florencenet
-./tezos-node identity generate --data-dir /tezos-florencenet
-./tezos-node run --data-dir /tezos-florencenet
+./tezos-node config init --data-dir /tezos-hangzhounet --network hangzhounet
+./tezos-node identity generate --data-dir /tezos-hangzhounet
+./tezos-node run --data-dir /tezos-hangzhounet
 ```
 
 > Once initialized, the node remembers its network settings on subsequent runs and reconnects to the same network every time you run it. If you specify a different network when running the node again, it will refuse to start. In order to switch to a different network, you need to either reinitialize it with a different data directory using the --data-dir option or remove everything from the existing data directory, which defaults to ~/.tezos-node (and also initialize again).
@@ -52,16 +52,16 @@ The `--network option` is **not** case-sensitive and can be used with the follow
 
 - mainnet (this is the default)
 - sandbox
-- florencenet (available from version 9.0)
-- granadanet (available from version 9.2)
+- hangzhounet
+- ithacanet
 
-If you did not initialize your node configuration or if your configuration file doesn't contain a "network" field, the node assumes you want to run **Mainnet**. You can use the `--network` option with `tezos-node run` to make sure your node runs on the expected network. For instance, to make sure that it runs on **Florencenet**:
+If you did not initialize your node configuration or if your configuration file doesn't contain a "network" field, the node assumes you want to run **Mainnet**. You can use the `--network` option with `tezos-node run` to make sure your node runs on the expected network. For instance, to make sure that it runs on **Hangzhounet**:
 
 ```shell
-./tezos-node run --data-dir ~/tezos-florencenet --network florencenet
+./tezos-node run --data-dir ~/tezos-hangzhounet --network hangzhounet
 ```
 
-This command will fail with an error if the configured network is **not** *Florencenet*. The node also displays the chain name (such as `TEZOS_MAINNET`) when it starts.
+This command will fail with an error if the configured network is **not** *Hangzhounet*. The node also displays the chain name (such as `TEZOS_MAINNET`) when it starts.
 
 ## References
 

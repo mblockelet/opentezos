@@ -12,10 +12,10 @@ It is possible to define the directory where the data will be stored with `--dat
 
 By default, the network is Mainnet but, you can specify the network with the `--network` option.
 
-For example, the following command configure the node for the Florencenet Network and stores data in a specified directory:
+For example, the following command configure the node for the Hangzhounet Network and stores data in a specified directory:
 
 ```shell
-./tezos-node config init --data-dir ~/tezos-florencenet --network florencenet`.
+./tezos-node config init --data-dir ~/tezos-hangzhounet --network hangzhounet
 ```
 
 More about Networks in the [Networks chapter](/deploy-a-node/networks).
@@ -27,7 +27,6 @@ If you want to know more about possible alternative node configurations, check o
 First, you must generate a new identity in order to connect to the Tezos network.
 
 ```shell
-cd tezos
 ./tezos-node identity generate
 ```
 
@@ -48,7 +47,7 @@ So, rather than taking days to download the Tezos blockchain from the P2P networ
 
 #### Downloading snapshot
 
-Download the correct snapshot depending on whether you want to configure your node on the [Mainnet](/deploy-a-node/networks#Mainnet) or on a [Testnet](/deploy-a-node/networks#est-networks).
+Download the correct snapshot depending on whether you want to configure your node on the [Mainnet](/deploy-a-node/networks#mainnet) or on a [Testnet](/deploy-a-node/networks#test-networks).
 
 1. Download the last **rolling** snapshot on this site [snapshots-tezos.giganode.io](https://snapshots-tezos.giganode.io/) (use the 'WEB' link)
    > The file is about 1.3 GB and should take a few minutes to download.
@@ -66,7 +65,7 @@ The mechanism of Snapshots can help to reduce the synchronization time.
 The following command bootstraps an empty Tezos node from the `<snapshot.rolling>` file to a rolling Tezos node.
 
 ```shell
-./tezos-node snapshot import <snapshot.rolling>
+./tezos-node snapshot import <snapshot.rolling> --data-dir ~/tezos-hangzhounet
 ```
 
 > This command should take a few minutes.

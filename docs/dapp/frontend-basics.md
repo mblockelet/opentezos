@@ -1,5 +1,5 @@
 ---
-id: basics
+id: frontend-basics
 disable_pagination: true
 title: Frontend (Basics)
 authors: Benjamin Pilia
@@ -23,9 +23,9 @@ In the end, our application will look like:
 
 Let's create a React project. To do that, we can use the `npx create-react-app` command. We will use the `typescript` template:
 ```shell
-$ npx create-react-app my-Dapp --template typescript # create project
-$ cd my-dapp
-$ yarn start # run project
+npx create-react-app my-Dapp --template typescript # create project
+cd my-dapp
+yarn start # run project
 ```
 
 We have a running React application that displays some text. So far, it doesn't do anything else. The first step is to integrate the _Temple Wallet_.
@@ -35,13 +35,17 @@ We have a running React application that displays some text. So far, it doesn't 
 The [@temple-wallet/dapp](https://www.npmjs.com/package/@temple-wallet/dapp) module enables a React application to use the _Temple Wallet_ to interact with a Tezos blockchain. This module uses the [@taquito/taquito](https://www.npmjs.com/package/@taquito/taquito) and [constate](https://www.npmjs.com/package/constate) modules. Let's install this module:
 
 ```shell
-$ yarn add @temple-wallet/dapp
-$ yarn add @taquito/taquito
-$ yarn add constate
+yarn add @temple-wallet/dapp
+yarn add @taquito/taquito
+yarn add constate
 ```
 
 The _Madfish Solutions_ team provides developers with a ready-to-use script to integrate _Temple_ into our _React_ app:
 https://github.com/madfish-solutions/counter-dapp/blob/master/src/dapp.js
+
+:::info
+If you encounter errors when running `yarn add` or `npm run start`, change the `react-scripts` version to `4.0.3` in the `package.json`.
+:::
 
 Let's create a `dapp` folder into `src/`, and put the dapp.js file into it:
 
@@ -112,7 +116,7 @@ function App() {
             <React.Suspense fallback={null}>
 
             </React.Suspense>
-        < /DAppProvider>
+        </DAppProvider>
     );
 }
 
@@ -181,10 +185,10 @@ const connect = React.useCallback(
 ```typescript
 // src/dapp/default.ts
 export const APP_NAME = 'Raffle';
-export const NETWORK = 'edo2net';
+export const NETWORK = 'hangzounet';
 ```
 
-Our smart contract is deployed on _Edonet_: the network is therefore set to `edo2net`.
+Our smart contract is deployed on _Hanghzounet_: the network is therefore set to `hangzounet`.
 
 We can now use the `useConnect` callback. We can define a `ConnexionButton` component that will execute a connexion callback when clicked.
 
@@ -269,7 +273,7 @@ Let's add the used address. We will use the `useAccountPkh` callback from `dapp/
               wallet,
               tezos: tzs,
               accountPkh: pkh, // set here
-            })
+            })  
           } catch (err) {
             console.error(`Failed to connect ThanosWallet: ${err.message}`)
           }

@@ -1,5 +1,5 @@
 ---
-id: front_user_experience
+id: frontend-advanced
 disable_pagination: true 
 title: Frontend (Advanced)
 authors: Benjamin Pilia

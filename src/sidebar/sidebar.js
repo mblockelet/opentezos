@@ -118,11 +118,19 @@ module.exports = {
       label: 'Build a Dapp',
       items: [
         'dapp/introduction',
-        'dapp/truffle_compilation_migration',
         'dapp/taquito',
-        'dapp/temple',
-        'dapp/basics',
-        'dapp/front_user_experience',
+        'dapp/temple-wallet',
+        {
+            type: 'category',
+            label: 'Deploy',
+            items: [
+                'dapp/deploy/introduction',
+                'dapp/deploy/deploy-with-taquito',
+                'dapp/deploy/deploy-with-truffle'
+            ]
+        },
+        'dapp/frontend-basics',
+        'dapp/frontend-advanced',
         'dapp/exam',
       ],
     },

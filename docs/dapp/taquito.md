@@ -15,7 +15,7 @@ A full reference is available [here](https://tezostaquito.io/docs/quick_start).
 
 In this chapter we will use _Taquito_ to interact with the deployed _Raffle_ smart contract.
 
-# Installation
+## Installation
 
 The _Taquito_ library is made of several modules:
 - [@taquito/taquito](https://www.npmjs.com/package/@taquito/taquito): High-level functionalities that build upon the other packages in the Tezos Typescript Library Suite.
@@ -26,6 +26,15 @@ The _Taquito_ library is made of several modules:
 - [@taquito/michel-codec](https://www.npmjs.com/package/@taquito/michel-codec): Michelson parser/validator/formatter.
 - [@taquito/local-forging](https://www.npmjs.com/package/@taquito/local-forging): Provide local forging functionality.
 - [@taquito/signer](https://www.npmjs.com/package/@taquito/signer): Provide signing functionality.
+- [@taquito/beacon-wallet](https://www.npmjs.com/package/@taquito/beacon-wallet): Provide Beacon wallet.
+- [@taquito/http-utils](https://www.npmjs.com/package/@taquito/http-utils): Provide http functionalities for Taquito.
+- [@taquito/tzip12](https://www.npmjs.com/package/@taquito/tzip12): Provide TZIP-012 functionalities for Taquito.
+- [@taquito/tzip16](https://www.npmjs.com/package/@taquito/tzip16): Provide TZIP-016 functionalities for Taquito.
+- [@taquito/tezbridge-signer](https://www.npmjs.com/package/@taquito/tezbridge-signer): Tezbridge signer provider.
+- [@taquito/remote-signer](https://www.npmjs.com/package/@taquito/remote-signer): Remote signer provider.
+- [@taquito/tezbridge-wallet](https://www.npmjs.com/package/@taquito/tezbridge-wallet): Tezbridge wallet provider.
+- [@taquito/contracts-library](https://www.npmjs.com/package/@taquito/contracts-library): Can be used as an extension on the TezosToolkit to provide contracts data.
+
 
 The main module is `@taquito/taquito`, it will be used for most actions. The other modules are used by the `@taquito/taquito` methods as complementary features.
 
@@ -36,25 +45,26 @@ $ mkdir taquito-poc
 $ mkdir taquito-poc/src
 $ touch taquito-poc/src/app.ts taquito-poc/main.ts
 $ cd taquito-poc
-$ yarn add @taquito/taquito
+$ npx typescript --init --resolveJsonModule
+$ yarn add typescript @taquito/taquito
 ```
 
 The `main.ts` file will import an `App` class from `src/app.ts` and run its `main` function:
 ``` typescript
+// main.ts
 import { App } from './src/app';
 
 new App().main();
-
 ```
 
 Let's create the `App` class with a `main` method. We import the `TezosToolkit` class to check if `@taquito/taquito` is indeed installed:
 
 ``` typescript
+// src/app.ts
 import { TezosToolkit } from '@taquito/taquito';
+
 export class App {
-
     public async main() { }
-
 }
 ```
 
@@ -66,15 +76,19 @@ $ npx ts-node main.ts
 
 If _Taquito_ is correctly installed, this should not raise any exception.
 
-# Taquito configuration
+## Taquito configuration
 
-We first need to configure _Taquito_ with an RPC URL (to communicate with a Tezos node). To do that we use the `TezosToolkit`: it is the "facade class that surfaces all of the libraries capability and allow its configuration". When created, it accepts an RPC URL. Here, we will use the _Florence testnet_ RPC URL offered for free by _smartpy.io_ at [https://florencenet.smartpy.io/](https://florencenet.smartpy.io/)
+We first need to configure _Taquito_ with an RPC URL (to communicate with a Tezos node).
+
+To do that we use the `TezosToolkit`: it is the "facade class that surfaces all of the libraries capability and allow its configuration". When created, it accepts an RPC URL.
+
+Here, we will use the _Hangzhou testnet_ RPC URL offered for free by _smartpy.io_ at [https://hangzhounet.smartpy.io](https://hangzhounet.smartpy.io).
 
 ``` typescript
 // src/app.ts
 import { TezosToolkit } from '@taquito/taquito';
-export class App {
 
+export class App {
     private tezos: TezosToolkit;
 
     constructor(rpcUrl: string) {
@@ -82,18 +96,19 @@ export class App {
     }
 
     public async main() { }
+}
 ```
 
 ``` typescript
 // main.ts
 import { App } from './src/app';
 
-const RPC_URL = "https://florencenet.smartpy.io/"
+const RPC_URL = "https://hangzhounet.smartpy.io";
 
 new App(RPC_URL).main();
 ```
 
-# Interactions without an account
+## Interactions without an account
 
 _Taquito_ is already ready for some actions: it can retrieve all the information about the Tezos network, the accounts, the smart contracts.
 
@@ -101,8 +116,8 @@ For instance, let's retrieve the balance of an account, with the `getBalance` me
 ``` typescript
 // src/app.ts
 import { TezosToolkit } from '@taquito/taquito';
-export class App {
 
+export class App {
     private tezos: TezosToolkit;
 
     constructor(rpcUrl: string) {
@@ -110,45 +125,45 @@ export class App {
     }
 
     public getBalance(address: string) : void {
-    this.tezos.rpc
-        .getBalance(address)
-        .then(balance => console.log(balance))
-        .catch(e => console.log('Address not found'));
+        this.tezos.rpc
+            .getBalance(address)
+            .then(balance => console.log(balance))
+            .catch(e => console.log('Address not found'));
     }
 
     public async main() { }
+}
 ```
 
 Every interaction with the Tezos network through _Taquito_  is handled via a Javascript `Promise`.
 
-Let's call this method for the address: `tz1YWK1gDPQx9N1Jh4JnmVre7xN6xhGGM4uC`
+Let's call this method for the address: `tz1Xqa5LRU5tayDcZEFr7Sw2GjrbDBY3HtHH`
 
 ``` typescript
 // main.ts
 import { App } from './src/app';
 
-const RPC_URL = "https://florencenet.smartpy.io/"
-const ACCOUNT_TO_CHECK = "tz1YWK1gDPQx9N1Jh4JnmVre7xN6xhGGM4uC"
+const RPC_URL = "https://hangzhounet.smartpy.io";
+const ACCOUNT_TO_CHECK = "tz1Xqa5LRU5tayDcZEFr7Sw2GjrbDBY3HtHH";
 
 new App(RPC_URL).getBalance(ACCOUNT_TO_CHECK);
-
 ```
 
 Let's run it:
 ``` shell
 $ npx ts-node main.ts 
-BigNumber { s: 1, e: 10, c: [ 53152138122 ] }
+BigNumber { s: 1, e: 7, c: [ 79229894 ] }
 ```
 
-## Contract data
+### Contract data
 
 We can also retrieve the metadata and storage of a contract.
 
 ``` typescript
 // src/app.ts
 import { TezosToolkit } from '@taquito/taquito';
-export class App {
 
+export class App {
     private tezos: TezosToolkit;
 
     constructor(rpcUrl: string) {
@@ -156,12 +171,11 @@ export class App {
     }
 
     public getBalance(address: string) : void {
-    this.tezos.rpc
-        .getBalance(address)
-        .then(balance => console.log(balance))
-        .catch(e => console.log('Address not found'));
+        this.tezos.rpc
+            .getBalance(address)
+            .then(balance => console.log(balance))
+            .catch(e => console.log('Address not found'));
     }
-
 
     public getContractEntrypoints(address: string) {
         this.tezos.contract
@@ -174,16 +188,18 @@ export class App {
     }
 
     public async main() { }
+}
 ```
 
-Let's run it for the simple `Counter` contract on _Florencenet_.
+Let's run it for the simple `Counter` contract on _Hangzhounet_.
 
 ``` typescript
+// main.ts
 import { App } from './src/app';
 
-const RPC_URL = "https://florencenet.smartpy.io/"
-const ACCOUNT_TO_CHECK = "tz1YWK1gDPQx9N1Jh4JnmVre7xN6xhGGM4uC"
-const COUNTER_CONTRACT = "KT1BEMULAGQ58C5NNdWQM3WYLjUtwgJ8X8aN"
+const RPC_URL = "https://hangzhounet.smartpy.io";
+const ACCOUNT_TO_CHECK = "tz1Xqa5LRU5tayDcZEFr7Sw2GjrbDBY3HtHH";
+const COUNTER_CONTRACT = "KT1Gm3XHrRCTJ3TNH6kB3Nt4pURv4XR3kTv8";
 
 new App(RPC_URL).getContractEntrypoints(COUNTER_CONTRACT);
 ```
@@ -204,13 +220,15 @@ $ npx ts-node main.ts
 ]
 ```
 
-# Interactions with an account
+## Interactions with an account
 
-_Taquito_ can also sign and send transactions, but it needs a private key to do that. Let's retrieve a faucet file from [ faucet.tzalpha.net/](https://faucet.tzalpha.net/) and put it in the project directory.
+_Taquito_ can also sign and send transactions, but it needs a private key to do that.
 
-## Activating the account from _Taquito_
+Let's retrieve a faucet file from [https://teztnets.xyz](https://teztnets.xyz/hangzhounet-faucet) and put it in the project directory :
 
-Every implicit address must be activated on a public network. Let's activate ours on _Florencenet_.
+### Activating the account from _Taquito_
+
+Every implicit address must be activated on a public network. Let's activate ours on _Hangzhounet_.
 
 First, we need to install the `@taquito/signer` module, used to sign the transactions.
 
@@ -222,7 +240,7 @@ We will use the `InMemorySigner`: it loads a private key in memory and uses it t
 
 > Storing private keys in memory is suitable for development workflows but risky for production use-cases! Use the `InMemorySigner` appropriately given your risk profile.
 
-You can find a complete reference [here](https://tezostaquito.io/docs/inmemory_signer), and find more _signers_ [here](https://tezostaquito.io/docs/tezbridge_signer) and [here](https://tezostaquito.io/docs/ledger_signer).
+You can find a complete reference for the [InMemorySigner](https://tezostaquito.io/docs/inmemory_signer), and find more _signers_ like [TezBridge Signer](https://tezostaquito.io/docs/tezbridge_signer) and [Ledger Signer](https://tezostaquito.io/docs/ledger_signer).
 
 First, we need to set the signer of our _TezosToolkit_ using `setSignerProvider`. The signer will load a private key from our faucet using the `fromFundraiser` method.
 
@@ -230,18 +248,19 @@ First, we need to set the signer of our _TezosToolkit_ using `setSignerProvider`
 // src/app.ts
 import { TezosToolkit } from '@taquito/taquito';
 import { InMemorySigner } from '@taquito/signer';
-const faucet = require('../faucet.json');
-export class App {
+import * as faucet from '../faucet.json';
 
+export class App {
     private tezos: TezosToolkit;
 
     constructor(rpcUrl: string) {
         this.rpcUrl = rpcUrl
         this.tezos = new TezosToolkit(rpcUrl);
-        this.tezos.setSignerProvider(InMemorySigner.fromFundraiser(faucet.email, faucet.password, faucet.mnemonic.join(' ')))
+        this.tezos.setSignerProvider(InMemorySigner.fromFundraiser(faucet.email, faucet.password, faucet.mnemonic.join(' ')));
     }
 
     public async main() { }
+}
 ```
 
 We can now create an `activateAccount` method that uses the signer to activate our address.
@@ -250,51 +269,53 @@ We can now create an `activateAccount` method that uses the signer to activate o
 // src/app.ts
 import { TezosToolkit } from '@taquito/taquito';
 import { InMemorySigner } from '@taquito/signer';
-const faucet = require('../faucet.json');
-export class App {
+import * as faucet from '../faucet.json';
 
+export class App {
     private tezos: TezosToolkit;
 
     constructor(rpcUrl: string) {
-        this.rpcUrl = rpcUrl
         this.tezos = new TezosToolkit(rpcUrl);
         this.tezos.setSignerProvider(InMemorySigner.fromFundraiser(faucet.email, faucet.password, faucet.mnemonic.join(' ')))
     }
 
     public async activateAccount() {
-        const {pkh, secret} = faucet;
+        const {pkh, activation_code} = faucet;
 
         try {
-            const operation = await this.tezos.tz.activate(pkh, secret);
+            const operation = await this.tezos.tz.activate(pkh, activation_code);
             await operation.confirmation();
         } catch (e) {
             console.log(e)
         }
-
     }
 
     public async main() { }
+}
 ```
 
 Let's call it from our `main.ts` file:
 
 ```typescript
+// main.ts
 import { App } from './src/app';
 
-const RPC_URL = "https://florencenet.smartpy.io/"
-const ACCOUNT_TO_CHECK = "tz1YWK1gDPQx9N1Jh4JnmVre7xN6xhGGM4uC"
-const COUNTER_CONTRACT = "KT1BEMULAGQ58C5NNdWQM3WYLjUtwgJ8X8aN"
+const RPC_URL = "https://hangzhounet.smartpy.io";
+const ACCOUNT_TO_CHECK = "tz1Xqa5LRU5tayDcZEFr7Sw2GjrbDBY3HtHH";
+const COUNTER_CONTRACT = "KT1BEMULAGQ58C5NNdWQM3WYLjUtwgJ8X8aN";
 
 new App(RPC_URL).activateAccount();
 ```
 
-You can now see your activated account on an explorer ([https://florence.tzstats.com/](https://florence.tzstats.com/) for instance).
+You can now see your activated account on an explorer ([TzStats](https://hangzhou.tzstats.com/) or [TzKT](https://hangzhou2net.tzkt.io/)).
 
-## Sending a transaction
+### Sending a transaction
 
 Now that _Taquito_ is configured with an activated account, we can send transactions. Let's send some Tez to another address.
 
-Transactions can be sent with `this.tezos.contract.transfer`. It returns a `Promise<TransactionOperation>`. A `TransactionOperation` contains the information about this transaction. It also has a `confirmation` method. This method can wait for several confirmations on demand.
+Transactions can be sent with `this.tezos.contract.transfer`. It returns a `Promise<TransactionOperation>`.
+
+A `TransactionOperation` contains the information about this transaction. It also has a `confirmation` method. This method can wait for several confirmations on demand.
 
 Let's create a `sendTz` method that sends an `amount` of Tez to the recipient `address`.
 
@@ -302,10 +323,9 @@ Let's create a `sendTz` method that sends an `amount` of Tez to the recipient `a
 // src/app.ts
 import { TezosToolkit } from '@taquito/taquito';
 import { InMemorySigner } from '@taquito/signer';
-const faucet = require('../faucet.json');
+import * as faucet from '../faucet.json';
 
 export class App {
-
     private tezos: TezosToolkit;
 
     constructor(rpcUrl: string) {
@@ -315,8 +335,8 @@ export class App {
     }
 
     public sendTz(address: string, amount: number) {
-
         console.log(`Transfering ${amount} ꜩ to ${address}...`);
+
         this.tezos.contract.transfer({ to: address, amount: amount })
             .then(op => {
                 console.log(`Waiting for ${op.hash} to be confirmed...`);
@@ -331,32 +351,32 @@ export class App {
 Let's call it from our `main.ts` file:
 
 ``` typescript
+// main.ts
 import { App } from './src/app';
 
-const RPC_URL = "https://florencenet.smartpy.io/"
-const ACCOUNT_TO_CHECK = "tz1YWK1gDPQx9N1Jh4JnmVre7xN6xhGGM4uC"
-const COUNTER_CONTRACT = "KT1BEMULAGQ58C5NNdWQM3WYLjUtwgJ8X8aN"
-const RECIPIENT = "tz1WD73bxtb3oeBBTU471Yz5gcy9NMzepfMJ"
-const AMOUNT = 10
-new App(RPC_URL).sendTz(RECIPIENT,AMOUNT);
+const RPC_URL = "https://hangzhounet.smartpy.io";
+const ACCOUNT_TO_CHECK = "tz1Xqa5LRU5tayDcZEFr7Sw2GjrbDBY3HtHH";
+const COUNTER_CONTRACT = "KT1BEMULAGQ58C5NNdWQM3WYLjUtwgJ8X8aN";
+const RECIPIENT = "tz1dDc5HrFbjsAuydBwotTa2nzuRkePSRDZg";
+const AMOUNT = 10;
 
+new App(RPC_URL).sendTz(RECIPIENT, AMOUNT);
 ```
 
 Let's run it from the console:
 
 ``` shell
 $ npx ts-node main.ts 
-Transfering 10 ꜩ to tz1WD73bxtb3oeBBTU471Yz5gcy9NMzepfMJ...
-Waiting for ooYGXazAECCMTehpfsPWo6JxavJs2a5KYP6a1i6eU5ofATWnHbH to be confirmed...
-ooYGXazAECCMTehpfsPWo6JxavJs2a5KYP6a1i6eU5ofATWnHbH
-
+Transfering 10 ꜩ to tz1dDc5HrFbjsAuydBwotTa2nzuRkePSRDZg...
+Waiting for oohhG6GmrH2j1xARjnZ2Q3WFGYR3zPRzDzsAaFYb1TwdmJjyqV2 to be confirmed...
+oohhG6GmrH2j1xARjnZ2Q3WFGYR3zPRzDzsAaFYb1TwdmJjyqV2
 ```
 
-We can now check the transaction on an explorer: [https://florence.tzstats.com/ooYGXazAECCMTehpfsPWo6JxavJs2a5KYP6a1i6eU5ofATWnHbH](https://florence.tzstats.com/ooYGXazAECCMTehpfsPWo6JxavJs2a5KYP6a1i6eU5ofATWnHbH)
+We can now check the transaction on an explorer ([TzStats](https://hangzhou.tzstats.com/oohhG6GmrH2j1xARjnZ2Q3WFGYR3zPRzDzsAaFYb1TwdmJjyqV2) or [TzKT](https://hangzhou2net.tzkt.io/oohhG6GmrH2j1xARjnZ2Q3WFGYR3zPRzDzsAaFYb1TwdmJjyqV2)).
 
-## Making a contract call
+### Making a contract call
 
-_Taquito_ can call smart contracts as well. We will use the _Counter_ contract. If you need to know what are the available entrypoints, you can use the `getContractEntrypoints` defined in the [Contract data subsection](##contract-data).
+_Taquito_ can call smart contracts as well. We will use the _Counter_ contract. If you need to know what are the available entrypoints, you can use the `getContractEntrypoints` defined in the [Contract data subsection](#contract-data).
 
 Let's call the `increment` entrypoint. It takes a single _int_ as input.
 
@@ -368,19 +388,18 @@ To do so, we need:
 5. wait for a chosen number of confirmations, let's say `3`.
 
 ``` typescript
+// src/app.ts
 import { TezosToolkit } from '@taquito/taquito';
 import { InMemorySigner } from '@taquito/signer';
-const faucet = require('../faucet.json');
-export class App {
+import * as faucet from '../faucet.json';
 
+export class App {
     private tezos: TezosToolkit;
 
     constructor(rpcUrl: string) {
-        this.rpcUrl = rpcUrl
         this.tezos = new TezosToolkit(rpcUrl);
-        this.tezos.setSignerProvider(InMemorySigner.fromFundraiser(faucet.email, faucet.password, faucet.mnemonic.join(' ')))
+        this.tezos.setSignerProvider(InMemorySigner.fromFundraiser(faucet.email, faucet.password, faucet.mnemonic.join(' ')));
     }
-
 
     public increment(increment: number, contract: string) {
         this.tezos.contract
@@ -393,7 +412,7 @@ export class App {
                 console.log(`Awaiting for ${op.hash} to be confirmed...`);
                 return op.confirmation(3).then(() => op.hash); // step 5
             })
-            .then((hash) => console.log(`Operation injected: https://florence.tzstats.com/${hash}`))
+            .then((hash) => console.log(`Operation injected: https://hangzhounet.smartpy.io/${hash}`))
             .catch((error) => console.log(`Error: ${JSON.stringify(error, null, 2)}`));
     }
 }
@@ -402,21 +421,22 @@ export class App {
 Let's call it from our `main.ts` file:
 
 ``` typescript
+// main.ts
 import { App } from './src/app';
 
-const RPC_URL = "https://florencenet.smartpy.io/"
-const ACCOUNT_TO_CHECK = "tz1YWK1gDPQx9N1Jh4JnmVre7xN6xhGGM4uC"
-const COUNTER_CONTRACT = "KT1BEMULAGQ58C5NNdWQM3WYLjUtwgJ8X8aN"
-const RECIPIENT = "tz1WD73bxtb3oeBBTU471Yz5gcy9NMzepfMJ"
-const AMOUNT = 10
-const INCREMENT = 5
-new App(RPC_URL).increment(INCREMENT, COUNTER_CONTRACT);
+const RPC_URL = "https://hangzhounet.smartpy.io";
+const ACCOUNT_TO_CHECK = "tz1Xqa5LRU5tayDcZEFr7Sw2GjrbDBY3HtHH";
+const COUNTER_CONTRACT = "KT1Gm3XHrRCTJ3TNH6kB3Nt4pURv4XR3kTv8";
+const RECIPIENT = "tz1dDc5HrFbjsAuydBwotTa2nzuRkePSRDZg";
+const AMOUNT = 10;
+const INCREMENT = 5;
 
+new App(RPC_URL).increment(INCREMENT, COUNTER_CONTRACT);
 ```
 
 The `send()` function can take an object with fields as an input, such as `amount` (which defines an amount sent with the contract call), `storageLimit`, etc.
 
-## Sending several transactions
+### Sending several transactions
 
 Let's consider this Dapp:
 
@@ -424,7 +444,7 @@ Let's consider this Dapp:
 // src/app.ts
 import { TezosToolkit } from '@taquito/taquito';
 import { InMemorySigner } from '@taquito/signer';
-const faucet = require('../faucet.json');
+import * as faucet from '../faucet.json';
 
 export class App {
     private tezos: TezosToolkit;
@@ -466,14 +486,15 @@ export class App {
 This is basically a concatenation of the _Counter_ example and the _Transfer_ example. Now, let's consider a use-case where we need to send these two transactions at the same time (and maybe additional contract calls, originations or transfer transactions). One could be tempted to make those calls one after the other like this:
 
 ``` typescript
+// main.ts
 import { App } from './src/app';
 
-const RPC_URL = "https://florencenet.smartpy.io/"
-const ACCOUNT_TO_CHECK = "tz1YWK1gDPQx9N1Jh4JnmVre7xN6xhGGM4uC"
-const COUNTER_CONTRACT = "KT1BEMULAGQ58C5NNdWQM3WYLjUtwgJ8X8aN"
-const RECIPIENT = "tz1WD73bxtb3oeBBTU471Yz5gcy9NMzepfMJ"
-const AMOUNT = 10
-const INCREMENT = 5
+const RPC_URL = "https://hangzhounet.smartpy.io";
+const ACCOUNT_TO_CHECK = "tz1Xqa5LRU5tayDcZEFr7Sw2GjrbDBY3HtHH";
+const COUNTER_CONTRACT = "KT1Gm3XHrRCTJ3TNH6kB3Nt4pURv4XR3kTv8";
+const RECIPIENT = "tz1dDc5HrFbjsAuydBwotTa2nzuRkePSRDZg";
+const AMOUNT = 10;
+const INCREMENT = 5;
 
 const app : App = new App(RPC_URL);
 app.increment(INCREMENT, COUNTER_CONTRACT);
@@ -484,21 +505,20 @@ We basically make a contract call then try to send some funds to an address. Her
 
 ``` shell
 $ npx ts-node main.ts 
-Transfering 10 ꜩ to tz1WD73bxtb3oeBBTU471Yz5gcy9NMzepfMJ...
+Transfering 10 ꜩ to tz1dDc5HrFbjsAuydBwotTa2nzuRkePSRDZg...
 Incrementing storage value by 5...
-Waiting for opYNFzprpcnTCS2dWP9STdJJ8HUpcMGeJNcczmKnBK1SNpXQeoC to be confirmed...
+Waiting for ooEQVNe3SVJkG6TW8WvLbpFDrdtsau6ys7eb2g4nUTbVBUjdQYi to be confirmed...
 Error: {
-  "message": "Http error response: (500) [{\"kind\":\"temporary\",\"id\":\"failure\",\"msg\":\"Error while applying operation ongme9f4evozEpAAtP3MUeiU79emuc8KGyoaFGYxvPUUFR3TDUA:\\nbranch refused (Error:\\n                  Counter 334156 already used for contract tz1YWK1gDPQx9N1Jh4JnmVre7xN6xhGGM4uC (expected 334157)\\n)\"}]\n",
   "status": 500,
   "statusText": "Internal Server Error",
-  "body": "[{\"kind\":\"temporary\",\"id\":\"failure\",\"msg\":\"Error while applying operation ongme9f4evozEpAAtP3MUeiU79emuc8KGyoaFGYxvPUUFR3TDUA:\\nbranch refused (Error:\\n                  Counter 334156 already used for contract tz1YWK1gDPQx9N1Jh4JnmVre7xN6xhGGM4uC (expected 334157)\\n)\"}]\n",
-  "url": "https://florencenet.smartpy.io/injection/operation",
+  "body": "[{\"kind\":\"temporary\",\"id\":\"failure\",\"msg\":\"Error while applying operation ooSRhMW4TgVbBa7XvMS18wa3X5CPsm4XSXZ1nKtb9KxdTL4HcQS:\\nError:\\n  Counter 3615454 already used for contract tz1Xqa5LRU5tayDcZEFr7Sw2GjrbDBY3HtHH (expected 3615455)\\n\"}]\n",
+  "url": "https://hangzhounet.smartpy.io/injection/operation",
   "name": "HttpResponse"
 }
-opYNFzprpcnTCS2dWP9STdJJ8HUpcMGeJNcczmKnBK1SNpXQeoC
+ooEQVNe3SVJkG6TW8WvLbpFDrdtsau6ys7eb2g4nUTbVBUjdQYi
 ```
 
-The meaningful part is `Counter 334156 already used for contract tz1YWK1gDPQx9N1Jh4JnmVre7xN6xhGGM4uC`. Each transaction in our Dapp is performed asynchronously: the application makes the contract call to the `increment` entrypoint, but did not wait for the confirmation to made the transfer transaction. The contract call transaction was still in the mempool when the transfer transaction was sent. Thus, it failed. 
+The meaningful part is `Counter 3615454 already used for contract tz1Xqa5LRU5tayDcZEFr7Sw2GjrbDBY3HtHH`. Each transaction in our Dapp is performed asynchronously: the application makes the contract call to the `increment` entrypoint, but did not wait for the confirmation to made the transfer transaction. The contract call transaction was still in the mempool when the transfer transaction was sent. Thus, it failed. 
 
 However, _Taquito_ offers a `batch` method, which enables Dapps to send several transactions at once.
 
@@ -512,27 +532,26 @@ To do so, we need to:
 Here is an example:
 
 ``` typescript
-    public async sendInBatch(contractAddress: string, recipientAddress : string) {
-        const contract = await this.tezos.contract.at(contractAddress) //step 1
+public async sendInBatch(contractAddress: string, recipientAddress : string) {
+    const contract = await this.tezos.contract.at(contractAddress) //step 1
 
-        const batch = this.tezos.contract.batch() // step 2
-            .withTransfer({ to: recipientAddress, amount: 10 }) // step 3
-            .withTransfer({ to: recipientAddress, amount: 100 }) // step 3
-            .withTransfer({ to: recipientAddress, amount: 1000 }) // step 3
-            .withContractCall(contract.methods.increment(10)) // step 3
+    const batch = this.tezos.contract.batch() // step 2
+        .withTransfer({ to: recipientAddress, amount: 10 }) // step 3
+        .withTransfer({ to: recipientAddress, amount: 100 }) // step 3
+        .withTransfer({ to: recipientAddress, amount: 1000 }) // step 3
+        .withContractCall(contract.methods.increment(10)) // step 3
 
-        const batchOp = await batch.send(); // step 4
+    const batchOp = await batch.send(); // step 4
 
-        await batchOp.confirmation(); // step 5
-    }
-
+    await batchOp.confirmation(); // step 5
+}
 ```
 
-[Here is its output on TzStats.](https://florence.tzstats.com/opNz4g3XTd9oAAyPe4jMiEqXLQ67EfPPTZkXhhvXje8DoMg5D5u/2402084)
+Here is its output on [TzKT](https://hangzhou2net.tzkt.io/onySyMJNZoqqo7CaFbesumuyFDLAbg6a7JLtLZqCUYsvd25cKjR) and [TzStats](https://hangzhou.tzstats.com/onySyMJNZoqqo7CaFbesumuyFDLAbg6a7JLtLZqCUYsvd25cKjR).
 
 Our three transfer transactions and our contract call are now indeed batched together in an operation.
 
-# Conclusion
+## Conclusion
 
 _Taquito_ facilitates developers' interactions with the Tezos network. It can read data from a blockchain, send transactions, originate a contract, etc.
 

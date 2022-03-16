@@ -1,20 +1,14 @@
 ---
-id: truffle_compilation_migration
+id: deploy-with-truffle
 title: Deploy with Truffle
 authors: Benjamin Pilia
 ---
 
-import NotificationBar from '../../src/components/docs/NotificationBar';
+:::warning
+Truffle is not longer maintained. It is recommended to use another method to deploy contracts.
+:::
 
-The first step to creating a Dapp is to deploy a smart contract on the _Tezos_ network, whether for testing or real-life use. There are several ways to do this, such as using the Tezos CLI.
-
-However, during development, the smart contracts and the associated storage are likely to change: new field, field removal, structure change. For each change, a new deployment must be done.
-
-Thus, the way that the contract is deployed will change accordingly, especially the initial storage. A minimal change in the storage definition can make the next deployments tiresome when using the Tezos CLI, especially if changes are made several times.
-
-Mooreover, there are times when you need to deploy several smart contracts that will interact with one another. The deployment of a smart contract depends on the deployment of a previous one to get its address. Instead of deploying one after the other the smart contracts and retrieving their address, it should be possible to have an automated script that performs these actions.
-
-*Truffle*, developed and maintained by _ConsenSys Software Inc_, solves these difficulties. This tool uses scripts to perform smart contract deployments. It uses a CLI and a few configuration files to make deployments easier and faster.
+*Truffle*, developed by _ConsenSys Software Inc_, uses scripts to perform smart contract deployments. It uses a CLI and a few configuration files to make deployments easier and faster.
 
 In this chapter, we will deploy the _Raffle_ smart contract, as developed in the [LIGO module](/ligo) onto a testnet using _Truffle_.
 

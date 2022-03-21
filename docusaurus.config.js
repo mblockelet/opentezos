@@ -22,6 +22,16 @@ module.exports = {
     },
   ],
   themeConfig: {
+    algolia: {
+      // The application ID provided by Algolia
+      appId: 'YW41129NVN',
+      // Public API key: it is safe to commit it
+      apiKey: '16bccd1e569227f209e9dc8330e84a98',
+      indexName: 'opentezos',
+      // Optional: see doc section below
+      contextualSearch: false,
+
+    },
     navbar: {
       logo: {
         alt: 'OpenTezos',

@@ -145,6 +145,7 @@ The concepts behind liquidity pools and automated market-making are pretty simpl
 - [Youves](https://app.youves.com/)
 - [SpicySwap](https://spicyswap.xyz/#/app)
 - [FlameDex](https://app.flamedex.io/)
+- [Alien's Farm](https://aliens.farm/exchange)
 
 ## References
 [1] https://selfkey.org/list-of-cryptocurrency-exchange-hacks/

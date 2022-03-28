@@ -8,7 +8,7 @@ The full source code of Tezos is available on [gitlab.com/tezos](https://gitlab.
 
 The simplest way to contribute to Tezos is to [report an issue (as described in the previous chapter)](/contribute/report-issue). However, if you are proficient in OCaml, you can correct the error yourself or add new features and submit a merge request to the admins of the Tezos repository.
 
-For more detailed information about how to proceed, please refer to the [official contribution guidelines here](tezos.gitlab.io/developer/contributing.html).
+For more detailed information about how to proceed, please refer to the [official contribution guidelines here](https://tezos.gitlab.io/developer/contributing.html).
 
 ## References
 

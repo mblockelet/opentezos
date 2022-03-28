@@ -8,30 +8,45 @@ The excellent website you are currently browsing is called _OpenTezos_ and will 
 
 - On the page that you see the error on, scroll down and click the link `Edit this page`. 
 
-![](../../static/img/contribute/edit-page.png)
-<small className="figure">FIGURE 1: Click `Edit this page` on the page containing an error</small>
+<p align="center">
 
-- You are being redirected to the file on Github corresponding to this chapter. Click on the pen logo on the upper right corner saying `Fork this project and edit the file`.
+![](../../static/img/contribute/edit-page.png)
+<small className="figure">FIGURE 1: Click <em>Edit this page</em> on the page containing an error</small>
+
+</p>
+
+- You are being redirected to the file on Gitlab corresponding to this chapter. Click on the pen logo on the upper right corner saying `Fork this project and edit the file`.
+
+- Click on the blue button with the down arrow to open the drop-down menu. Choose `Edit` and then click on the `Fork` button
+
+<p align="center">
 
 ![](../../static/img/contribute/fork-project.png)
-<small className="figure">FIGURE 2: Click `Fork this project and edit the file` on the github file</small>
+<small className="figure">FIGURE 2: Click <em>Edit</em> and then <em>Fork</em> on the Gitlab file</small>
 
-- The chapter file is now opening in your browser. Proceed to edit its content to correct the error, then scroll down to the `Propose changes` section. Enter a title and a description of your correction proposal, then click `Propose changes`.
+</p>
 
-![](../../static/img/contribute/propose-changes.png)
-<small className="figure">FIGURE 3: Edit the chapter file and propose the changes</small>
+- The chapter file is now opening in your browser. Proceed to edit its content to correct the error, then scroll down to the `Commit message` section. Enter a title and a description of your correction proposal, then click `Commit changes`.
 
-- Github now offers you to create a `Pull request`, i.e., propose your changes to the admins of the _OpenTezos_ repository. Click `Create pull request`.
+<p align="center">
 
-![](../../static/img/contribute/create-pull-request.png)
-<small className="figure">FIGURE 4: Create a pull request.</small>
+![](../../static/img/contribute/commit-changes.png)
+<small className="figure">FIGURE 3: Edit the chapter file and commit the changes</small>
 
-- Your pull request is now opened and will be accepted and refused by the admins in the next few days. If accepted, your correction will be merged into the main code repository and published on OpenTezos.com. Thank you for your contribution!
+</p>
 
-![](../../static/img/contribute/pr-done.png)
-<small className="figure">FIGURE 5: Create a pull request.</small>
+- Gitlab now offers you to create a `Merge request`, i.e., propose your changes to the admins of the _OpenTezos_ repository. Click `Create merge request`.
 
-Note that this tutorial only shows you the _graphic_ way to proceed with a pull request using the Github interface. If you are proficient with Git, you can instead go through all these steps using the CLI.
+<p align="center">
+
+![](../../static/img/contribute/create-merge-request.png)
+<small className="figure">FIGURE 4: Create a merge request</small>
+
+</p>
+
+Your merge request is now opened and will be accepted and refused by the admins in the next few days. If accepted, your correction will be merged into the main code repository and published on OpenTezos.com. Thank you for your contribution!
+
+> Note that this tutorial only shows you the _graphic_ way to proceed with a pull request using the Github interface. If you are proficient with Git, you can instead go through all these steps using the CLI.
 
 ## Rules
 We have a few basic rules for contributors, which are designed for quality control:

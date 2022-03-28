@@ -139,8 +139,13 @@ If you want to provide liquidity to an AMM, make sure to become familiar with th
 The concepts behind liquidity pools and automated market-making are pretty simple yet extremely powerful. They alleviate the need for centralized order books. The only obstacle to the further development of liquidity pools are the sometimes high gas fees and the execution time. Still, as gas fees are reduced and transactions made faster with each amendment of Tezos, liquidity pools could soon become the primary way of trading on Tezos.
 
 ## Liquidity pools on Tezos
-- [Dexter](https://dexter.exchange/)
 - [Quipuswap](https://quipuswap.com/)
+- [PlentyDefi](https://www.plentydefi.com/swap)
+- [Vortex](https://app.vortex.network/)
+- [Youves](https://app.youves.com/)
+- [SpicySwap](https://spicyswap.xyz/#/app)
+- [FlameDex](https://app.flamedex.io/)
+- [Alien's Farm](https://aliens.farm/exchange)
 
 ## References
 [1] https://selfkey.org/list-of-cryptocurrency-exchange-hacks/

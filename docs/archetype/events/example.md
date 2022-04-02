@@ -15,14 +15,14 @@ Run the following to install completium-cli:
 npm i -g @completium/completium-cli
 ```
 
-If it is already installed, check that the version is at least `0.3.32` with:
+If it is already installed, check that the version is at least `0.3.35` with:
 ```bash
 completium-cli version
 ```
 
-Set completium to work with testnet (hangzhou protocol at the time of writing) with the following command:
+Set completium to work with testnet (Ithaca protocol at the time of writing) with the following command:
 ```
-$ completium-cli set endpoint https://hangzhounet.api.tez.ie
+$ completium-cli set endpoint https://ithacanet.ecadinfra.com
 ```
 
 The following commands init the example project:
@@ -88,8 +88,8 @@ const runTest = async () => {
   register_Odd(emitter.address, handleOdd);
   await runCrank({
     verbose: true,
-    endpoint: 'https://hangzhounet.api.tez.ie',
-    well: 'KT1Aho6K97CKApDSCxXEzvP14qd1qTHhF4uH'
+    endpoint: 'https://ithacanet.ecadinfra.com',
+    well: 'KT1ReVgfaUqHzWWiNRfPXQxf7TaBLVbxrztw'
   })
 }
 

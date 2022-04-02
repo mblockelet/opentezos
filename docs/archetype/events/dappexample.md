@@ -49,13 +49,13 @@ transition switchOff() {
   with effect { emit<SwitchedOff>({}) }
 }
 ```
-The bulb contract has been deployed on Hangzhounet and its address is `KT19EAMugKU416cbA9jL1XcukWArfpv4dLYu` . Click [here](https://better-call.dev/hangzhou2net/KT19EAMugKU416cbA9jL1XcukWArfpv4dLYu/operations) to view it on Better Call Dev indexer.
+The bulb contract has been deployed on Ithacanet and its address is `KT1PKQ76kR1nZSvu5YN41r7GjYcAqGQSrLxg` . Click [here](https://better-call.dev/ithacanet/KT1PKQ76kR1nZSvu5YN41r7GjYcAqGQSrLxg/operations) to view it on Better Call Dev indexer.
 
 ## Switch on/off
 
-Use the [*Interact*](https://better-call.dev/hangzhou2net/KT19EAMugKU416cbA9jL1XcukWArfpv4dLYu/interact) tab in Better Call Dev to switch the bulb on and off.
+Use the [*Interact*](https://better-call.dev/ithacanet/KT1PKQ76kR1nZSvu5YN41r7GjYcAqGQSrLxg/interact) tab in Better Call Dev to switch the bulb on and off.
 
-<BrowserWindow url="https://better-call.dev/hangzhou2net/KT19EAMugKU416cbA9jL1XcukWArfpv4dLYu/interact">
+<BrowserWindow url="https://better-call.dev/ithacanet/KT1PKQ76kR1nZSvu5YN41r7GjYcAqGQSrLxg/interact">
 <ThemedImage
   alt="Buld Dapp"
   width="100%"
@@ -68,4 +68,6 @@ Use the [*Interact*](https://better-call.dev/hangzhou2net/KT19EAMugKU416cbA9jL1X
 
 :::info
 You cannot switch on (off) a bulb already on (off). You then get the error `A FAILWITH instruction was reached with InvalidState`.
+
+Hence switch the bulb off (on) first. The event will appear in the event notification anyway.
 :::

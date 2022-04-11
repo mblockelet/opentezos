@@ -113,11 +113,11 @@ The *Ithaca 2* proposal was a joint effort from  TriliTech, Nomadic Labs, Marigo
 Along with numerous minor improvements, Ithaca 2 contained two major updates to the protocol:
 
 * Tenderbake, a major update to the Tezos consensus algorithm, that brings fast deterministic finality to the Tezos protocol. It also includes important changes:
-** bakers now receive rewards depending on their current stake instead of the number of rolls they own
-** the minimum number of tokens required to be selected as a validator is reduced from 8,000 tez to 6,000 tez
-** a rework of baking and endorsements rewards
-** a new security deposit mechanism requiring delegates to freeze 10% of their stake in advance, to obtain baking and endorsement rights.
-** an increase of the number of endorsement slots per block from 256 to 7,000
+    - bakers now receive rewards depending on their current stake instead of the number of rolls they own
+    - the minimum number of tokens required to be selected as a validator is reduced from 8,000 tez to 6,000 tez
+    - a rework of baking and endorsements rewards
+    - a new security deposit mechanism requiring delegates to freeze 10% of their stake in advance, to obtain baking and endorsement rights.
+    - an increase of the number of endorsement slots per block from 256 to 7,000
 
 * Precheck of operations:  a new set of features that can be used by any Tezos shell, to avoid having to fully execute manager operations before gossiping them through the network
 

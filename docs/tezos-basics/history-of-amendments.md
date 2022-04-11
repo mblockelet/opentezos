@@ -79,6 +79,17 @@ Florence's notable bug fixes and improvements are the:
   
 *Bakings Accounts*[[6]](/tezos-basics/history-of-amendments#references) was also included in the feature set. However, ongoing testing uncovered some important and previously undocumented breaking changes in the proposal with *Baking Accounts*. Hence, the feature was postponed until a thorough audit of the functionality was completed or that an alternative implementation was produced. The version of *Florence* without *Baking Accounts* was considered a safer choice.
 
+## [Granada](https://tezos.gitlab.io/protocols/010_granada.html) (PtGRANAD)
+The *Granada* proposal was a joint effort from Nomadic Labs, Marigold, TQ, Tarides, and DaiLambda
+
+Granada's main changes are:
+
+* Emmy*, a new consensus algorithm with reduced time between blocks (30s), and faster finality.
+
+* Liquidity Baking, increasing the liquidity of tez by minting some at every block into a CPMM.
+
+* The reduction of gas consumption of smart contracts by a factor of three to six, through a number of performance improvements.
+
 ## What have we learned so far?
 In this chapter, we went through the past proposals' history and how and why they were approved or rejected.
 

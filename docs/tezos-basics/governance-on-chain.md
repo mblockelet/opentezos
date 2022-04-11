@@ -30,7 +30,7 @@ The self-amendment process is composed of five periods:
 
 1. _Proposal Period_
 2. _Exploration Vote Period_
-3. _Testing Period_
+3. _Cooldown Period_
 4. _Promotion Vote Period_
 5. _Adoption Period_
 
@@ -110,13 +110,16 @@ At the end of the _Proposal Period_, the network counts proposal votes, and the 
 
 In the _Exploration Vote Period_, delegates may vote for the top-ranked proposal from the previous _Proposal Period_. Delegates get to vote either _Yea_, _Nay_ or _Pass_ on a specific submission (voting rules are explained in the previous "_Super-majority_" and "_Quorum_" sections). If the voting participation fails to achieve the _Quorum_ or the 80% _Super-Majority_, the amendment process restarts from the beginning of the _Proposal Period_ (1.).
 
-## Phase 3: Testing Period
-If a proposal is approved in the _Exploration Vote Period_ (2.), the _Testing Period_ begins with a **testnet** fork that runs in parallel to the mainnet for 48 hours. These forks have access rights to the standard library but in a [*sandbox*](https://en.wikipedia.org/wiki/Sandbox_(software_development)) (at node level).
+## Phase 3: Cooldown Period
 
-The purpose is to verify that the migration from the old protocol to the new one works correctly. This 48-hour duration has been conservatively set to reduce the risk of the network perceiving the testnet fork as the main chain. However, 48 hours of testing is too short to determine whether a proposal is worthwhile and a safe amendment or not. A testnet matching the amendment proposal is likely to run off-chain during the remaining ~7.3 cycles of the _Testing Period_ to find security vulnerabilities. These extra cycles allow stakeholders to evaluate and discuss the amendment and gain better knowledge of its properties.
+If a proposal is approved in the _Exploration Vote Period_ (2.), the _Cooldown Period_ begins.
+
+The only purpose of this period is to let some time elapse before the promotion period.
+
+This period replaces the previous Testing period that was underused since most of the testing happens on a dedicated testnest.
 
 ## Phase 4: Promotion Vote Period
-At the end of the _Testing Period_ (3.), the _Promotion Vote Period_ (4.) begins. The network decides whether to adopt the amendment based on previous off-chain discussions and its behaviour (in 3.). The voting rules are identical to the _Exploration Voting Period_ (2.) (settlement in the "_Super-Majority_" and "_Quorum_" sections).
+At the end of the _Cooldown Period_ (3.), the _Promotion Vote Period_ (4.) begins. The network decides whether to adopt the amendment based on previous off-chain discussions and its behaviour (in 3.). The voting rules are identical to the _Exploration Voting Period_ (2.) (settlement in the "_Super-Majority_" and "_Quorum_" sections).
 
 At the end of the _Promotion Vote Period_, the network counts the number of votes. If the participation rate reaches the minimum quorum and an 80% _Super-Majority_ of non-passing delegates vote in _Yea_, then the amendment proceeds to the _Adoption period_ (5.). If not, then the process reverts to the _Proposal Period_ (1.). The minimum vote participation rate is based on past ones.
 

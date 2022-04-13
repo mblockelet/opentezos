@@ -7,7 +7,7 @@ authors: Thomas Zoughebi, Aymeric Bethencourt, and Maxime Fernandez
 In this chapter, the reader will learn how to install the official "tezos-client" and "tezos-admin-client" applications and run them using the Command Line Interface. These commands call on the remote procedures of a Tezos node (local or remote). There are many commands, but we'll see some examples.
 
 ## Connecting to the network
-The _tezos-client_ and _Tezos RPC_ need to connect to a Tezos node. You can connect to your own [tezos node](/deploy-a-node/introduction), or you can use a *community node*. In both cases, you can set it for the *mainnet* or the *testnet*.
+The _tezos-client_ and _Tezos RPC_ need to connect to a Tezos node. You can connect to your own [tezos node](/deploy-a-node/), or you can use a *community node*. In both cases, you can set it for the *mainnet* or the *testnet*.
 
 You can find a list of *community nodes* [here](https://tezostaquito.io/docs/rpc_nodes/).
 

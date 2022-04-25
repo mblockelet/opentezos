@@ -125,7 +125,7 @@ export default App;
 ```
 Now that we have our context, we can start using the provided hooks.
 
-### Wallet connexion 
+### Wallet connection 
 The first step is to connect your react app to the _Temple Wallet_.
 
 Let's create a `Page` component, that will contain all our components:

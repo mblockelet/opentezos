@@ -38,8 +38,18 @@ To install *Chinstrap* v0.0.16 from Github, open a terminal and run:
 ➜ pip3 install . -U
 ```
 
-For more info, you can refer to the [official documentation](https://chinstrap.io)
+#### M1 (ARM)
+In case `secp256k1` or `gmp` cannot find either include or lib paths, try explicitly set environment vars:
 
+```
+export CFLAGS="-I`brew --prefix gmp`/include -I`brew --prefix libsecp256k1`/include"
+export LDFLAGS="-L`brew --prefix gmp`/lib -L`brew --prefix libsecp256k1`/lib"
+pip3 install . -U 
+```
+
+or follow instructions from [pytezos](https://github.com/baking-bad/pytezos/blob/master/README.md?plain=1#L63)
+
+For more info, you can refer to the [official documentation](https://chinstrap.io)
 
 # Usage
 

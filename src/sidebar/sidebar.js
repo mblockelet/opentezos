@@ -126,7 +126,8 @@ module.exports = {
             items: [
                 'dapp/deploy/introduction',
                 'dapp/deploy/deploy-with-taquito',
-                'dapp/deploy/deploy-with-truffle'
+                'dapp/deploy/deploy-with-truffle',
+                'dapp/deploy/deploy-with-chinstrap'
             ]
         },
         'dapp/frontend-basics',

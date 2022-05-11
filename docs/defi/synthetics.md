@@ -16,25 +16,35 @@ Conversely, if the value of BTC goes down 20% in the set period of the bet, Alic
 
 As you don't actually purchase the asset, synthetics are particularly interesting for assets that have very low liquidity, are hard to transact, or are simply not available to trade.
 
-![](../../static/img/defi/synthetic.svg)
-<small className="figure">FIGURE 1: Illustration of the synthethic contract between Alice and Bob</small>
+<p align="center">
+
+![synthetic](../../static/img/defi/synthetic.svg)
+<small className="figure">
+FIGURE 1: Illustration of the synthethic contract between Alice and Bob
+</small>
+
+</p>
 
 ## Synthetics & Blockchain
+
 Synthetics have existed way before their use in blockchain, but it's unlikely that you've heard of them before. Why? Because without blockchain, synthetics are "paper bets" only enforceable by legal contracts that are difficult and expensive to set up. That's why only banks and big investment firms were able to use synthetics so far. Now that the outcomes of the bets can be settled and enforced automatically through smart contracts, anyone can, with ease, get access to synthetic investments.
 
 Of course, it would be pretty tricky for you to find another person on your own, willing to open a synthetic option with you, which is why most people still need an exchange to put you in contact with other traders and to provide you with an easy-to-use interface. However, remember that synthetics are peer-to-peer, so the exchange should not have any access to your tokens.
 
 ## Synthetics Vs. Wrapped Asset
+
 _Synthetics_ are not to be confused with _Wrapped Assets_. As seen in the [previous chapter](/defi/wrapped-assets), a wrapped asset represents the actual asset and can be exchanged 1:1 against that asset. A synthetic represents your share of a bet against the other players. Anything can be bet upon, as long as you have an oracle that updates prices to the synthetic smart contract. For example, we could just as easily imagine synthetics been used on stocks like Apple, Tesla, etc.
 
 ## Risks
+
 As with any trading, synthetics are risky in their nature. You can lose your investment if the assets you bet on go the opposite way of your bet.
 
-Note that to settle the bet, synthetics contracts use [orcales](/defi/orcales) to fetch the underlying asset's price. There have been [countless oracle incidents](https://blog.synthetix.io/response-to-oracle-incident/) where the asset price in the smart contract loses its peg to the actual asset.
+Note that to settle the bet, synthetics contracts use [oracles](/defi/orcales) to fetch the underlying asset's price. There have been [countless oracle incidents](https://blog.synthetix.io/response-to-oracle-incident/) where the asset price in the smart contract loses its peg to the actual asset.
 
 ## Synthetics on Tezos
+
 [_SEXP_](https://www.publish0x.com/publish0x-posts/sexp-a-tezos-based-synthetic-exchange-xmkjjzq) is a synthetics exchange on Tezos currently in development. _SEXP_ will use Harbinger oracles and use Tezos staking rewards to provide an entirely free service. The token standard will be [FA2](/defi/token-standards), and the web app will work with all that wallets that support [Beacon](https://www.walletbeacon.io/).
 
 ## References
 
-[1] https://www.publish0x.com/publish0x-posts/sexp-a-tezos-based-synthetic-exchange-xmkjjzq
+[1] <https://www.publish0x.com/publish0x-posts/sexp-a-tezos-based-synthetic-exchange-xmkjjzq>

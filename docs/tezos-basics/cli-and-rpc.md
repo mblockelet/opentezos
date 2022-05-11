@@ -427,7 +427,11 @@ At this point, please **save your work and reboot the system**.
 ### Flextesa Tezos Sandbox
 Thanks to Docker, the following command integrates Flextesa and will start the Tezos sandbox in the background:
 ```bash
-docker run --rm --name my-sandbox --detach -p 20000:20000 tqtezos/flextesa:20210514 flobox start
+image=oxheadalpha/flextesa:latest
+script=ithacabox
+docker run --rm --name my-sandbox --detach -p 20000:20000 \
+       -e block_time=3 \
+       "$image" "$script" start
 ```
 
 Notice the port number set on 20000. After downloading images, the node should start in the background.
@@ -440,7 +444,7 @@ tezos-client --endpoint http://localhost:20000 config update
 
 The sandbox also set two accounts. You can access their information with the following command:
 ```bash
-docker run --rm tqtezos/flextesa:20210514 flobox info
+docker exec my-sandbox $script info
 ```
 
 You should get something like the following result:
@@ -472,6 +476,8 @@ tezos-client get balance for bob
 ```
 
 They should both have 2,000,000 ꜩ.
+
+See [The Documenation](https://gitlab.com/tezos/flextesa/-/blob/0acbeec5e25491231f4976085c5b5f488bfda96f/README.md) for more Flextesa examples.
 
 Let's now install the `tezos-admin-client` application.
 

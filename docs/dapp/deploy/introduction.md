@@ -14,3 +14,5 @@ In this sub-module, we will show how to deploy a smart-contract using different 
 
 1. Taquito : a TypeScript library suite for development on the Tezos blockchain
 2. Truffle : a development environment, testing framework and asset pipeline for blockchains (not recommended)
+3. Chinstrap : Chinstrap makes developers' lives easier by providing support for multiple contract compilations, tests, and origination on public and private Tezos networks.
+

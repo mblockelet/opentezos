@@ -30,9 +30,9 @@ Open a terminal and run:
 ➜ brew install libsodium libsecp256k1 gmp
 ```
 
-To install *Chinstrap* v0.0.16 from Github, open a terminal and run:
+To install *Chinstrap* v0.1.0 from Github, open a terminal and run:
 ```
-➜ git clone https://github.com/ant4g0nist/chinstrap/ -b v0.0.16
+➜ git clone https://github.com/ant4g0nist/chinstrap/ -b v0.1.0
 ➜ cd chinstrap
 ➜ pip3 install . -U
 ```
@@ -526,6 +526,10 @@ Loaded wallet tz1PiDHTNJXhqpkbRUYNZEzmePNd21WcB8yB . Balance: ꜩ 20000.022856
 On origination, Chinstrap calculates and keeps track of the sha256 hash of the compiled contracts. This helps in preventing duplicate originations. If you want to re-originate the same contract, you can force chinstrap to do so using the -f` or --force flag.
 :::
 
+### Testing
+
+Please find documentation related to testing on [Chinstrap](https://chinstrap.io/docs/testing)
+
 # Conclusion
 
 The first step in developing a Dapp is to deploy the smart contracts. _Chinstrap_ takes LIGO/SmartPy code and deploys it onto any public or private network. Each origination needs an initial storage that is compliant with the storage type of Michelson code.
@@ -533,5 +537,5 @@ The first step in developing a Dapp is to deploy the smart contracts. _Chinstrap
 Thanks to its easy configuration and readable origination files, _Chinstrap_ is an essential tool throughout the development and deployment of a Dapp.
 
 :::info
-🐧 *Chinstrap* v0.0.16 is still under active development. Please reach out to [ant4g0nist](https://twitter.com/ant4g0nist) or join [Telegram](https://t.me/chinstrap_io) if you have any queries or advices. Happy hacking :)
+🐧 *Chinstrap* v0.1.0 is still under active development. Please reach out to [ant4g0nist](https://twitter.com/ant4g0nist) or join [Telegram](https://t.me/chinstrap_io) if you have any queries or advices. Happy hacking :)
 :::

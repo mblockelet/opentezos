@@ -79,7 +79,8 @@ The well contract is deployed on the mainnet and testnets:
 
 | Network | Well address |
 | -- | -- |
-| mainnet | `KT1AHVF5m8XaWPQCGgfAsZ9eSJJZ7WVGV2hE` |
+| mainnet | `KT19ij2bHXkhMALzoTZCG88FWgAHRR21247v` |
+| jakartanet | `KT1HchD9HwAWLffYitWvPiKEKJGvyZYRWNWh` |
 | ithacanet | `KT1ReVgfaUqHzWWiNRfPXQxf7TaBLVbxrztw` |
 | hangzhounet | `KT1Aho6K97CKApDSCxXEzvP14qd1qTHhF4uH` |
 
@@ -87,6 +88,9 @@ Its source code is available [here](https://github.com/completium/event-well-con
 
 ```archetype
 archetype event_well
+with metadata "ipfs://QmeujYaXRZtLPHo6bH17VnEFPmkKo9tLcurfNCA7fXvU7Q"
+
+variable u : unit = Unit
 
 entry %event(arg : bytes) {}
 ```

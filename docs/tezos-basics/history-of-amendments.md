@@ -130,9 +130,29 @@ Along with numerous minor improvements, Ithaca 2 contained two major updates to 
 
 * Adding approximately ten months to the liquidity baking sunset level.
 
-*Ithaca* was autonomsously [activated](https://twitter.com/tezos/status/1509956858303365120) in Avril 2022.
+*Ithaca* was autonomsously [activated](https://twitter.com/tezos/status/1509956858303365120) in April 2022.
 
 For more information, see the blog post from [Nomadic Labs](https://research-development.nomadic-labs.com/announcing-tezos-9th-protocol-upgrade-proposal-ithaca.html).
+
+## [Jakarta 2](https://tezos.gitlab.io/protocols/013_jakarta.html) (PtJakart2)
+
+The Jakarta 2 proposal was a joint effort from Nomadic Labs, Marigold, TriliTech, Oxhead Alpha, Tarides, DaiLambda, Functori & Tweag.
+
+Jakarta 2's main changes are:
+
+* Transactional optimistic rollups (or TORU), an experimental implementation of optimistic rollups on Tezos. TORU provide a way to enable higher throughput (TPS) of transactions by moving their validation away from the main chain, to 'Layer 2'.
+
+* A new improved design for the integration of Sapling transactions into Smart Contracts. The Sapling protocol uses advanced cryptography to enable the protection of user's privacy and transparency with regard to regulators.
+
+* A redesign and renaming of the Liquidity Baking Escape Hatch mechanism, now called "Liquidity Baking Toggle Vote".
+
+* Various improvements to type safety and performance of the Michelson interpreter, including decreasing gas costs for parsing and unparsing scripts. Furthermore, Michelson now ignores annotations.
+
+* A new mechanism was introduced to explicitly track ownership of tickets in the protocol. This adds extra protection against attempts to forge tickets, and facilitates Layer 2 solutions that use tickets to represent assets that can be exchanged with the main chain.
+
+* The voting power of delegates is now defined directly by their stake expressed in mutez, and no more in terms of rolls. The minimal stake required to be assigned voting rights is kept at 6000 tez.
+
+For more information, see the blog post from [Nomadic Labs](https://research-development.nomadic-labs.com/announcing-jakarta-two.html).
 
 ## What have we learned so far?
 In this chapter, we went through the past proposals' history and how and why they were approved or rejected.

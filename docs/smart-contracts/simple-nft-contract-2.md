@@ -509,7 +509,6 @@ For the third issue and to make sure the top bidder does pay, we change it so th
 		<li>claimNFT(contract, tokenID)
 			<ul>
 				<li>Check that the current time is after the deadline</li>
-				<li>Check that the caller is the topBidder for this token</li>
 				<li>Transfer token ownership to the caller</li>
 				<li>Add the amount bid to the ledger, for the seller</li>
 			</ul>

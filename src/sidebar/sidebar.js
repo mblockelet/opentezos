@@ -22,7 +22,6 @@ module.exports = {
       label: 'Tezos Basics',
       items: [
         'tezos-basics/introduction',
-        'tezos-basics/smart-contracts',
         'tezos-basics/liquid-proof-of-stake',
         'tezos-basics/operations',
         'tezos-basics/cli-and-rpc',
@@ -31,6 +30,16 @@ module.exports = {
         'tezos-basics/history-of-amendments',
         'tezos-basics/economics-and-rewards',
         'tezos-basics/exam',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Smart contracts',
+      items: [
+        'smart-contracts/simple-nft-contract-1',
+        'smart-contracts/call-and-deploy',
+        'smart-contracts/simple-nft-contract-2',
+        'smart-contracts/simplified-contracts',
       ],
     },
     {

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import useThemeContext from '@theme/hooks/useThemeContext';
+import { useColorMode } from '@docusaurus/theme-common';
 
 let counter = 0;
 
@@ -14,7 +14,7 @@ const getImage = (
     return '';
   }
 
-  const {isDarkTheme} = useThemeContext();
+  const isDarkTheme = useColorMode().isDarkTheme
 
   const backgroundImage = isDarkTheme && imageDark ? imageDark : imageLight;
 

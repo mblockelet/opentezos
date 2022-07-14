@@ -38,7 +38,7 @@ Welcome Tezos Developers! Explore the technical and economic concepts behind the
   />
   <OverlayCard
       description="Learn the basics of smart contracts"
-      icon="img/icons/handshake-small-light.svg"
+      icon="img/icons/handshake-big-light.svg"
       iconDark="img/icons/handshake-big-dark.svg"
       title="Smart Contracts"
       to="/smart-contracts/simple-nft-contract-1"

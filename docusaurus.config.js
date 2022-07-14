@@ -54,16 +54,6 @@ module.exports = {
       defaultMode: 'light',
       disableSwitch: false,
       respectPrefersColorScheme: false,
-      switchConfig: {
-        darkIcon: '🌙',
-        darkIconStyle: {
-          marginLeft: '2px',
-        },
-        lightIcon: '☀️',
-        lightIconStyle: {
-          marginLeft: '1px',
-        },
-      },
     },
     prism: {
       darkTheme: darkCodeTheme,

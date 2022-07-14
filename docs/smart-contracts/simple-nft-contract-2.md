@@ -47,25 +47,26 @@ Here is one way we could do this:
 
 Here is the corresponding implementation in the Archetype language:
 
-	archetype risingNft(author: address, owner : address, metadata: string)
+```archetype
+archetype risingNft(author : address, owner : address, metadata : string)
 
-	variable price : tez = 1tz
+variable price : tez = 1tz
 
-	entry buy() {
-	   require {
-		  r1 : transferred == price
-	   }
-	   effect {
-		  transfer price * 0.05 to author;
-		  transfer price - (price * 0.05) to owner;
-		  price := price * 1.1;
-		  owner = caller;
-	   }
-	}
+entry buy() {
+  require { r1: transferred = price }
+  effect {
+    const royalties = 5% * price;
+    transfer royalties to author;
+    transfer (price - royalties) to owner;
+    price := 110% * price;
+    owner := caller;
+  }
+}
+```
 
 Unfortunately, we will see that as straightforward as this smart contract looks, it has some flaws, and doesn't provide the guarantees it seems to promise.
 
-Note that Tezos purposely doesn’t support floating point numbers. This is to avoid not only imprecisions and rounding errors, but most of all, to ensure that there is no risk of inconsistencies between nodes that all need to perform the same computation, but may use different implementations of the Tezos protocol. 
+Note that Tezos purposely doesn’t support floating point numbers. This is to avoid not only imprecisions and rounding errors, but most of all, to ensure that there is no risk of inconsistencies between nodes that all need to perform the same computation, but may use different implementations of the Tezos protocol.
 
 Additionally, formal verification doesn’t handle floating point operations very well. Instead, Tezos provides integer division, where we can both get the rounded down result of the integer division, and the remainder. In the example above, the Archetype language provides a syntax that makes it look like we are handling floating point numbers, but the actual values manipulated are fractions. 0.05 is actually the pair (1, 20) representing 1/20.
 

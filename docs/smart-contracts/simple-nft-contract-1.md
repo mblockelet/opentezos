@@ -41,28 +41,31 @@ Here is an example of a very basic smart contract that does a simple computation
 
 Contract expressed in the Archetype high-level language:
 
-	archetype example
+```archetype
+archetype example
 
-	variable data : int = 0
+variable data : int = 0
 
-	entry compute (param : int) {
-	  data := 2 * data - 3 * param;
-	}
+entry compute(param : int) {
+  data := 2 * data - 3 * param;
+}
+```
 
 The same contract, compiled to Michelson
 
-	storage int;
-	parameter (int %compute);
-	code { UNPAIR;
-		   PUSH int 3;
-		   MUL;
-		   SWAP;
-		   PUSH int 2;
-		   MUL;
-		   SUB;
-		   NIL operation;
-		   PAIR };
-
+```ocaml
+storage int;
+parameter (int %compute);
+code { UNPAIR;
+	   PUSH int 3;
+	   MUL;
+	   SWAP;
+	   PUSH int 2;
+	   MUL;
+	   SUB;
+	   NIL operation;
+	   PAIR };
+```
 
 ### Properties to keep in mind
 
@@ -136,26 +139,27 @@ Within a smart contract, we simply have access to the address of the author of t
 </table>
 Here is the corresponding implementation in the SmartPy language:
 
-	import smartpy as sp
+```py
+import smartpy as sp
 
-	class Account(sp.Contract):
-		def __init__(self, firstOwner, metadata):
-			self.init(owner = firstOwner, metadata = metadata)
+class Account(sp.Contract):
+	def __init__(self, firstOwner, metadata):
+		self.init(owner = firstOwner, metadata = metadata)
 
-		@sp.entry_point
-		def transfer(self, newOwner):
-			sp.verify(sp.sender == self.data.owner, "Not the owner")
-			self.data.owner = newOwner
-
+	@sp.entry_point
+	def transfer(self, newOwner):
+		sp.verify(sp.sender == self.data.owner, "Not the owner")
+		self.data.owner = newOwner
+```
 
 In SmartPy, we generate a smart contract with a class that inherits from <code>sp.Contract</code>.
-Here, its constructor <code>\_\_init\_\_</code> takes two parameters:
+Here, its constructor `\_\_init\_\_` takes two parameters:
 - the address of the initial owner of our NFT
 - the content of the metadata.
 
-<code>self.init</code> is then called, to put these two values in the initial storage of the contract.
+`self.init` is then called, to put these two values in the initial storage of the contract.
 
-In the <code>transfer</code> entry point, we can see how <code>self.data.owner</code> is used both to read and write the value of the owner to and from the storage.
+In the `transfer` entry point, we can see how `self.data.owner` is used both to read and write the value of the owner to and from the storage.
 
 **This 10 lines example is all the code we need** to generate and deploy a contract that represents a single NFT. We will see how to add additional features and make it more convenient to use, but this is technically all we need to create an NFT that will exist forever.
 
@@ -173,7 +177,7 @@ The issue, especially when the item is very valuable, is the order in which thes
 
 In either situation, if the second person doesn’t do their part, they end up with both the money and the item, while the first person ends up with nothing. The second person has a strong incentive to betray the first person.
 
-The traditional way to deal with this is to involve a **third party** that both the buyer and seller can trust. 
+The traditional way to deal with this is to involve a **third party** that both the buyer and seller can trust.
 - For casual sales, the third party is the government, its justice system and police force, with the possibility of filing a complaint, going to court, and hoping that justice will prevail.
 - For the sale of expensive items, the sale itself goes through an intermediary, such as a notary. All this is complicated, takes time, and requires trust in this third party.
 
@@ -190,7 +194,7 @@ This takes advantage of the property we presented earlier, that any error in the
 The previous version of our smart contract already included the transfer of the NFT, assuming that the payment was done off-chain or through a separate transaction. To ensure the atomicity of the exchange, we need the same entry point to manage both the transfer of the item, and the transfer of tez.
 
 Four new features of Tezos are needed:
-- **We need  a new data type, <code>tez</code>**, to represent the price.
+- **We need  a new data type, `tez`**, to represent the price.
 - **We need the buyer to send some tez**. On Tezos, a call to a contract is a special type of transaction, and you always send a number of tez (potentially 0) to a contract, when you call its entry point. That amount is automatically added to the balance of the contract.
 - **We need to check that the transferred amount is correct.** The code of an entry point has access to the amount sent by the caller, usually through an amount keyword.
 - **We need to send that amount to the seller.** We will use an instruction that generates a new transaction, from the balance of the contract, to a destination address.
@@ -227,27 +231,29 @@ We need two entry points in our contract:
 </td>
 </tr>
 </table>
-				
+
 
 
 Here is the corresponding implementation in the Archetype language:
 
-	archetype nftForSale(owner : address, metadata: string)
+```archetype
+archetype nftForSale(owner : address, metadata: string)
 
-	variable price : tez = 0tz
+variable price : tez = 0tz
 
-	entry setPrice (newPrice : tez) {
-	   called by owner
-	   effect { price := newPrice; }
-	}
+entry setPrice(newPrice : tez) {
+  called by owner
+  effect { price := newPrice; }
+}
 
-	entry buy() {
-	   require { r1 : transferred == price }
-	   effect {
-		  transfer price to owner;
-		  owner := caller;
-	   }
-	}
+entry buy() {
+  require { r1 : transferred = price }
+  effect {
+	  transfer price to owner;
+	  owner := caller;
+  }
+}
+```
 
 
 Note that with this version of our contract, if the buyer doesn’t immediately call setPrice after buying this NFT, nothing stops anyone from buying it from them at that same price.

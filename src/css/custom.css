@@ -108,66 +108,66 @@ html[data-theme='dark'] .menu > .menu__list > li:nth-child(3) > .menu__list-item
 }
 
 html[data-theme='light'] .menu > .menu__list > li:nth-child(4) > .menu__list-item-collapsible > a::before {
-  background: url('/img/icons/node-small-light.svg') no-repeat;
+  background: url('/img/icons/handshake-small-light.svg') no-repeat;
 }
 html[data-theme='dark'] .menu > .menu__list > li:nth-child(4) > .menu__list-item-collapsible > a::before {
-  background: url('/img/icons/node-small-dark.svg') no-repeat;
+  background: url('/img/icons/handshake-small-dark.svg') no-repeat;
 }
 
 html[data-theme='light'] .menu > .menu__list > li:nth-child(5) > .menu__list-item-collapsible > a::before {
-  background: url('/img/icons/explorer-small-light.svg') no-repeat;
+  background: url('/img/icons/node-small-light.svg') no-repeat;
 }
 html[data-theme='dark'] .menu > .menu__list > li:nth-child(5) > .menu__list-item-collapsible > a::before {
-  background: url('/img/icons/explorer-small-dark.svg') no-repeat;
+  background: url('/img/icons/node-small-dark.svg') no-repeat;
 }
 
 html[data-theme='light'] .menu > .menu__list > li:nth-child(6) > .menu__list-item-collapsible > a::before {
-  background: url('/img/icons/archetype-small-light.svg') no-repeat;
+  background: url('/img/icons/explorer-small-light.svg') no-repeat;
 }
 html[data-theme='dark'] .menu > .menu__list > li:nth-child(6) > .menu__list-item-collapsible > a::before {
-  background: url('/img/icons/archetype-small-dark.svg') no-repeat;
+  background: url('/img/icons/explorer-small-dark.svg') no-repeat;
 }
 
 html[data-theme='light'] .menu > .menu__list > li:nth-child(7) > .menu__list-item-collapsible > a::before {
-  background: url('/img/icons/smartpy-small-light.svg') no-repeat;
+  background: url('/img/icons/archetype-small-light.svg') no-repeat;
 }
 html[data-theme='dark'] .menu > .menu__list > li:nth-child(7) > .menu__list-item-collapsible > a::before {
-  background: url('/img/icons/smartpy-small-dark.svg') no-repeat;
+  background: url('/img/icons/archetype-small-dark.svg') no-repeat;
 }
 
 html[data-theme='light'] .menu > .menu__list > li:nth-child(8) > .menu__list-item-collapsible > a::before {
-  background: url('/img/icons/ligo-small-light.svg') no-repeat;
+  background: url('/img/icons/smartpy-small-light.svg') no-repeat;
 }
 html[data-theme='dark'] .menu > .menu__list > li:nth-child(8) > .menu__list-item-collapsible > a::before {
-  background: url('/img/icons/ligo-small-dark.svg') no-repeat;
+  background: url('/img/icons/smartpy-small-dark.svg') no-repeat;
 }
 
 html[data-theme='light'] .menu > .menu__list > li:nth-child(9) > .menu__list-item-collapsible > a::before {
-  background: url('/img/icons/michelson-small-light.svg') no-repeat;
+  background: url('/img/icons/ligo-small-light.svg') no-repeat;
 }
 html[data-theme='dark'] .menu > .menu__list > li:nth-child(9) > .menu__list-item-collapsible > a::before {
-  background: url('/img/icons/michelson-small-dark.svg') no-repeat;
+  background: url('/img/icons/ligo-small-dark.svg') no-repeat;
 }
 
 html[data-theme='light'] .menu > .menu__list > li:nth-child(10) > .menu__list-item-collapsible > a::before {
-  background: url('/img/icons/dapp-small-light.svg') no-repeat;
+  background: url('/img/icons/michelson-small-light.svg') no-repeat;
 }
 html[data-theme='dark'] .menu > .menu__list > li:nth-child(10) > .menu__list-item-collapsible > a::before {
-  background: url('/img/icons/dapp-small-dark.svg') no-repeat;
+  background: url('/img/icons/michelson-small-dark.svg') no-repeat;
 }
 
 html[data-theme='light'] .menu > .menu__list > li:nth-child(11) > .menu__list-item-collapsible > a::before {
-  background: url('/img/icons/baking-small-light.svg') no-repeat;
+  background: url('/img/icons/dapp-small-light.svg') no-repeat;
 }
 html[data-theme='dark'] .menu > .menu__list > li:nth-child(11) > .menu__list-item-collapsible > a::before {
-  background: url('/img/icons/baking-small-dark.svg') no-repeat;
+  background: url('/img/icons/dapp-small-dark.svg') no-repeat;
 }
 
 html[data-theme='light'] .menu > .menu__list > li:nth-child(12) > .menu__list-item-collapsible > a::before {
-  background: url('/img/icons/baker-small-light.svg') no-repeat;
+  background: url('/img/icons/baking-small-light.svg') no-repeat;
 }
 html[data-theme='dark'] .menu > .menu__list > li:nth-child(12) > .menu__list-item-collapsible > a::before {
-  background: url('/img/icons/baker-small-dark.svg') no-repeat;
+  background: url('/img/icons/baking-small-dark.svg') no-repeat;
 }
 
 html[data-theme='light'] .menu > .menu__list > li:nth-child(13) > .menu__list-item-collapsible > a::before {

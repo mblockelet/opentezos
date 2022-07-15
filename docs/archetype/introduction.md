@@ -5,29 +5,30 @@ slug: /archetype
 authors: Benoit Rognier
 ---
 
-This section presents the [Archetype](https://archetype-lang.org) Smart Contract language .
+[Archetype](https://archetype-lang.org) is an elegant generic-purpose language to develop Smart Contracts on the Tezos blockchain.
 
-Archetype is an elegant high-level generic purpose language to develop Smart Contracts on the Tezos blockchain. It supports all Michelson features, and also provides new types (rational, duration) and design concepts (state machine ...) that ease the development and maintenance of smart contracts.
+⚡️ It supports all Michelson features, but also provides exclusive high-level features for a precise and concise source code, that make contracts easier to develop, read and maintain.
 
 It also enables formal verification of contracts by transcoding to the [Why3](http://why3.lri.fr/) language.
 
-[How to install Archetype.](https://docs.archetype-lang.org/getting-started-1)
+[How to install Archetype.](https://archetype-lang.org/docs/installation)
 
 ## Business logic
 
 Besides standard [Michelson](/michelson) types, Archetype provides `rational`, `date` and `duration` types to make business logic easy to express.
 
 ```archetype
-archetype business_logic(holder : address, value : tez, deadline : date)
+archetype pay_with_penalty(holder : address, cost : tez, deadline : date)
 
 entry pay () {
-  transfer ((1 + 7% * (now - deadline) / 1d) * value) to holder
+  const penalty = now > deadline ? 7% * (now - deadline) / 1d : 0;
+  transfer ((1 + penalty) * cost) to holder
 }
 ```
 
-The `pay` entrypoint applies a penalty fee to the value transferred to _holder_, of 7% per day beyond the deadline .
+The `pay` entry point applies a penalty fee to the value transferred to _holder_, of 7% per day beyond the deadline .
 
-[Learn more about Rationals in Archetype...](https://docs.archetype-lang.org/archetype-language/numbers#rationals)
+[Learn more about Rationals in Archetype...](https://archetype-lang.org/docs/reference/types/#rational)
 
 ## Explicit execution conditions
 
@@ -36,21 +37,20 @@ Archetype provides a specific syntax to establish execution conditions so that t
 ```archetype
 archetype exec_cond_demo(admin : address, value : nat)
 
-entry setvalue (v : nat) {
+entry set_value (v : nat) {
   called by admin
   require {
-    r1: transferred > value otherwise "Invalid transferred amount";
-    r2: now < 2023-01-01    otherwise "Too late";
+    r1: transferred > value otherwise "INSUFFICIENT_TRANSFERRED_AMOUNT";
+    r2: now < 2023-01-01    otherwise "TOO_LATE";
   }
-  effect {
-    value := v;
-  }
+  effect { value := v; }
 }
 ```
 
-The entrypoint `setvalue` only executes if the sender is _admin_, if the transferred amount is greater than _value_ and if it is called before 2022.
+The `set_value` entry
+point only executes if the sender is _admin_, if the transferred amount is greater than _value_, and if it is called before 2022.
 
- [Learn more about the sections of an Archetype contract...](https://docs.archetype-lang.org/archetype-language/action#sections)
+ [Learn more about the sections of an Archetype contract...](https://archetype-lang.org/docs/reference/declarations/entrypoint#sections)
 
 ## Rich Storage API
 
@@ -66,23 +66,17 @@ The exclusive `asset` data container provides a rich API to access and manipulat
 archetype asset_demo
 
 asset vehicle {
-  vin          : string;
-  nbrepairs    : nat  = 0;
-  dateofrepair : date = now;
+  vin         : string;
+  nb_repairs  : nat  = 0;
 }
 
-entry repair_oldest () {
-  for v in vehicle.sort(dateofrepair).select(the.nbrepairs = 0).head(3) do
-    vehicle.update(v, { nbrepairs += 1; dateofrepair = now })
-  done
+entry incr(n : nat) {
+  vehicle.select(the.nb_repairs = n).update_all({ nb_repairs += 1 })
 }
 ```
+The `incr` entry point increments the `nb_repairs` field of vehicles with a number of repairs equal to `n`.
 
-The `repair_oldest` entrypoint increments the _nbrepairs_ field of the 3 vehicles with the oldest dates of repair, and with a number of repairs equal to zero.
-
-An asset collection provides a rich API to read/write data (add, remove, update, addupdate, ...), and to iterate over the collection (select, sort, sum, head, tail, ...).
-
-[Learn more about assets...](https://docs.archetype-lang.org/archetype-language/data-model)
+[Learn more about assets...](https://archetype-lang.org/docs/asset)
 
 ## State Machine
 
@@ -94,22 +88,16 @@ archetype state_machine_demo(value : tez, holder : address)
 states =
 | Created initial
 | Initialized
-| Terminated
 
 transition initialize () {
   from Created to Initialized
   when { transferred > value }
 }
-
-transition terminate () {
-  from Initialized to Terminated
-  effect { transfer balance to holder }
-}
 ```
 
 State machines help make the overall process clear and transparent.
 
-[Learn more about state machines...](https://docs.archetype-lang.org/archetype-language/state-machine)
+[Learn more about state machines...](https://archetype-lang.org/docs/statemachine)
 
 ## Formal Specification
 
@@ -123,6 +111,4 @@ specification entry repair_oldest () {
 }
 ```
 
-The postcondition `p1` of repair_oldest entry point specifies that the difference between the total number of repairs after the entry point's execution and before, is less or equal to 3.
-
-[Learn more about formal specification...](https://docs.archetype-lang.org/archetype-language/contract-specification)
+Postcondition `p1` of `repair_oldest` entry point specifies that the difference between the total number of repairs after the entry point's execution and before, is less or equal to 3.

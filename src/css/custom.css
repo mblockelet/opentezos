@@ -6,7 +6,7 @@
   --ifm-color-primary-light: #488ef8;
   --ifm-color-primary-lighter: #5697f9;
   --ifm-color-primary-lightest: #80b1fa;
-  --ifm-code-font-size: 95%;
+  --ifm-code-font-size: 90%;
 
   --ifm-container-width: 1420px;
   --ifm-spacing-horizontal: 1rem;
@@ -33,6 +33,13 @@ html[data-theme='light'] {
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
+}
+
+code {
+  --ifm-code-font-size: 85%;
+  --ifm-code-border-radius: 0px;
+  position: relative;
+  top: -1px;
 }
 
 small {

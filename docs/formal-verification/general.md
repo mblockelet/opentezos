@@ -4,11 +4,11 @@ title: Generalities
 authors: Frank Hillard
 ---
 
-Formal verification is a complex task but made possible and easier on Tezos smart contracts with proof assistant tools (such as _Coq_) and Michelson conception choices. 
+Formal verification is a complex task but made possible and easier on Tezos smart contracts with proof assistant tools (such as _Coq_) and Michelson conception choices.
 
 ## All about trust
 
-The main trait of the blockchain is that it ensures the execution of transactions without a trusted third-party. The deployment of smart contracts re-introduces a trusted party (the one who wrote the smart contracts). Tests can be done but nothing ensures the completeness (all situations of execution) of these tests. 
+The main trait of the blockchain is that it ensures the execution of transactions without a trusted third-party. The deployment of smart contracts re-introduces a trusted party (the one who wrote the smart contracts). Tests can be done but nothing ensures the completeness (all situations of execution) of these tests.
 
 A bug in a smart contract would destroy the trust.
 
@@ -30,7 +30,7 @@ The formal verification on Tezos smart contracts consist on:
 
 Formal verification is a complex task but made possible on Tezos smart contracts with Michelson conception choices.
 
-Indeed the Michelson language has been designed in order to take the formal verification into account. It is done by: 
+Indeed the Michelson language has been designed in order to take the formal verification into account. It is done by:
 - introducing typing system on a stack-based language for facilitating formal verification.
 - preventing JUMP instructions which make the formal verification more complex
 - prevent floating-point number (because of overflow and rounding)
@@ -38,13 +38,13 @@ Indeed the Michelson language has been designed in order to take the formal veri
 
 ## Formal verification benefits
 
-There is a real benefit to be able to prove the behavior of a smart contract, (i.e. to verify that a smart contract complies to some specifications). 
+There is a real benefit to be able to prove the behavior of a smart contract, (i.e. to verify that a smart contract complies to some specifications).
 
 Generally speaking, smart contracts have specific characteristics making them more bound to be verified than other common programs:
 - Due to the blockchain context, a smart contract is not intended to be modified (hard to modify once deployed), and thus can be proven once and for all.
 - particularly relevant when financial transfers are at stake (bug causing the loss of a token).
 - Proofs can be verified automatically without a trusted third-party. The proof process is aligned with the decentralization concept.
-- smart contracts are short , thus it is not too hard to write a proof 
+- smart contracts are short , thus it is not too hard to write a proof
 - smart contracts are executed in a well-defined context (protocol Tezos) which relatively separated, thus facilitating the formal verification.
 
 > This compliance can be verified by anyone for a given smart contract and proof.
@@ -53,7 +53,7 @@ Generally speaking, smart contracts have specific characteristics making them mo
 
 Many proof assistants can be used to translate a smart contract into a formal definition and formalize its specifications and its compliance to these specifications.
 
-- Nomadic Labs provides Mi-Cho-Coq, a library for the _Coq_ proof assistant. 
+- Nomadic Labs provides Mi-Cho-Coq, a library for the _Coq_ proof assistant.
 
 - Archetype language integrates directly information concerning formal verification (based on Why3, may automatically produce the proof). specifications are written in the smart contract.
 
@@ -65,7 +65,7 @@ Many proof assistants can be used to translate a smart contract into a formal de
 
 #### Coq
 
-Initially developed by Thierry Coquand, _Coq_ [[1]](/formal-verification/modeling-theorem#references) is a proof assistant designed to develop mathematical proofs, and especially to write formal specifications, programs, and proofs that programs comply to their specifications. 
+Initially developed by Thierry Coquand, _Coq_ [[1]](/formal-verification/modeling-theorem#references) is a proof assistant designed to develop mathematical proofs, and especially to write formal specifications, programs, and proofs that programs comply to their specifications.
 
 Specifications, programs, and proofs are formalized in the _Coq_ language called _Gallina_, which follows the _Calculus of Inductive Constructions_ (CIC).
 
@@ -97,7 +97,7 @@ Mi-Cho-Coq official repository is available at https://gitlab.com/nomadic-labs/m
 
 ### Archetype
 
-Archetype official documentation is available at https://docs.archetype-lang.org/
+Archetype official documentation is available at https://archetype-lang.org/
 
 ### K-Michelson
 
@@ -121,19 +121,19 @@ All these proof assistants provides tools for formal verification but also provi
 
 Proof assistants have chosen different ways to model specifications. For example, Mi-Cho-Coq is a Coq library allowing to verify at Michelson level, and specifications are designed in Coq as logical objects (with all the **expressivity** power of the Gallina language).
 
-Whereas Archetype design specifications by adding annotations directly inside the smart contract (written in a high-level language). Using annotations for expressing specifications, has the benefit to allow the **automatic generation of the proof**. This automatic proof cannot be done in all cases (it depends on the complexity) but is It introduces an inconvenience which is to limit the expressivity of these specifications to the annotation grammar. 
+Whereas Archetype design specifications by adding annotations directly inside the smart contract (written in a high-level language). Using annotations for expressing specifications, has the benefit to allow the **automatic generation of the proof**. This automatic proof cannot be done in all cases (it depends on the complexity) but is It introduces an inconvenience which is to limit the expressivity of these specifications to the annotation grammar.
 
 
 ![](../../static/img/formal-verification/proof_assistants_comparison.svg)
 <small className="figure">FIGURE 1: Comparison of proof assistants approaches.</small>
 
-Due to these different approaches and their implementations, the time of verification may vary. Automated generated proofs take more time to verify correctness (i.e. time spent for running the proof). Obviously, automation reduces drastically the time spent on writing the proof ! 
+Due to these different approaches and their implementations, the time of verification may vary. Automated generated proofs take more time to verify correctness (i.e. time spent for running the proof). Obviously, automation reduces drastically the time spent on writing the proof !
 
 ###  Verification level
 
 It's worth to mention that these proof assistants have different approaches concerning the level at which the verification is applied.
 
-The Mi-Cho-Coq approach is to apply formal verification on the low-level language (Michelson) and provides trust on the smart contract. 
+The Mi-Cho-Coq approach is to apply formal verification on the low-level language (Michelson) and provides trust on the smart contract.
 
 Another approach is to apply formal verification on a high-level language and provides trust in the high-level language compiler (which produces Michelson). (e.g. Archetype).
 

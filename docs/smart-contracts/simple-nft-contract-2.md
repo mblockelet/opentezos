@@ -146,26 +146,26 @@ Here is how this NFTWrapper contract could work:
 			<ul>
 				<li>Call the buy entry point of the nft contract</li>
 			</ul>
-		</li>
+		</li><br/>
 		<li>setPrice(newPrice: tez)
 			<ul>
 				<li>Verify that the caller is the owner</li>
 				<li>Replace price with newPrice in the storage</li>
 			</ul>
-		</li>
+		</li><br/>
 		<li>buy()
 			<ul>
 				<li>Verify that the transferred amount equals the price</li>
 				<li>Create a transaction that sends price tez to the owner</li>
 				<li>Replace owner with the caller</li>
 			</ul>
-		</li>
+		</li><br/>
 		<li>setAllowSale(newValue: boolean)
 			<ul>
 				<li>Verify that the caller is the owner</li>
 				<li>Replace allowSales with newValue in the storage</li>
 			</ul>
-		</li>
+		</li><br/>
 		<li>default()
 			<ul>
 				<li>Verify that allowSales is true</li>
@@ -222,7 +222,7 @@ As this owner may not immediately collect the funds they are owed, our contract 
 				<li>Replace owner with the caller, in the storage</li>
 				<li>Increase price by 10%, in the storage</li>
 			</ul>
-		</li>
+		</li><br/>
 		<li>claim()
 			<ul>
 				<li>Verify that ledger[caller] exists</li>
@@ -259,7 +259,7 @@ We need to add a new entry point, so that it’s possible to create new NFTs. We
 <tr><td>
 	<ul>
 		<li>nextID: int</li>
-		<li>tokens: big-map</li>
+		<li>tokens: big-map
 			<ul>
 				<li>tokenID (key): int</li>
 				<li>owner: address</li>
@@ -267,6 +267,7 @@ We need to add a new entry point, so that it’s possible to create new NFTs. We
 				<li>metadata: string</li>
 				<li>price: tez</li>
 			</ul>
+		</li><br/>
 		<li>ledger: big-map
 			<ul>
 				<li>key: address</li>
@@ -287,7 +288,7 @@ We need to add a new entry point, so that it’s possible to create new NFTs. We
 				<li>Replace owner with the caller in the token</li>
 				<li>Increase price by 10% in the token</li>
 			</ul>
-		</li>
+		</li><br/>
 		<li>mint(metadata, price)
 			<ul>
 				<li>Create a new entry in tokens, with key nextID</li>
@@ -295,7 +296,7 @@ We need to add a new entry point, so that it’s possible to create new NFTs. We
 				<li>Set metadata and price to the value of the parameters</li>
 				<li>Increment nextID</li>
 			</ul>
-		</li>
+		</li><br/>
 		<li>claim()
 			<ul>
 				<li>Verify that ledger[caller] exists</li>
@@ -346,7 +347,7 @@ Here is how our marketplace contract would work:
 				<li>seller: address</li>
 				<li>price: tez</li>
 			</ul>
-		</li>
+		</li><br/>
 		<li>ledger: big-map
 			<ul>
 				<li>key: address</li>
@@ -363,14 +364,14 @@ Here is how our marketplace contract would work:
 				<li>Transfer token ownership to the marketplace</li>
 				<li>Add a contract/tokenID entry to tokens big-map, and store caller as the seller, and the price</li>
 			</ul>
-		</li>
+		</li><br/>
 		<li>removeFromMarketplace(contract, tokenID)
 			<ul>
 				<li>Check that the caler is the seller</li>
 				<li>Transfer token ownership back to the seller</li>
 				<li>Delete tokens[(contract,tokenID)]</li>
 			</ul>
-		</li>
+		</li><br/>
 		<li>buy(tokenID)
 			<ul>
 				<li>Check that the amount transferred is the price</li>
@@ -379,7 +380,7 @@ Here is how our marketplace contract would work:
 				<li>Add the rest to the seller account in the ledger</li>
 				<li>Delete tokens[(contract,tokenID)]</li>
 			</ul>
-		</li>
+		</li><br/>
 		<li>claim()
 			<ul>
 				<li>Verify that ledger[caller] exists</li>
@@ -418,13 +419,13 @@ Note that now that we can buy and sell NFTs through this marketplace contract, w
 				<li>Set metadata to the value of the parameter</li>
 				<li>Increment nextID</li>
 			</ul>
-		</li>
+		</li><br/>
 		<li>setMarket(tokenID, market)
 			<ul>
 				<li>Checks that caller is the owner of tokens[tokenID]</li>
 				<li>Replace market for this token, with the parameter</li>
 			</ul>
-		</li>
+		</li><br/>
 		<li>transfer(tokenID, newOwner)
 			<ul>
 				<li>Checks that caller is the market of tokens[tokenID]</li>
@@ -481,7 +482,7 @@ For the third issue and to make sure the top bidder does pay, we change it so th
 				<li>topBid: tez</li>
 				<li>deadline: datetime</li>
 			</ul>
-		</li>
+		</li><br/>
 		<li>ledger: big-map
 			<ul>
 				<li>key: address</li>
@@ -498,7 +499,7 @@ For the third issue and to make sure the top bidder does pay, we change it so th
 				<li>Transfer ownership of the NFT to the marketplace</li>
 				<li>Create an entry in tokens, with contract and tokenID as the key, the caller as seller, the caller as the initial value of topBidder, 0 tez as the initial value of topBid, and the deadline parameter.</li>
 			</ul>
-		</li>
+		</li><br/>
 		<li>bid(contract, tokenID)
 			<ul>
 				<li>Check that the current time is before the deadline</li>
@@ -506,14 +507,14 @@ For the third issue and to make sure the top bidder does pay, we change it so th
 				<li>Add the previous topBid to the ledger, for the previous owner</li>
 				<li>Stores the caller as topBidder, and the amount transferred as topBid</li>
 			</ul>
-		</li>
+		</li><br/>
 		<li>claimNFT(contract, tokenID)
 			<ul>
 				<li>Check that the current time is after the deadline</li>
 				<li>Transfer token ownership to the caller</li>
 				<li>Add the amount bid to the ledger, for the seller</li>
 			</ul>
-		</li>
+		</li><br/>
 		<li>claim()
 			<ul>
 				<li>Verify that ledger[caller] exists</li>

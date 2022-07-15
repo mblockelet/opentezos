@@ -153,7 +153,7 @@ class Account(sp.Contract):
 ```
 
 In SmartPy, we generate a smart contract with a class that inherits from <code>sp.Contract</code>.
-Here, its constructor `\_\_init\_\_` takes two parameters:
+Here, its constructor `__init__` takes two parameters:
 - the address of the initial owner of our NFT
 - the content of the metadata.
 
@@ -217,9 +217,9 @@ We need two entry points in our contract:
 		<li>setPrice(newPrice)
 			<ul>
 				<li>Check that the caller is the owner</li>
-				<li>Replaces price with newPrice in the storage</li>
+				<li>Replace price with newPrice in the storage</li>
 			</ul>
-		</li>
+		</li><br/>
 		<li>buy()
 			<ul>
 				<li>Check that the amount sent is equal to the price</li>

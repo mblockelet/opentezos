@@ -499,6 +499,12 @@ Our contract has three entry points:
 			<ul>
 				<li>Check that repaid is true</li>
 			</ul>
+		</li><br/>
+		<li>collect(nbTez)
+			<ul>
+				<li>Check that caller is admin</li>
+				<li>Transfer nbTez to admin</li>
+			</ul>
 		</li>
 	</ul>
 </td>

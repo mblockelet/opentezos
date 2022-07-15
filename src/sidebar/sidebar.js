@@ -40,7 +40,6 @@ module.exports = {
         'smart-contracts/call-and-deploy',
         'smart-contracts/simple-nft-contract-2',
         'smart-contracts/simplified-contracts',
-        'smart-contracts/avoiding-flaws',
       ],
     },
     {

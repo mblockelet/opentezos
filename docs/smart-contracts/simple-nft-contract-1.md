@@ -3,6 +3,7 @@ id: simple-nft-contract-1
 title: First contracts - NFTs
 authors: Mathias Hiron, Nomadic Labs
 ---
+
 In this chapter, we will introduce smart contracts, and present some of the main features available for building smart contract on Tezos, through examples based on one of the most popular current uses of smart contracts: NFTs (Non Fungible Tokens).
 
 In most cases, the examples will be presented using plain English. A few examples of code will be shown, but the intention is not to teach you the syntax of one of the smart contract programming languages available on Tezos.
@@ -51,7 +52,7 @@ entry compute(param : int) {
 }
 ```
 
-The same contract, compiled to Michelson
+The same contract, compiled to Michelson:
 
 ```ocaml
 storage int;
@@ -113,7 +114,9 @@ For this, we will need to add some code: a <code>transfer</code> entry point, th
 - Verify that the current owner is the one requesting the transfer
 - Replace the owner in the storage with a new address.
 
-> Verifying who is making each request is one of the core aspects of blockchains: a simple transaction of some tez from account A to account B should only be accepted by the blockchain, if the owner of account A allows this transaction. This is done by having the author of a transaction cryptographically sign it. Anyone can then verify this signature and check the legitimacy of the transaction.
+:::info
+Verifying who is making each request is one of the core aspects of blockchains: a simple transaction of some tez from account A to account B should only be accepted by the blockchain if the owner of account A allows this transaction. This is done by having the author of a transaction cryptographically sign it. Anyone can then verify this signature and check the legitimacy of the transaction.
+:::
 
 Within a smart contract, we simply have access to the address of the author of the call, the <code>caller</code> or <code>sender</code>, with the guarantee that all verifications have already been done. For the transfer of our NFT, we simply need to include in our entry point, a single line of code that checks that this sender is the current owner of the NFT.
 
@@ -256,5 +259,5 @@ entry buy() {
 ```
 
 
-Note that with this version of our contract, if the buyer doesn’t immediately call setPrice after buying this NFT, nothing stops anyone from buying it from them at that same price.
+Note that with this version of our contract, if the buyer doesn’t immediately call `setPrice` after buying this NFT, nothing stops anyone from buying it from them at that same price.
 

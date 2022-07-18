@@ -3,6 +3,7 @@ id: simple-nft-contract-2
 title: First contracts - first flaws
 authors: Mathias Hiron, Nomadic Labs
 ---
+
 In this chapter, we will continue our discovery of smart contracts by adding features to our NFT contract, then discussing potential flaws and ways to prevent them.
 
 ## Flawed NFT with an increasing price
@@ -70,7 +71,6 @@ Note that Tezos purposely doesn’t support floating point numbers. This is to a
 
 Additionally, formal verification doesn’t handle floating point operations very well. Instead, Tezos provides integer division, where we can both get the rounded down result of the integer division, and the remainder. In the example above, the Archetype language provides a syntax that makes it look like we are handling floating point numbers, but the actual values manipulated are fractions. 0.05 is actually the pair (1, 20) representing 1/20.
 
-
 ## Potential flaws
 
 To figure out the flaws presented in this section, you need to know that any address can be a contract. Furthermore, when we send some tez to a contract without specifying any entry point, like we would for a transfer to a regular account, this will only work if the contract has a “default” entry point. This entry point may in turn execute some code and create new transactions.
@@ -86,7 +86,6 @@ Let’s say that you just bought this NFT, and want to make sure you can keep it
 **Question:** is there a way to prevent this sort of manipulation?
 
 The buy entry point could be changed to verify that the address of the buyer is not the address of the current owner. However, it is extremely easy for the same user to control two different accounts, so this would simply make this self-sale hard to detect. We simply can't prevent this type of attack.
-
 
 > **Advice:** be careful when you see an NFT or other asset being sold at a very high price. You may think that this price is an indicator of the current value of this asset, but it could be the same user buying it from themselves, creating the illusion of a high value asset.
 
@@ -127,7 +126,7 @@ Here, we will show an illustration of a contract that holds that same NFT in the
 
 Owning our NFT through a contract allows us to go around the NFT’s restrictions in multiple ways: as we can sell our NFTWrapper contract itself and avoid using the buy entry point of the NFT, we can set our own rules, sell it at the price of our choice, and avoid paying royalties to the author.
 
-If we add a <code>default</code> entry point to NFTWrapper, that simply fails whenever it is called, we can prevent anyone from successfully calling the buy entry point of the NFT to purchase it at the computed price: the transfer of tez to our NFTWrapper contract would indeed cause this <code>default</code> entry point to be called and fail, therefore preventing the sale from happening at all. We could also store a boolean in the storage of NFTWrapper, that indicates whether the default entry point should fail or not, therefore keeping the possibility to enable direct sales again, and “unwrap” our NFT.
+If we add a `default` entry point to NFTWrapper, that simply fails whenever it is called, we can prevent anyone from successfully calling the buy entry point of the NFT to purchase it at the computed price: the transfer of tez to our NFTWrapper contract would indeed cause this `default` entry point to be called and fail, therefore preventing the sale from happening at all. We could also store a boolean in the storage of NFTWrapper, that indicates whether the default entry point should fail or not, therefore keeping the possibility to enable direct sales again, and “unwrap” our NFT.
 
 Here is how this NFTWrapper contract could work:
 
@@ -315,7 +314,9 @@ That’s it, now anyone can simply call this contract to create and sell their o
 
 It is possible to create all kinds of NFTs, with different types of metadata, different rules on how they are minted, etc. However, if we want these NFTs to be convenient to trade, we need a dedicated dApp: a place where people can easily browse through all kinds of NFTs, and buy or sell them. This type of dApp is what we call a marketplace.
 
-> A dApp is a Decentralized Application. It is an application, usually web based, that provides a nice interface to help users to interact with one or more smart contracts. Through the dApp, users can sign transactions (and calls) to the smart contract with their wallet, and view the results. The dApp interact with a node of the blockchain to send transactions (including calls to smart contracts) and check the results. Keep in mind when using a dApp, that only the smart contract part of the dApp is usually decentralized.
+:::info
+A dApp is a Decentralized Application. It is an application, usually web based, that provides a nice interface to help users to interact with one or more smart contracts. Through the dApp, users can sign transactions (and calls) to the smart contract with their wallet, and view the results. The dApp interact with a node of the blockchain to send transactions (including calls to smart contracts) and check the results. Keep in mind when using a dApp, that only the smart contract part of the dApp is usually decentralized.
+:::
 
 **Question:** what smart contracts would you need to develop, such a dApp, if any?
 

@@ -16,7 +16,9 @@ The goal is for you to get a good understanding of what a smart contract is, how
 
 Finally, this will give you an overview of what some of the most common smart contract may look like.
 
-> **Warning**: the contracts below are simplified contracts, provided for educational purposes only. They are not meant to be implemented and used as is, as some of them may contain potential flaws.
+:::warning
+The contracts below are simplified contracts, provided for educational purposes only. They are not meant to be implemented and used as is, as some of them may contain potential flaws.
+:::
 
 ## <a name="fa1.2">FA1.2 - Fungible token</a>
 
@@ -287,7 +289,7 @@ For example, the request could consist in the service sending the decrypted vers
 
 Our contract has three entry points:
 - <code>send_request</code> creates a new request with a deadline and collects the payment, that will be held in the escrow.<br/>Along with the data, the request contains the code that will verify the validity of the answer (a lambda)
-- <code>fulfil_request</code> is to be called later by the service.<br/>It verifies that the request has been performed and transfers the funds to the service.
+- <code>fulfill_request</code> is to be called later by the service.<br/>It verifies that the request has been performed and transfers the funds to the service.
 - <code>cancel_request</code> can be called buy the buyer if the request had not been fulfilled after the deadline.<br/>It transfers the funds back to them.
 
 <table>
@@ -321,7 +323,7 @@ Our contract has three entry points:
 				<li>Push a call to <code>service(data, self, amount, deadline)</code></li>
 			</ul>
 		</li><br/>
-		<li>fulfil_request(id, answer)
+		<li>fulfill_request(id, answer)
 			<ul>
 				<li>Set <code>request = requests[caller, id]</code>, checking that it exists</li>
 				<li>Check that <code>verification(request.data, answer)</code> returns <code>true</code></li>

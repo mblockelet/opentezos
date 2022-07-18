@@ -4,7 +4,7 @@ title: Calling and deploying contracts
 authors: Mathias Hiron, Nomadic Labs
 ---
 
-In this chapter, we will show you how to use the octez suite, and more specifically, <code>tezos-client</code>, to call and deploy contracts.
+In this chapter, we will show you how to use the octez suite, and more specifically, `tezos-client`, to call and deploy contracts.
 
 To make it as easy as possible for you to give it a try, we will use [gitpod](https://gitpod.io) with a virtual machine we have setup with all the necessary software, including the octez suite and the vscode editor and language compilers. Gitpod runs directly in your browser.
 
@@ -35,24 +35,31 @@ If your Gitpod account was created with a GitHub credential, you must authorize 
 
 To point tezos-client to a public node of a Tezos test network, input the following command:
 
-	tezos-client --endpoint https://ithacanet.ecadinfra.com config update
-	
-Note that public nodes come and go, and the url above may not always work,or not correspond to the latest version of the protocol. A list of public nodes can be found [here](https://tezostaquito.io/docs/rpc_nodes/). Make sure you pick a test network, and not Mainnet.
+```bash
+tezos-client --endpoint https://rpc.ghostnet.teztnets.xyz config update
+```
+
+Note that public nodes come and go, and the url above may not always work,or not correspond to the latest version of the protocol. A list of public nodes can be found [here](https://tezostaquito.io/docs/rpc_nodes/) and [here](https://teztnets.xyz/) especially for testnets. Make sure you pick a test network, and not Mainnet.
 
 If everything goes well, the output should look similar to this:
 
-![](../../static/img/smart-contracts/call_and_deploy_endpoint.png)
+<p align="center">
 
+![tezos-cli-endpoint](../../static/img/smart-contracts/call_and_deploy_endpoint.png)
+
+</p>
 
 ### 4. Disable warnings about connecting to a test network
 
 Input the following command:
 
-	export TEZOS_CLIENT_UNSAFE_DISABLE_DISCLAIMER=yes
+```bash
+export TEZOS_CLIENT_UNSAFE_DISABLE_DISCLAIMER=yes
+```
 
 ### 5. Obtain an address with plenty of tez, from a Faucet
 
-Go to this page: https://teztnets.xyz/ithacanet-faucet
+Go to this page: <https://teztnets.xyz/ghostnet-faucet>.
 
 Follow the instructions, download the JSON file, save it to your computer – then drag-and-drop the file to your Gitpod environment.
 
@@ -62,14 +69,18 @@ Activate the account downloaded from the faucet, and give it a name (an alias).
 
 The alias shouldn’t contain any spaces. To keep it simple, just use non-accented letters.
 
-For example, to give the name “alice” to your account, input this command, where you replace <code>[path&nbsp;to&nbsp;the&nbsp;JSON&nbsp;file]</code> with the path of the file, relative to your current folder:
+For example, to give the name “alice” to your account, input this command, where you replace `[path&nbsp;to&nbsp;the&nbsp;JSON&nbsp;file]` with the path of the file, relative to your current folder:
 
-	tezos-client activate account alice with [path to the JSON file]
+```bash
+tezos-client activate account alice with [path to the JSON file]
+```
 
 Note that if you run this activation command on an account that has already been activated before, it will display the following error message:
 
-	Error:
-	  Invalid activation. The public key … does not match any commitment.
+```bash
+Error:
+	Invalid activation. The public key … does not match any commitment.
+```
 
 The alias is still created, so don’t worry if you see this message, as long as the next step, checking your balance, still works.
 
@@ -77,17 +88,27 @@ The alias is still created, so don’t worry if you see this message, as long as
 
 Input the following command, replacing alice with the name you picked for your account:
 
-	tezos-client get balance for alice
+```bash
+tezos-client get balance for alice
+```
 
 If everything is set up correctly, it should output a single line the amount of tez the faucet allocated to your address.
 
-![](../../static/img/smart-contracts/call_and_deploy_balance.png)
+<p align="center">
+
+![call-and-deploy-balance](../../static/img/smart-contracts/call_and_deploy_balance.png)
+
+</p>
 
 ### 8. Share your address with others
 
 You can find the address of your account in the json file, on the line that starts with “pkh”. It starts with tz1.
 
-![](../../static/img/smart-contracts/call_and_deploy_json.png)
+<p align="center">
+
+![call-and-deploy-json](../../static/img/smart-contracts/call_and_deploy_json.png)
+
+</p>
 
 You can share this address with other people, so that they can send you some tez.
 
@@ -95,13 +116,21 @@ You can share this address with other people, so that they can send you some tez
 
 Go to https://tzkt.io/ and select the test network you are using, in the drop-down:
 
-![](../../static/img/smart-contracts/call_and_deploy_tzkt.png)
+<p align="center">
+
+![call-and-deploy-tzkt](../../static/img/smart-contracts/call_and_deploy_tzkt.png)
+
+</p>
 
 In the search area of TzKT, paste the address of your account.
 
 Check that the balance corresponds to what you saw with the command line.
 
-![](../../static/img/smart-contracts/call_and_deploy_tzkt_view.png)
+<p align="center">
+
+![call-and-deploy-tzkt-view](../../static/img/smart-contracts/call_and_deploy_tzkt_view.png)
+
+</p>
 
 Note that sometimes, it takes a few minutes for your account to be visible.
 
@@ -111,7 +140,9 @@ Create an alias for another account, so that you don’t have to input the full 
 
 For example to create an alias for your friend bob, input the following command:
 
-	tezos-client remember contract bob [address of bob]
+```bash
+tezos-client remember contract bob [address of bob]
+```
 
 You can then check your friend’s balance.
 
@@ -120,13 +151,17 @@ You can then check your friend’s balance.
 Gitpod closes after 30 minutes of inactivity.  Saved files are preserved, but not environment variables. To avoid having to re-configure each time you (re)open your workspace, you can create a config.sh file. 
 To create the file and open it in the vscode editor, input the following command:
 
-	code config.sh
+```bash
+code config.sh
+```
 
 Edit the content of this file, with commands that you want to run automatically:
 
-	tezos-client --endpoint https://ithacanet.ecadinfra.com config update
-	export TEZOS_CLIENT_UNSAFE_DISABLE_DISCLAIMER=yes
-	tezos-client remember contract bob [address of the contract]
+```bash
+tezos-client --endpoint https://rpc.ghostnet.teztnets.xyz config update
+export TEZOS_CLIENT_UNSAFE_DISABLE_DISCLAIMER=yes
+tezos-client remember contract bob [address of the contract]
+```
 
 ### 12. Recover your gitpod workspace after a deconnexion
 
@@ -138,8 +173,9 @@ However, if you closed that tab or your browser, you can go to https://gitpod.io
 
 Once your workspace is reopened, input the following command, to run the commands you saved in your config.sh file:
 
-	source config.sh
-
+```bash
+source config.sh
+```
 
 ## <a name="call-contract">Tezos client: calling a contract</a>
 
@@ -151,19 +187,24 @@ You can transfer tokens from your account, to any account for which you created 
 
 For example, if your account is named alice, and you created an alias for your friend bob, input the following command to transfer 5 tez to bob:
 
-	tezos-client transfer 5 from alice to bob
+```bash
+tezos-client transfer 5 from alice to bob
+```
 
 You could also directly input the destination address instead of the alias.
 
 The transfer is not immediate! You need to wait for a baker to include your transaction in a block. To be really sure that the block is final, you should then wait for two more blocks after that.
 
-When testing (and only when testing), we add <code>--wait none</code> to the command, to avoid having to wait for these two extra block:
+When testing (and only when testing), we add `--wait none` to the command, to avoid having to wait for these two extra block:
 
-	tezos-client --wait none transfer 5 from alice to bob
+```bash
+tezos-client --wait none transfer 5 from alice to bob
+```
 
 **Practice:** exchange your addresses with others and do a few transactions. (Just be sure you’re on a testnet!).
 
 ### 2. Check your transactions on a block explorer
+
 Remember that you can access the status and history of any account, using one of the block explorers available for Tezos.
 
 Go to https://tzkt.io/, then make sure you select the correct network, then search for the address of the account you want to check.
@@ -174,23 +215,29 @@ Remember that it may take a couple of minutes for the block explorer to show the
 
 ### 3. Create an alias for a smart contract
 
-Here is the address of a contract, on the <code>ithachanet</code> test network:
+Here is the address of a contract, on the `ghostnet` test network:
 
-	KT1AeHhAyyWGfAizceN7AhEkCbMwEZFfEG7g
+```bash
+KT1AeHhAyyWGfAizceN7AhEkCbMwEZFfEG7g
+```
 
 Note that smart contract addresses start with "KT".
 
 Start by creating an alias for this contract, using the same command as for a regular account.
 
-For example, if you want to use the alias <code>contract1</code>, input this command:
+For example, if you want to use the alias `contract1`, input this command:
 
-	tezos-client remember contract contract1 [address of the contract]
+```bash
+tezos-client remember contract contract1 [address of the contract]
+```
 
 ### 4. Check the balance of the contract
 
 Just like a regular account, a contract has a balance, that you can check with the following command (using the alias you selected earlier):
 
-	tezos-client get balance for contract1
+```bash
+tezos-client get balance for contract1
+```
 
 ### 5. Call a simple contract with only an int as parameter
 
@@ -202,31 +249,40 @@ Pick a new value. For example here, we pick 432, but pick your own, so that it�
 
 Then input this command to call the contract, so that it will replace its storage with your value:
 
-	tezos-client --wait none transfer 5 from alice to contract1 --arg '432'
+```bash
+tezos-client --wait none transfer 5 from alice to contract1 --arg '432'
+```
 
 Let's decompose the elements of this command:
-- <code>--wait none</code> indicates that we don't wait for the transaction to be final
-- <code>transfer 5</code> indicates that we are sending 5 tez to the contract
-- <code>from alice</code> indicates that the caller address (and sender of the 5 tez) is alice
-- <code>to contract1</code> indicates the destination of the call: our contract
-- <code>--arg '432'</code> is how we provide the parameter of the contract call.
 
-Remember to use the correct aliases instead of <code>alice</code> and <code>contract1</code>.
+- `--wait none` indicates that we don't wait for the transaction to be final
+- `transfer 5` indicates that we are sending 5 tez to the contract
+- `from alice` indicates that the caller address (and sender of the 5 tez) is alice
+- `to contract1` indicates the destination of the call: our contract
+- `--arg '432'` is how we provide the parameter of the contract call
 
-Note that the symbol <code>'</code> has variants like <code>‘</code> or <code>’</code> that look very similar but will not be accepted.
+Remember to use the correct aliases instead of `alice` and `contract1`.
 
-Note that we didn’t need to send 5 tez and could have saved tokens, by putting <code>transfer 0</code> instead.
+Note that the symbol `'` has variants like `‘` or `’` that look very similar but will not be accepted.
+
+Note that we didn’t need to send 5 tez and could have saved tokens, by putting `transfer 0` instead.
 
 ### 6. Check the output and see that it was successful
 
 The output is quite long, and contains lots of information:
 
-![](../../static/img/smart-contracts/call_and_deploy_call_output.png)
+<p align="center">
+
+![call-and-deploy-output](../../static/img/smart-contracts/call_and_deploy_call_output.png)
+
+</p>
 
 Look for the new value of the contract’s storage and this message.
 
-	This transaction was successfully applied
-	Updated storage: 432
+```bash
+This transaction was successfully applied
+Updated storage: 432
+```
 
 In some cases, you may get an error, and not see this, for example if there was some connection issue with the node.
 
@@ -236,53 +292,73 @@ This doesn’t mean the transaction didn’t happen. If that’s the case, check
 
 To check the activity on a contract, we will use a different block explorer, better call dev.
 
-Go to https://better-call.dev/
+Go to https://better-call.dev/.
 
 In the search area, input the address of the contract you want to check.
 
-![](../../static/img/smart-contracts/call_and_deploy_bcd.png)
+<p align="center">
 
-When you see the contract in the results, click on it to open the page. You will then see the list of recent transactions for this contract :
+![call-and-deploy-bcd](../../static/img/smart-contracts/call_and_deploy_bcd.png)
 
-![](../../static/img/smart-contracts/call_and_deploy_bcd_2.png)
+</p>
+
+When you see the contract in the results, click on it to open the page. You will then see the list of recent transactions for this contract:
+
+<p align="center">
+
+![call-and-deploy-bcd-2](../../static/img/smart-contracts/call_and_deploy_bcd_2.png)
+
+</p>
 
 Click on a transaction to see the details:
 
-![](../../static/img/smart-contracts/call_and_deploy_bcd_3.png)
+<p align="center">
+
+![call-and-deploy-bcd-3](../../static/img/smart-contracts/call_and_deploy_bcd_3.png)
+
+</p>
 
 You should be able to find your transactions, as well as other people’s transactions on that contract.
 
 ### 8. Call a contract with a string as a parameter, that increases the storage
 
-Here is the address of another contract on the <code>ithachanet</code> test network:
+Here is the address of another contract on the `ghostnet` test network:
 
-	KT1XWjfX2sFzDS1u1vhu8WumVYqQRKJRcvNW
+```bash
+KT1XWjfX2sFzDS1u1vhu8WumVYqQRKJRcvNW
+```
 
 This contract that can be called with a string as a parameter. It stores a string, and after every call, it will add a comma to the storage, then the value of your parameter.
 
-A string is a sequence of characters, that you can delimit between two double-quotes: <code>"</code>
+A string is a sequence of characters, that you can delimit between two double-quotes: `"`.
 
-For example the string <code>Hello World!</code> is expressed as <code>"Hello World!"</code>
+For example the string `Hello World!` is expressed as `"Hello World!"`.
 
 When you input a command, remember that the value of the parameter should be put between two single quotes, for example '432'  for a number. For a string, this means you will have single quotes outside, and double quotes inside, like this:
 
-	'"Hello World!"'
+```bash
+'"Hello World!"'
+```
 
-Note that just like <code>'</code>, the symbol <code>"</code> has variants like <code>“</code> or  <code>”</code> that look similar but will not be accepted. 
+Note that just like `'`, the symbol `"` has variants like `“` or  `”` that look similar but will not be accepted. 
 
 When you call that contract, the amount of data it stores will increase. You will need to pay for that extra storage, by burning some tez. To indicate how many tez you are accepting to burn at the most, add this at the end of your command. For example, if you accept to burn 0.1 tez:
 
-	--burn-cap 0.1
+```bash
+--burn-cap 0.1
+```
 
-Your final command, will look like this (this should be a single line)
+Your final command, will look like this (this should be a single line):
 
-	tezos-client --wait none transfer 0 from alice to contract2 --arg '"Hello"' --burn-cap 0.1
+```bash
+tezos-client --wait none transfer 0 from alice to contract2 --arg '"Hello"' --burn-cap 0.1
+```
 
 ### 9. Check that the result is correct
 
 Make sure the output is correct and you see the expected value of the new storage.
 
-Also make sure you explore this contract in a block explorer, and see your transaction there, and the new value of the contract’s storage
+Also make sure you explore this contract in a block explorer, and see your transaction there, and the new value of the contract’s storage.
 
 ### 10. Call more advanced contracts
 
@@ -290,61 +366,83 @@ If you want to call contracts that have more complex parameters, you can get hep
 
 Load the contract, then go to the "Interact" tab:
 
-![](../../static/img/smart-contracts/call_and_deploy_bcd_execute.png)
+<p align="center">
+
+![call-and-deploy-bcd-execute](../../static/img/smart-contracts/call_and_deploy_bcd_execute.png)
+
+</p>
 
 Use the user interface to input the parameters, then click on "Execute", and select "Tezos-client".
 
-![](../../static/img/smart-contracts/call_and_deploy_bcd_gen_command.png)
+<p align="center">
+
+![call-and-deploy-bcd-gen-command](../../static/img/smart-contracts/call_and_deploy_bcd_gen_command.png)
+
+</p>
 
 Better Call Dev will then show you the command line, with a placeholder for your address (or alias):
 
-![](../../static/img/smart-contracts/call_and_deploy_bcd_shown_command.png)
+<p align="center">
+
+![call-and-deploy-bcd-shown-command](../../static/img/smart-contracts/call_and_deploy_bcd_shown_command.png)
+
+</p>
 
 ## <a name="call-contract">Tezos client: deploying a contract</a>
-
 
 ### 1. Fetch the code of the contract
 
 Let's try to redeploy our first contract:
 
-	KT1XWjfX2sFzDS1u1vhu8WumVYqQRKJRcvNW
+```bash
+KT1XWjfX2sFzDS1u1vhu8WumVYqQRKJRcvNW
+```
 
 Make sure you use the correct address, otherwise you may encounter issues, in particular if you use a different contract that needs to be called with different parameters.
 
 The first step is to obtain the michelson code of this contract. The easiest way is to use a block explorer.
 
-Go to https://better-call.dev/
+Go to https://better-call.dev/.
 
 Input the address of the contract you want to find the source code of.
 
 Click on the contract in the results, then on the contract page, open the “code” tab:
 
-![](../../static/img/smart-contracts/call_and_deploy_bcd_code.png)
+<p align="center">
 
+![call-and-deploy-bcd-code](../../static/img/smart-contracts/call_and_deploy_bcd_code.png)
+
+</p>
 
 You should then see the Michelson source code of the contract:
 
-	parameter string;
-	storage string;
-	code { UNPAIR ; PUSH string "," ; CONCAT ; SWAP ; CONCAT ; NIL operation ; PAIR }
+```michelson
+parameter string;
+storage string;
+code { UNPAIR ; PUSH string "," ; CONCAT ; SWAP ; CONCAT ; NIL operation ; PAIR }
+```
 
 ### 2. Put it in a .tz file
 
-To deploy a copy of this contract, you need to put its content in a file, with the <code>.tz</code> extension, for example <code>myContract.tz</code>
+To deploy a copy of this contract, you need to put its content in a file, with the `.tz` extension, for example `myContract.tz`
 
 Start by copying the contract by clicking on the “copy” button in the top-right corner, or by selecting the code, and using keyboard shortcuts (like ctrl+C on windows) to copy it.
 
 In your gitpod environment, create a file and open it directly in your vscode editor, by using the following command:
 
-	code myContract.tz
+```bash
+code myContract.tz
+```
 
 Then, in the editor, paste the content of the contract that you copied.
 
-Save it using ctrl+S
+Save it using ctrl+S.
 
 Make sure everything ok by displaying the content of the file using this command line:
 
-	cat myContract.tz
+```bash
+cat myContract.tz
+```
 
 The content should be displayed below.
 
@@ -354,22 +452,25 @@ Now that the Michelson source code of your contract is in a file, you can run a 
 
 Input the following command (in a single line):
 
-	tezos-client originate contract myContract transferring 0 from alice running myContract.tz --init '"Hello"' --burn-cap 0.1
-	
+```bash
+tezos-client originate contract myContract transferring 0 from alice running myContract.tz --init '"Hello"' --burn-cap 0.1
+```
+
 This command will originate a new version of the contract you copied, and have the number you used as its initial storage content.
 
 Let's decompose the elements:
-- <code>tezos-client originate contract</code> is the command to use to originate a contract
-- <code>myContract</code> tells what alias you want to give to this contract
-- <code>transferring 0</code> is the amount you want to put in the balance of your contract
-- <code>from alice</code> tells from which account you want to originate the contract, and transfer the tez from
-- <code>running myContract.tz</code> defines what file contains the Michelson code of your contract (its relative path).
-- <code>--init '"Hello"'</code> sets the initial value of the storage. In our case, the storage is simply a string.
-- <code>--burn-cap 0.1</code> sets the maximum amount of tez you are willing to burn to pay for the storage of the code and initial value.
 
-Make sure you replace the first <code>myContract</code> with the name of the alias you want to use, <code>alice</code> with the alias you chose for your account, and <code>myContract.tz</code> with the name of the path you used. Try to put a different string instead of <code>"Hello"</code>.
+- `tezos-client originate contract` is the command to use to originate a contract
+- `myContract` tells what alias you want to give to this contract
+- `transferring 0` is the amount you want to put in the balance of your contract
+- `from alice` tells from which account you want to originate the contract, and transfer the tez from
+- `running myContract.tz` defines what file contains the Michelson code of your contract (its relative path).
+- `--init '"Hello"'` sets the initial value of the storage. In our case, the storage is simply a string.
+- `--burn-cap 0.1` sets the maximum amount of tez you are willing to burn to pay for the storage of the code and initial value
 
-The output should show you the address of your contract. It starts with <code>KT</code>
+Make sure you replace the first `myContract` with the name of the alias you want to use, `alice` with the alias you chose for your account, and `myContract.tz` with the name of the path you used. Try to put a different string instead of `"Hello"`.
+
+The output should show you the address of your contract. It starts with `KT`.
 
 ### 4. Check your contract on a block explorer
 
@@ -380,10 +481,3 @@ Using the address in the output of the previous call, go to better call dev and 
 Call your contract exactly like you called the same contract in the previous exercise. Just make sure you use the new alias you chose when deploying it.
 
 Check again that you see the result on better-call-dev.
-
-
-
-
-
-
-

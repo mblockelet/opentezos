@@ -367,7 +367,7 @@ Here is how our marketplace contract would work:
 		</li><br/>
 		<li>removeFromMarketplace(contract, tokenID)
 			<ul>
-				<li>Check that the caler is the seller</li>
+				<li>Check that the caller is the seller</li>
 				<li>Transfer token ownership back to the seller</li>
 				<li>Delete tokens[(contract,tokenID)]</li>
 			</ul>

@@ -265,8 +265,8 @@ It provides the following entry points:
 				<li>Transfer token ownership to the caller:<br/>
 					call token_contract.transfer(self, [caller, token_id, 1])</li>
 				<li>Set admin_fee = fee_rate * amount_paid / 100</li>
-				<li>Push transaction to send admin_fee to admin</li>
-				<li>Push transaction to send amount_paid - admin_fee to <code>[token_contract, token_id].seller</code></li>
+				<li>Create transaction to send admin_fee to admin</li>
+				<li>Create transaction to send amount_paid - admin_fee to <code>[token_contract, token_id].seller</code></li>
 				<li>Delete entry [token_contract, toen_id] from tokens</li>
 			</ul>
 		</li><br/>
@@ -320,7 +320,7 @@ Our contract has three entry points:
 			<ul>
 				<li>Check that <code>requests[caller, id]</code> doesn't exist</li>
 				<li>Create <code>requests[caller,id]</code> entry with amount_paid and all the parameters</li>
-				<li>Push a call to <code>service(data, self, amount, deadline)</code></li>
+				<li>Create a call to <code>service(data, self, amount, deadline)</code></li>
 			</ul>
 		</li><br/>
 		<li>fulfill_request(id, answer)
@@ -328,7 +328,7 @@ Our contract has three entry points:
 				<li>Set <code>request = requests[caller, id]</code>, checking that it exists</li>
 				<li>Check that <code>verification(request.data, answer)</code> returns <code>true</code></li>
 				<li>Set <code>requests[caller, id].answer</code> to <code>answer</code></li>
-				<li>Push transaction to send <code>request.amount</code> to <code>caller</code></li>				
+				<li>Create transaction to send <code>request.amount</code> to <code>caller</code></li>				
 			</ul>
 		</li><br/>
 		<li>cancel_request(id)
@@ -336,7 +336,7 @@ Our contract has three entry points:
 				<li>Set <code>request = requests[caller,id]</code>, checking that it exists</li>
 				<li>Check that <code>request.answer</code> is <code>none</code>, meaning the request hasn't been processed</li>
 				<li>Check that the deadline has expired: <code>now > request.deadline</code></li>
-				<li>Push transaction to send <code>request.amount</code> to <code>caller</code></li>
+				<li>Create transaction to send <code>request.amount</code> to <code>caller</code></li>
 				<li>Delete <code>requests[caller,id]</code> entry</li>
 			</ul>
 		</li>
@@ -486,8 +486,8 @@ Our contract has three entry points:
 				<li>Transfer loan_amount to caller</li>
 				<li>Set storage loan_amount to loan_amount</li>
 				<li>Set repaid to false</li>
-				<li>Push call to callback</li>
-				<li>Push call to check_repaid</li>
+				<li>Create call to callback</li>
+				<li>Create call to check_repaid</li>
 			</ul>
 		</li><br/>
 		<li>repay()

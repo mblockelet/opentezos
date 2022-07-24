@@ -1183,7 +1183,7 @@ More information can be found [here](https://hackmd.io/@benjaminion/bls12-381).
 - Ligo: [Crypto](https://ligolang.org/docs/reference/crypto-reference).
 - Archetype: [Blake2b and related](https://archetype-lang.org/docs/reference/expressions/builtins#blake2b%28b%20:%20bytes%29), [Elliptic curves](https://archetype-lang.org/docs/language-basics/crypto#elliptic-curves).
 - SmartPy: [Hashing functions](https://smartpy.io/docs/advanced/hashing_functions/), [Signatures](https://smartpy.io/docs/types/signatures/).
-
+- Taquito: [Signing data](https://tezostaquito.io/docs/signing/).
 
 ## Tickets
 

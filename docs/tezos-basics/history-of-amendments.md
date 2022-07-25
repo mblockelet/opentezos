@@ -9,9 +9,9 @@ As presented in the [Governance on-chain chapter](/tezos-basics/governance-on-ch
 ## [Athens](https://tezos.gitlab.io/protocols/004_Pt24m4xi.html) (Pt24m4xiP)
 *Athens* was the first proposed protocol-amendment for Tezos. Two proposals - [Athens A](https://www.tezosagora.org/proposal/Pt24m4xiPbLDhVgVfABUjirbmda3yohdN82Sp9FeuAXJ4eV9otd) and [Athens B](https://www.tezosagora.org/proposal/Psd1ynUBhMZAeajwcZJAeq5NrxorM6UCU4GJqxZ7Bx2e9vUWB6z) - were proposed by [Nomadic Labs](https://blog.nomadic-labs.com/athens-our-proposals-for-the-first-voted-amendment.html) in February 2019.
 
-Of the two proposals, _Athens A_ sought to increase the gas limit and reduce the required roll size for baking from 10,000 tez to 8,000 tez. _Athens B_ only sought to increase the gas limit. Athens A was voted with a _Super-majority_ and was autonomously [activated](https://twitter.com/TezosAgoraBot/status/1133901612790034432?s=20) into the protocol in May 2019.
+Of the two proposals, _Athens A_ sought to increase the gas limit and reduce the required roll size for baking from 10,000 tez to 8,000 tez. _Athens B_ only sought to increase the gas limit. Athens A was voted with a _Super-majority_ and was autonomously [activated](https://twitter.com/tezos/status/1133907926907797504) into the protocol in May 2019.
 
-For a full list of changes, be sure to read this corresponding blog [post](https://blog.nomadic-labs.com/athens-proposals-injected.html) from Nomadic Labs and [reflections](https://medium.com/tqtezos/reflecting-on-athens-the-first-self-amendment-of-tezos-4791ab3b1de1) by Jacob Arluck. 
+For a full list of changes, be sure to read this corresponding blog [post](https://blog.nomadic-labs.com/athens-proposals-injected.html) from Nomadic Labs and [reflections](https://medium.com/tqtezos/reflecting-on-athens-the-first-self-amendment-of-tezos-4791ab3b1de1) by Jacob Arluck, and the [reference documentation](https://tezos.gitlab.io/protocols/004_Pt24m4xi.html).
 
 ## [Brest A](https://www.tezosagora.org/proposal/PtdRxBHvc91c2ea2evV6wkoqnzW7TadTg9aqS9jAn2GbcPGtumD) (PtdRxBHv)
 *Brest A* was the first proposed amendment rejected during the _Exploration Period_. Submitted in June 2019, it received only 0.35% of the votes during the _Proposal Period_. But as it had no competition, the system promoted it. The amendment was then rejected in the _Exploration Period_ with only 0.26% of favourable votes. The 80% _Super-majority_ was not reached, neither was the minimum _Quorum_ required to validate it.
@@ -23,9 +23,9 @@ The *Babylon* proposal was composed of two proposals made in July/August 2019: [
 
 Notable changes included a new variant of the consensus algorithm (`Emmy+`). There were new Michelson features and accounts rehaul to aid smart contract developers. The accounts rehaul enabled a clearer distinction between "_tz_" and "_KT_" addresses. Furthermore, there was a refinement of the Quorum formula and the addition of the 5% threshold.
 
-Babylon was autonomously [activated](https://twitter.com/adrian_brink/status/1185137422432161792?s=20) into the protocol in October 2019.
+Babylon was autonomously [activated](https://twitter.com/tezos/status/1185212540894232576) into the protocol in October 2019.
 
-For a full list of changes, be sure to read the corresponding blog posts from [Nomadic Labs](https://blog.nomadic-labs.com/babylon-proposal-injected.html), and [Cryptium Labs](https://medium.com/metastatedev/on-babylon2-0-1-58058d9d2106) (Metastate). 
+For a full list of changes, be sure to read the corresponding blog posts from [Nomadic Labs](https://blog.nomadic-labs.com/babylon-proposal-injected.html), and [Cryptium Labs](https://medium.com/metastatedev/on-babylon2-0-1-58058d9d2106) (Metastate), and the [reference documentation](https://tezos.gitlab.io/protocols/005_babylon.html).
 
 ## [Carthage](https://www.tezosagora.org/proposal/PtCarthavAMoXqbjBPVgDCRd5LgT7qqKWUPXnYii3xCaHRBMfHH) (PtCarthav)
 *Carthage* was the first proposal to be rejected during the _Proposal Period_. Since the _Babylon_ change, it now took a minimum of 5% approval to move to the _Exploration Period_ and _Carthage_ only obtained 3.5%.
@@ -37,21 +37,21 @@ The purpose of this proposal was to increase the gas limit per block and per ope
 
 Notable changes included increasing the gas limit per block and per operation by 30%, improving the accuracy of the formula used to calculate baking and endorsing rewards, as well as several minor improvements to Michelson. The main difference with _Carthage_ was the new and more secure formula to calculate rewards.
 
-*Carthage 2.0* was autonomously [activated](https://twitter.com/tezos/status/1235590757416751105?s=20) onto the protocol in March 2020.
+*Carthage 2.0* was autonomously [activated](https://twitter.com/tezos/status/1235590757416751105) onto the protocol in March 2020.
 
-For a full list of changes be sure to read the corresponding [changelog](https://tezos.gitlab.io/protocols/006_carthage.html#changelog) and blog posts from [Nomadic Labs](https://blog.nomadic-labs.com/carthage-changelog-and-testnet.html) and [Cryptium Labs](https://medium.com/metastatedev/updating-the-potential-carthage-proposal-and-resetting-the-carthagenet-test-network-f413a792571f) (Metastate). 
+For a full list of changes be sure to read the corresponding [changelog](https://tezos.gitlab.io/protocols/006_carthage.html#changelog) and blog posts from [Nomadic Labs](https://blog.nomadic-labs.com/carthage-changelog-and-testnet.html) and [Cryptium Labs](https://medium.com/metastatedev/updating-the-potential-carthage-proposal-and-resetting-the-carthagenet-test-network-f413a792571f) (Metastate).  You may also check the [reference documentation](https://tezos.gitlab.io/protocols/006_carthage.html).
 
 ## [Delphi](https://tezos.gitlab.io/protocols/007_delphi.html) (PsDELPH1K)
-The *Delphi* proposal was a Nomadic Labs, Metastate, and Gabriel Alfour contribution, adopted in September 2020.
+The *Delphi* proposal was a Nomadic Labs, Metastate, and Gabriel Alfour contribution, presented in September 2020.
 
 Notable changes included improving the performance of the Michelson interpreter, improving gas costs by adjusting the gas model, reducing storage costs by 4 times, and various minor fixes.
 
-*Delphi* was autonomously [activated](https://twitter.com/tezos/status/1326877616322859009?s=20) into the protocol in November 2020.
+*Delphi* was autonomously [activated](https://twitter.com/tezos/status/1326877616322859009) into the protocol in November 2020.
 
-For a full list of changes, be sure to read the corresponding [changelog](https://blog.nomadic-labs.com/delphi-changelog.html#007-delphi-changelog) and blog post from [Nomadic Labs](https://blog.nomadic-labs.com/delphi-official-release.html).
+For a full list of changes, be sure to read the corresponding [changelog](https://blog.nomadic-labs.com/delphi-changelog.html#007-delphi-changelog) and blog post from [Nomadic Labs](https://blog.nomadic-labs.com/delphi-official-release.html). You may also check the [reference documentation](https://tezos.gitlab.io/protocols/007_delphi.html).
 
-## [Edo](https://tezos.gitlab.io/protocols/008_edo.html) (PtEdoTezd)
-The *Edo* proposal was adopted in November 2020 with Nomadic Labs, Metastate, and Gabriel Alfour contributions.
+## [Edo](https://tezos.gitlab.io/protocols/008_edo.html) (PtEdo2Zk)
+The *Edo* proposal was presented in November 2020 with Nomadic Labs, Metastate, and Gabriel Alfour contributions.
 
 Edo added two major features to Tezos smart contracts:
 
@@ -59,7 +59,11 @@ Edo added two major features to Tezos smart contracts:
 
 * *Tickets*[[3]](/tezos-basics/history-of-amendments#references) for native on-chain permissions and assets issuance.
 
-Among other features, Edo also updated the Tezos amendment process by lowering period length to 5 cycles and by adding a 5th *Adoption Period*. A full changelog is available [here](https://tezos.gitlab.io/protocols/008_edo.html).
+Among other features, Edo also updated the Tezos amendment process by lowering period length to 5 cycles and by adding a 5th *Adoption Period*.
+
+*Edo* was autonomously [activated](https://twitter.com/tezos/status/1360699346401046534) into the protocol in February 2021.
+
+For more information check the [reference documentation](https://tezos.gitlab.io/protocols/008_edo.html).
 
 ## [Florence](https://tezos.gitlab.io/protocols/009_florence.html) (PsFLorena)
 The *Florence* proposal was a joint effort from Nomadic Labs, Marigold, DaiLambda, and Tarides.
@@ -76,7 +80,9 @@ Florence's notable bug fixes and improvements are the:
   
 *Bakings Accounts*[[6]](/tezos-basics/history-of-amendments#references) was also included in the feature set. However, ongoing testing uncovered some important and previously undocumented breaking changes in the proposal with *Baking Accounts*. Hence, the feature was postponed until a thorough audit of the functionality was completed or that an alternative implementation was produced. The version of *Florence* without *Baking Accounts* was considered a safer choice [[7]](/tezos-basics/history-of-amendments#references).
 
-For more information, see the blog post from [Nomadic Labs](https://research-development.nomadic-labs.com/florence-our-next-protocol-upgrade-proposal.html) and [Tarides](https://tarides.com/blog/2021-03-04-florence-and-beyond-the-future-of-tezos-storage).
+*Florence* was autonomously [activated](https://twitter.com/tezos/status/1392123466002878464) into the protocol in May 2021.
+
+For more information, see the blog post from [Nomadic Labs](https://research-development.nomadic-labs.com/florence-our-next-protocol-upgrade-proposal.html) and [Tarides](https://tarides.com/blog/2021-03-04-florence-and-beyond-the-future-of-tezos-storage), as well as the [reference documentation](https://tezos.gitlab.io/protocols/009_florence.html).
 
 ## [Granada](https://tezos.gitlab.io/protocols/010_granada.html) (PtGRANAD)
 The *Granada* proposal was a joint effort from Nomadic Labs, Marigold, Oxhead Alpha, Tarides, and DaiLambda
@@ -85,15 +91,15 @@ Granada's main changes are:
 
 * Emmy*, a new consensus algorithm with reduced time between blocks (30s), and faster finality.
 
-* Liquidity Baking, increasing the liquidity of tez by minting some at every block into a CPMM.
+* Liquidity Baking, increasing the liquidity of tez by minting some at every block into a CPMM (Constant Product Market Making smart-contract).
 
 * The reduction of gas consumption of smart contracts by a factor of three to six, through a number of performance improvements.
 
 *Granada* was autonomously [activated](https://twitter.com/tezos/status/1423588645785776129) in August 2021.
 
-For more information, see the blog post from [Nomadic Labs](https://research-development.nomadic-labs.com/granada-the-latest-tezos-upgrade-is-live.html).
+For more information, see the blog post from [Nomadic Labs](https://research-development.nomadic-labs.com/granada-the-latest-tezos-upgrade-is-live.html) and the [reference documentation](https://tezos.gitlab.io/protocols/010_granada.html).
 
-## [Hangzhou](https://tezos.gitlab.io/protocols/011_hangzhou.html) (PtHangzHo)
+## [Hangzhou](https://tezos.gitlab.io/protocols/011_hangzhou.html) (PtHangz2)
 
 The *Hangzhou* proposal was a joint effort from Nomadic Labs, Marigold, Oxhead Alpha, Tarides, and DaiLambda.
 
@@ -111,13 +117,13 @@ Hangzhou's main changes are:
 
 *Hanghzou* was autonomsously [activated](https://twitter.com/tezos/status/1466975039887233027) in December 2021.
 
-For more information, see the blog post from [Marigold](https://www.marigold.dev/post/hangzhou-the-latest-tezos-upgrade-is-live).
+For more information, see the blog post from [Marigold](https://www.marigold.dev/post/hangzhou-the-latest-tezos-upgrade-is-live) and the [reference documentation](https://tezos.gitlab.io/protocols/011_hangzhou.html).
 
-## [Ithaca 2](https://tezos.gitlab.io/protocols/012_ithaca.html) (Psithaca2)
+## [Ithaca](https://tezos.gitlab.io/protocols/012_ithaca.html) (Psithaca2)
 
-The *Ithaca 2* proposal was a joint effort from TriliTech, Nomadic Labs, Marigold, Oxhead Alpha, Tarides, DaiLambda, Functori and Tweag.
+The *Ithaca* proposal was a joint effort from TriliTech, Nomadic Labs, Marigold, Oxhead Alpha, Tarides, DaiLambda, Functori and Tweag.
 
-Along with numerous minor improvements, Ithaca 2 contained two major updates to the protocol:
+Along with numerous minor improvements, Ithaca contained two major updates to the protocol:
 
 * Tenderbake, a major update to the Tezos consensus algorithm, that brings fast deterministic finality to the Tezos protocol. It also includes important changes:
     - bakers now receive rewards depending on their current stake instead of the number of rolls they own
@@ -132,13 +138,13 @@ Along with numerous minor improvements, Ithaca 2 contained two major updates to 
 
 *Ithaca* was autonomsously [activated](https://twitter.com/tezos/status/1509956858303365120) in April 2022.
 
-For more information, see the blog post from [Nomadic Labs](https://research-development.nomadic-labs.com/announcing-tezos-9th-protocol-upgrade-proposal-ithaca.html).
+For more information, see the blog post from [Nomadic Labs](https://research-development.nomadic-labs.com/announcing-tezos-9th-protocol-upgrade-proposal-ithaca.html) and the [reference documentation](https://tezos.gitlab.io/protocols/012_ithaca.html).
 
-## [Jakarta 2](https://tezos.gitlab.io/protocols/013_jakarta.html) (PtJakart2)
+## [Jakarta](https://tezos.gitlab.io/protocols/013_jakarta.html) (PtJakart2)
 
-The Jakarta 2 proposal was a joint effort from Nomadic Labs, Marigold, TriliTech, Oxhead Alpha, Tarides, DaiLambda, Functori & Tweag.
+The *Jakarta* proposal was a joint effort from Nomadic Labs, Marigold, TriliTech, Oxhead Alpha, Tarides, DaiLambda, Functori & Tweag.
 
-Jakarta 2's main changes are:
+Jakarta's main changes are:
 
 * Transactional optimistic rollups (or TORU), an experimental implementation of optimistic rollups on Tezos. TORU provide a way to enable higher throughput (TPS) of transactions by moving their validation away from the main chain, to 'Layer 2'.
 
@@ -152,14 +158,16 @@ Jakarta 2's main changes are:
 
 * The voting power of delegates is now defined directly by their stake expressed in mutez, and no more in terms of rolls. The minimal stake required to be assigned voting rights is kept at 6000 tez.
 
-For more information, see the blog post from [Nomadic Labs](https://research-development.nomadic-labs.com/announcing-jakarta-two.html).
+*Jakarta* was autonomsously [activated](https://twitter.com/tezos/status/1541901290623614978) in June 2022.
+
+For more information, see the blog post from [Nomadic Labs](https://research-development.nomadic-labs.com/announcing-jakarta-two.html) and the [reference documentation](https://tezos.gitlab.io/protocols/013_jakarta.html).
 
 ## What have we learned so far?
 In this chapter, we went through the past proposals' history and how and why they were approved or rejected.
 
 In the next chapter, we will see the details of operations costs and various rewards calculations.
 
-## References 
+## References
 
 [1] https://z.cash/upgrade/sapling/
 

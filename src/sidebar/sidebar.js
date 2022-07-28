@@ -22,6 +22,7 @@ module.exports = {
       label: 'Tezos Basics',
       items: [
         'tezos-basics/introduction',
+        'tezos-basics/nodes',
         'tezos-basics/liquid-proof-of-stake',
         'tezos-basics/operations',
         'tezos-basics/cli-and-rpc',

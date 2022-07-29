@@ -41,7 +41,7 @@ Each of these five periods lasts five baking cycles (i.e. 40,960 blocks or rough
 Should there be any failure in a given period, the whole process will revert to the _Proposal Period_ (1.), effectively aborting and restarting the process.
 
 :::info
-To follow the amendment process, check the current period, and follow the voting process, go to [tezosagora.org](https://www.tezosagora.org).
+To follow the amendment process, check the current period, and follow the voting process, go to Tezos Agora [[2]](/tezos-basics/governance-on-chain#references).
 :::
 
 ### 1. Proposal Period
@@ -103,7 +103,7 @@ The _vote participation_ is the ratio of all the cumulated stake of cast ballots
 
 The quorum is adjusted after each vote, to ensure that the amendment process can continue over time even if some delegates stop participating.
 
-To do that, an exponential moving average of the participation, `participation_ema`, is computed, using this formula:
+To do that, an exponential moving average [[3]](/tezos-basics/governance-on-chain#references) of the participation, `participation_ema`, is computed, using this formula:
 
 ```participation_ema = 80% of previous_participation_ema + 20% of the last vote_participation```.
 
@@ -117,7 +117,7 @@ This caps this expected quorum between 20% and 70%, to prevent it from getting u
 <small className="figure">FIGURE 2: Quorum computation</small>
 
 
-More details can be found in the [source code](https://gitlab.com/tezos/tezos/-/blob/master/src/proto_013_PtJakart/lib_protocol/amendment.ml) and in this [blog post](https://medium.com/metastatedev/updating-the-potential-carthage-proposal-and-resetting-the-carthagenet-test-network-f413a792571f) by Cryptium Labs.
+More details can be found in the developer documentation [[5]](/tezos-basics/governance-on-chain#references) and directly in the source code [[6]](/tezos-basics/governance-on-chain#references).
 
 
 ## Voting examples
@@ -266,9 +266,9 @@ Ballot : {
 `ballot` is one of the possible ballot response: `Yea`, `Nay`, or `Pass`
 
 
-Remember that `Pass` means to abstain from voting for or against a proposal but still allowing a delegate to reach the [Quorum](/tezos-basics/governance-on-chain#quorum-q).
+Remember that `Pass` means to abstain from voting for or against a proposal but still allowing a delegate to reach the quorum.
 
-Using `tezos-client` and during a voting period (being an **Exploration** or a **Promotion** _vote period_**), ballots can be submitted only once by a delegate with the following command:
+Using `tezos-client` and during a voting period (being an **Exploration** or a **Promotion** _vote period_), ballots can be submitted only once by a delegate with the following command:
 
 ```shell
 tezos-client submit ballot for <delegate> <proposal> <yay|nay|pass>
@@ -282,14 +282,12 @@ In the next "*History of Amendments*" chapter, we will go over a short history o
 ## References
 [1] https://medium.com/tezos/amending-tezos-b77949d97e1e
 
-[2] https://tezos.gitlab.io/007/voting.html#super-majority-and-quorum
+[2] https://www.tezosagora.org
 
 [3] https://en.wikipedia.org/wiki/Moving_average#Exponential_moving_average
 
-[4] https://tezos.gitlab.io/007/voting.html
+[4] https://tezos.gitlab.io/alpha/voting.html#operations
 
-[5] https://www.tezosagora.org
+[5] https://tezos.gitlab.io/alpha/voting.html
 
-[6] https://medium.com/metastatedev/updating-the-potential-carthage-proposal-and-resetting-the-carthagenet-test-network-f413a792571f
-
-[7] https://blog.octo.com/tezos-une-blockchain-auto-evolutive-partie-1-3/
+[6] https://gitlab.com/tezos/tezos/-/blob/master/src/proto_alpha/lib_protocol/amendment.ml

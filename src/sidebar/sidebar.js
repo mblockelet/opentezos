@@ -172,6 +172,11 @@ module.exports = {
         'defi/stablecoins',
         'defi/synthetics',
         'defi/lending',
+        {
+          type: 'category',
+          label: 'Rolling SAFE',
+          items: ['defi/rolling-safe/presentation', 'defi/rolling-safe/smart-contract'],
+        },
         'defi/exam',
       ],
     },

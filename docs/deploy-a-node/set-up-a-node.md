@@ -8,7 +8,7 @@ In this chapter, we will see how to create and deploy your own node.
 
 ### Node initial configuration (This is optional)
 
-It is possible to define the directory where the data will be stored with the `--data-dir` command line swithch (by default, it is stored in `.tezos-node`)
+It is possible to define the directory where the data will be stored with the `--data-dir` command line switch (by default, it is stored in `.tezos-node`)
 
 By default, the network is Mainnet but, you can specify the network with the `--network` option.
 
@@ -20,7 +20,7 @@ For example, the following command configure the node for the Jakartanet Network
 
 More about Networks in the [Networks chapter](/deploy-a-node/networks).
 
-If you want to know more about possible alternative node configurations, check out [Node Configuration](https://tezos.gitlab.io/user/node-configuration.html) in the official documentation.
+If you want to know more about possible alternative node configurations, check out [Node Configuration](https://tezos.gitlab.io/user/node-configuration.html) from the official documentation.
 
 ### Node identity
 

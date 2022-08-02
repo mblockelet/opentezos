@@ -31,10 +31,11 @@ What is baking?
 
 ### Question 3
 
-How many tezos must be delegated to a private key to represent a roll?
+How many tezos must be delegated to a private key to have a chance to participate in the consensus mecanism?
 
-<ExamCheckbox name="20" isCorrect="false">4,000ꜩ</ExamCheckbox>
-<ExamCheckbox name="21" isCorrect="true">8,000ꜩ</ExamCheckbox>
+<ExamCheckbox name="19" isCorrect="false">4,000ꜩ</ExamCheckbox>
+<ExamCheckbox name="20" isCorrect="true">6,000ꜩ</ExamCheckbox>
+<ExamCheckbox name="21" isCorrect="false">8,000ꜩ</ExamCheckbox>
 <ExamCheckbox name="22" isCorrect="false">16,000ꜩ</ExamCheckbox>
 <ExamCheckbox name="23" isCorrect="false">32,000ꜩ</ExamCheckbox>
 <ExamCheckbox name="24" isCorrect="false">64,000ꜩ</ExamCheckbox>
@@ -47,7 +48,8 @@ How many blocks are in a cycle?
 <ExamCheckbox name="31" isCorrect="false">512 blocks</ExamCheckbox>
 <ExamCheckbox name="32" isCorrect="false">1024 blocks</ExamCheckbox>
 <ExamCheckbox name="33" isCorrect="false">2048 blocks</ExamCheckbox>
-<ExamCheckbox name="34" isCorrect="true">4096 blocks</ExamCheckbox>
+<ExamCheckbox name="34" isCorrect="false">4096 blocks</ExamCheckbox>
+<ExamCheckbox name="35" isCorrect="true">8192 blocks</ExamCheckbox>
 
 ### Question 5
 
@@ -62,16 +64,17 @@ Once selected, how long will a baker have to freeze part of his tokens to bake a
 
 What is true about baker and endorser selection?
 
-<ExamCheckbox name="50" isCorrect="true">Rolls snapshots are done every 256 blocks and define who can bake.</ExamCheckbox>
-<ExamCheckbox name="51" isCorrect="false">Rolls snapshots are done every 5 cycles and define who can bake.</ExamCheckbox>
+<ExamCheckbox name="50" isCorrect="true">Stake snapshots are done every 512 blocks and define who can bake.</ExamCheckbox>
+<ExamCheckbox name="51" isCorrect="false">Stake snapshots are done every 5 cycles and define who can bake.</ExamCheckbox>
 <ExamCheckbox name="52" isCorrect="true">The order of baking is done using a pseudo-random number generator based on a seed.</ExamCheckbox>
-<ExamCheckbox name="53" isCorrect="true">The selected rolls determine the baking and endorsing rights for the next 5 cycles.</ExamCheckbox>
-<ExamCheckbox name="54" isCorrect="false">The selected rolls determine the baking and endorsing rights for the next cycle.</ExamCheckbox>
+<ExamCheckbox name="53" isCorrect="true">The selected snapshots determine the baking and endorsing rights for the next 5 cycles.</ExamCheckbox>
+<ExamCheckbox name="54" isCorrect="false">The selected snapshots determine the baking and endorsing rights for the next cycle.</ExamCheckbox>
 <ExamCheckbox name="55" isCorrect="true">It is a round-robin process that cycles on the list of priorities until the end of the cycle.</ExamCheckbox>
 
 ### Question 7
 
-What does an accuseer monitor?
+What does an accuser monitor?
+
 <ExamCheckbox name="60" isCorrect="true">He monitors that a baker does not create two competing blocks at the same level.</ExamCheckbox>
 <ExamCheckbox name="61" isCorrect="false">He monitors that a baker does not steal his delegators' rewards.</ExamCheckbox>
 <ExamCheckbox name="62" isCorrect="true">He monitors that an endorser does not endorse a block twice or more at the same baking slot.</ExamCheckbox>
@@ -81,7 +84,7 @@ What does an accuseer monitor?
 
 What is true about the Tez inflation?
 
-<ExamCheckbox name="70" isCorrect="true">Each new block generates 80 new Tez as a reward.</ExamCheckbox>
+<ExamCheckbox name="70" isCorrect="true">Each new block generates 40 new Tez as a reward.</ExamCheckbox>
 <ExamCheckbox name="71" isCorrect="false">The inflation rate for the first year was about 2.0%.</ExamCheckbox>
 <ExamCheckbox name="72" isCorrect="false">Each new block generates 40 new Tez as a reward.</ExamCheckbox>
 <ExamCheckbox name="73" isCorrect="true">The action of burning Tez decreases the inflation rate.</ExamCheckbox>
@@ -90,20 +93,20 @@ What is true about the Tez inflation?
 
 ### Question 9
 
-For a high priority baking, how much is the baking reward per endorsement?
+How much is the baking reward per endorsement?
 
-<ExamCheckbox name="80" isCorrect="true">0.1875 ꜩ</ExamCheckbox>
+<ExamCheckbox name="80" isCorrect="true">0.002857 ꜩ</ExamCheckbox>
 <ExamCheckbox name="81" isCorrect="false">0.8333 ꜩ</ExamCheckbox>
 <ExamCheckbox name="82" isCorrect="false">1.2500 ꜩ</ExamCheckbox>
 <ExamCheckbox name="83" isCorrect="false">5.5000 ꜩ</ExamCheckbox>
 
 ### Question 10
 
-If an endorser has been attributed 3 slots for a low priority block, how much will his reward be?
+If an endorser has been attributed 3 slots, how much will his reward be?
 
 <ExamCheckbox name="90" isCorrect="false">0.8333 ꜩ</ExamCheckbox>
 <ExamCheckbox name="91" isCorrect="false">1.2500 ꜩ</ExamCheckbox>
-<ExamCheckbox name="92" isCorrect="true">2.5000 ꜩ</ExamCheckbox>
+<ExamCheckbox name="92" isCorrect="true">0.008571 ꜩ</ExamCheckbox>
 <ExamCheckbox name="93" isCorrect="false">3.7500 ꜩ</ExamCheckbox>
 
 ### Question 11
@@ -124,12 +127,12 @@ What is the minimum amount required to become a baker?
 <ExamCheckbox name="111" isCorrect="false">1 ꜩ</ExamCheckbox>
 <ExamCheckbox name="112" isCorrect="false">32 ꜩ</ExamCheckbox>
 <ExamCheckbox name="113" isCorrect="false">512 ꜩ</ExamCheckbox>
-<ExamCheckbox name="114" isCorrect="true">8000 ꜩ</ExamCheckbox>
+<ExamCheckbox name="114" isCorrect="true">6000 ꜩ</ExamCheckbox>
 <ExamCheckbox name="115" isCorrect="false">16 000 ꜩ</ExamCheckbox>
 
 ### Question 13
 
-During the Baking process, what fraudulent motive results in the loss of its frozen Tez? 
+During the Baking process, what fraudulent motive results in the loss of its frozen Tez?
 
 <ExamCheckbox name="120" isCorrect="true">Double baking.</ExamCheckbox>
 <ExamCheckbox name="121" isCorrect="false">Inactivity during baking process.</ExamCheckbox>
@@ -140,8 +143,8 @@ During the Baking process, what fraudulent motive results in the loss of its fro
 
 What is the correct command line to run a baker on the Mainnet, supposing the account alias is "bob"?
 
-<ExamCheckbox name="130" isCorrect="false">`tezos-baker-009-PsFLoren run with local node ~/.tezos-node bob`</ExamCheckbox>
-<ExamCheckbox name="131" isCorrect="false">`tezos-baker-010-PtGRANAD run with local node ~/.tezos-node bob`</ExamCheckbox>
+<ExamCheckbox name="130" isCorrect="false">`tezos-baker-012-Psithaca run with local node ~/.tezos-node bob`</ExamCheckbox>
+<ExamCheckbox name="131" isCorrect="false">`tezos-baker-013-PtJakart run with local node ~/.tezos-node bob`</ExamCheckbox>
 <ExamCheckbox name="132" isCorrect="true">`tezos-baker-alpha run with local node ~/.tezos-node bob`</ExamCheckbox>
 
 ### Question 15

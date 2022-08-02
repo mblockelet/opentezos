@@ -8,25 +8,25 @@ In this chapter, we will see how to create and deploy your own node.
 
 ### Node initial configuration (This is optional)
 
-It is possible to define the directory where the data will be stored with `--data-dir` (by default, it is in .tezos-node)
+It is possible to define the directory where the data will be stored with the `--data-dir` command line swithch (by default, it is stored in `.tezos-node`)
 
 By default, the network is Mainnet but, you can specify the network with the `--network` option.
 
-For example, the following command configure the node for the Hangzhounet Network and stores data in a specified directory:
+For example, the following command configure the node for the Jakartanet Network and stores data in a specified directory:
 
 ```shell
-./tezos-node config init --data-dir ~/tezos-hangzhounet --network hangzhounet
+./tezos-node config init --data-dir ~/tezos-jakartanet --network jakartanet
 ```
 
 More about Networks in the [Networks chapter](/deploy-a-node/networks).
 
-If you want to know more about possible alternative node configurations, check out [Node Configuration](https://tezos.gitlab.io/user/node-configuration.html)
+If you want to know more about possible alternative node configurations, check out [Node Configuration](https://tezos.gitlab.io/user/node-configuration.html) in the official documentation.
 
 ### Node identity
 
 First, you must generate a new identity in order to connect to the Tezos network.
 
-```shell
+```
 ./tezos-node identity generate
 ```
 
@@ -38,11 +38,11 @@ It will take some time to generate the keys. An `identity.json` file will then b
 
 ### Node synchronisation
 
-Whenever a node starts, it tries to retrieve the most current head of the chain from its peers and all the block from the Genesis to that head. This can be a long process if there are many blocks to retrieve.
+Whenever a node starts, it tries to retrieve the most recent head of the chain from its peers and all the block from the Genesis to that head. This can be a long process if there are many blocks to retrieve.
 
 So, rather than taking days to download the Tezos blockchain from the P2P network, a node can be quickly synchronized in a few minutes from a **snapshot**.
 
-> The term snapshot is a bit of an unfortunate term as it already has another meaning in Tezos, which is the schedule for baking rights. To be clear, the snapshot we are talking about is completely different from the baking rights snapshot. This snapshot is a compressed copy of the chain from a certain block.
+> The term snapshot is a bit of an unfortunate term as it already has another meaning in Tezos, which is the periodical context picture necessary to establish future baking rights. To be clear, the snapshot we are talking about is completely different from the context snapshot. This snapshot is a compressed copy of the chain starting from a given block.
 > To learn more about snapshots, [here](https://blog.nomadic-labs.com/introducing-snapshots-and-history-modes-for-the-tezos-node.html) is an article from Nomadics Labs.
 
 #### Downloading snapshot
@@ -65,7 +65,7 @@ The mechanism of Snapshots can help to reduce the synchronization time.
 The following command bootstraps an empty Tezos node from the `<snapshot.rolling>` file to a rolling Tezos node.
 
 ```shell
-./tezos-node snapshot import <snapshot.rolling> --data-dir ~/tezos-hangzhounet
+./tezos-node snapshot import <snapshot.rolling> --data-dir ~/tezos-jakartanet
 ```
 
 > This command should take a few minutes.

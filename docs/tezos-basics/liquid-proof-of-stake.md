@@ -117,11 +117,11 @@ In LPoS, a validator is called a "**baker**" or an "**endorser**". As opposed to
 
 The needed quantity of tezs to bake or endorse is a useful parameter. Increase it to discourage Sybil attack or 51% attack, decrease it to coordinate cartels or coalitions dissolutions.
 
-A validator needs 8,000ꜩ (one "*roll*") to take part in the consensus (soon to be lowered to 2,000ꜩ [[11]](/tezos-basics/liquid-proof-of-stake#references)). However, as in DPoS, the reward probability is still proportional to the invested amount. The baking time has cycles, and the tokens are still frozen as bonds during this process.
+A validator needs 6,000ꜩ (one "*roll*") to take part in the consensus (soon to be lowered to 2,000ꜩ [[11]](/tezos-basics/liquid-proof-of-stake#references)). However, as in DPoS, the reward probability is still proportional to the invested amount. The baking time has cycles, and the tokens are still frozen as bonds during this process.
 
 ### Consensus mechanism
 #### Roll
-A roll represents 8,000ꜩ delegated to a given private key. So, the more rolls someone has, the higher the chance to bake the next block. If 10 rolls are active, and a baker owns $\frac{2}{10}$ of these rolls, he has a 20% chance of being selected. Note that 8,000ꜩ or 15,999ꜩ stakeholders have the same probability of baking.
+A roll represents 6,000ꜩ delegated to a given private key. So, the more rolls someone has, the higher the chance to bake the next block. If 10 rolls are active, and a baker owns $\frac{2}{10}$ of these rolls, he has a 20% chance of being selected.
 
 Baking rights are called priorities and given in turns. For example, if 10 rolls were active, the protocol could randomly select a priority list as follows:
 
@@ -168,7 +168,7 @@ The following table[[9]](/tezos-basics/liquid-proof-of-stake#references) highlig
 |                          | Liquid-proof-of-stake                                                | Delegated-proof-of-stake                                                                                 |
 | ------------------------ | -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | **Delegation (Purpose)** | Optional (minimizes dilution of small token holders).                | Required to elect block producers (enables greater scalability.                                          |
-| **Barrier to Entry**     | 8000ꜩ, modest computing power and reliable internet connection.      | Professionalized operations with significant computing infrastructure. Competition from other delegates. |
+| **Barrier to Entry**     | 6000ꜩ, modest computing power and reliable internet connection.      | Professionalized operations with significant computing infrastructure. Competition from other delegates. |
 | **Validator Set**        | Dynamic (size not fixed). Up to 80,000 bakers (limited by roll size) | Fixed size. Between 21 (EOS) and 101 (Lisk).                                                             |
 | **Design Priorities**    | Decentralization, accountable governance, and security               | Scalability and usable consumer applications                                                             |
 

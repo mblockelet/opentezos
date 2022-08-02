@@ -8,13 +8,13 @@ Becoming a baker or a delegate on Tezos is a great way to contribute to the ecos
 
 ## How to bake?
 
-Everyone with at least 8,000 Tez can produce, sign and validate blocks and get rewards in proportion to their stake. The only thing you need to exercise your baking rights is to run a node with baking software and keep it online and up to date.
+Everyone with at least 6,000 Tez can produce, sign and validate blocks and get rewards in proportion to their stake. The only thing you need to exercise your baking rights is to run a node with baking software and keep it online and up to date.
 
 OpenTezos has dedicated modules on [How baking works](/baking) and [How to set up your baker](/contribute/baker). However, this might be pretty complicated for inexperienced users — a more accessible alternative is to delegate instead of baking.
 
 ## Delegation
 
-Self-baking lets a baker earn a higher yield but requires technical expertise and time to set up a baker node and run the baking software reliably with as little downtime as possible. By delegating Tezos tokens, a token holder avoids this process altogether but usually earns a lower yield. In the current protocol, token holders with less than 8,000 Tez can only bake by delegating to another baker.
+Self-baking lets a baker earn a higher yield but requires technical expertise and time to set up a baker node and run the baking software reliably with as little downtime as possible. By delegating Tezos tokens, a token holder avoids this process altogether but usually earns a lower yield. In the current protocol, token holders with less than 6,000 Tez can only bake by delegating to another baker.
 
 Delegation is when you delegate your staking/baking rights to another person (the baker) rather than setting your Tezos node. It's a pretty helpful feature as it allows you to participate in staking and receive Tezos staking rewards without the necessity of maintaining a node.
 

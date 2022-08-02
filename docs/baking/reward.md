@@ -8,8 +8,8 @@ To maintain the network, Tezos needs bakers and endorsers. They stake their toke
 
 ## Inflation
 
-Each new block generates 80 new Tez as a reward. 40 Tez for the bakers and 40 Tez for the endorsers.
-A new block is created each minute, which generates 42 Million of Tez per year ($\approx$ 80ꜩ $\times$ 60 mins $\times$ 24 hours $\times$ 365 days). At the launch ofTezos, the network was composed of 763 Millions Tez.
+Each new block generates 40 new Tez as a reward. 20 Tez for the bakers and 20 Tez for the endorsers.
+A new block is created each 30 seconds, which generates 42 Million of Tez per year ($\approx$ 80ꜩ $\times$ 60 mins $\times$ 24 hours $\times$ 365 days). At the launch of Tezos, the network was composed of 763 Millions Tez.
 
 Therefore the inflation rate of the Tez token for the first year was **5.5%**:
 $$
@@ -26,101 +26,48 @@ $$
 \frac{42}{805 + 42 }=\frac{42}{847}\approx5.0\%
 $$
 
-and so on ... 
+and so on ...
 
 Therefore the inflation rate decreases a bit each year.
 
 > Note that this calculation of the inflation rate is based only on the generation of new Tez. The burned Tez are ignored in the formula. It is, therefore, an approximation, and in reality, the inflation rate is a bit lower.
 
-## Baking reward
+## Baking and Endorsing reward
 
-When a baker bakes a block, he receives a reward composed of all the [transaction fees](/tezos-basics/economics-and-rewards#transaction-cost) contained in the block in addition to a network reward computed by this formula:
+Bakers are crucial because they operate the chain by creating blocks and checking the integrity of the data
+they contain. Each baked block leads to the creation of new Tez to incentivize the bakers to perform baking
+and endorsing operations.
 
-$$
-\bm{Br_b=n_e\times Br_e}
-$$
+There are up to 20 Tez paid in _baking_ rewards, and 20 Tez paid in _endorsing_ rewards per block (for a total of
+40 Tez per block). Block rewards are split into two parts: a fixed part (10 Tez for the payload producer who
+selects the transactions to be included in the block and the first authorized to propose a block with that
+payload, and at most 10 Tez as a bonus for the block producer who proposes the block. In case of re-
+proposal, the payload producer might be different from the block proposer. Otherwise, it should be the
+same), and a variable part which is a bonus for the block producer, depending on the number of
+endorsements included (beyond the 4,667 endorsements threshold).
 
-Where:
-- $n_e$: the number of endorsements the block receives. As 32 endorsements are needed to validate a block, $n_e=32$ in this case.
-- $Br_e$: the baking reward per endorsement.
-- $Br_b$: the network baking reward per block.
-- $p$: the priority level.
+Baking rewards (fixed and variable) on each block are paid immediately, whereas endorsements rewards
+are paid at the end of each cycle, under the conditions of participating in the consensus (performing
+endorsement operations) more than 2/3 of its expected number of slots; and if they reveal their nonces.
 
-> **Deflationary baking** corresponds to actively refusing to include endorsements of other bakers in one’s blocks in an attempt to maximize one's reward.
-
-To make deflationary baking irrational, for all profitability criteria, the reward for including an endorsement is set to the same amount as the reward for having one endorsement included. In other words, the function makes a non-cooperative baker lose as much reward per censored endorsement as the endorser who loses the endorsement. This property holds only for high priority.
-
-If $p=0$ (high priority baking), we have:
-
-$$
-\bm{Br_e}=\frac{40}{32}=\text{1.2500 ꜩ}  
-$$
-
-If $p>0$ (low priority baking), we have:
+Baking and endorsement rewards follow the formulas below:
 
 $$
-\bm{Br_e}=\frac{40}{32}\times0.15=\frac{6}{32}=\text{0.1875 ꜩ}
+\bm{baking\ rewards=10 + e\times 0.004286}
 $$
 
-To make block stealing less profitable, and since the previous point needs to equalize the rewards for the baker and the endorsers of a block, the reward for baking at low priority is set to much less than the reward for baking at high priority. The decreasing factor is **0.15**.
+where `e ∈[0; 2,333]` = the number of extra endorsements slots beyond the threshold of 4,667.
 
-> **Block stealing** is a non-cooperative baking strategy, in which a baker of priority p>0 will withhold his endorsements in order to slow down the blocks of priority 0,..,p−1 enough for his block to be the fastest one.
-
-This Carthage update allows focusing the baker's efforts on the priority blocks.
-
-The final formulas for [Emmy+C](https://blog.nomadic-labs.com/analysis-of-emmy.html) are as follows. For a block baked at priority $p$ and containing $n_e$ endorsements, the reward is computed as:
-
-```js
-baking_reward (p, ne) =
-  if p = 0 then
-     (ne / 32) * 40
-  else
-     (ne / 32) * 6
-```
-
-Finally, with this formula, the network reward for a baked block is generally 32 $\times$ 1.250 = **40** ꜩ/block in addition to the transaction fees contained in the block.
-
-## Endorsing reward
-
-Selected endorsers are also rewarded. One block needs 32 endorsers slots, while one endorser can have more than one. The total reward for an endorser "$Er$" is then easy to calculate.
-
-For:
-- $Er$: the endorser's total reward
-- $n_s$: the endorser's number of slots
-- $Er_b$: the endorsement reward per block
-
-We have:
+The baking rewards are 20 Tez at most, for a fully endorsed block (not counting the transaction fees).
 
 $$
-\bm{Er=n_s\times Er_b}
+\bm{endorsing\ rewards=s \times 0.002857}
 $$
 
-For a **high priority** block:
+where `s` = number of endorser’s slots.
 
-$$
-\bm{Er_b}=\text{1.2500 ꜩ}
-$$
-
-For a **low priority** block:
-
-The endorsement rewards for endorsements included in low priority blocks are decreased by a factor of $\bm{\frac{2}{3}}$. This does decrease slightly resistance to block stealing because the baker that steals a block gets a higher reward for his own endorsements, but has the advantage of punishing the endorsers less for having their endorsements not included by absent low priority bakers.
-
-$$
-\bm{Er_b}=\frac{40}{32}\times\frac{2}{3}=\text{0.8333 ꜩ}
-$$
-
-The reward reveive for $n_s$ slot endorsed at priority $p$ is computed as:
-
-```js
-endorsing_reward (p, ns) =
-  if p = 0 then
-     (ns / 32) * 40
-  else
-     (ns / 32) * 40 * (2/3)
-```
-
-The total available reward for endorsing a high-priority block is fixed to the same amount as baking that block: **40ꜩ**.
-That value is distributed among all the endorsers proportionally to their slots.
+An endorser may have several slots among the 7,000 slots available in a given block, depending on its
+stake. The more stake a baker has, the more slots it gets per block.
 
 ## Delegating reward
 
@@ -129,6 +76,7 @@ When delegating, you can earn a passive income by participating in the Tezos net
 Every time a baker receives some rewards, those rewards are frozen for the next 5 cycles ($\approx$ 14 days), so the baker cannot spend them. Only after rewards are unfrozen, that the baker can transfer them to someone else. Most bakers wait until rewards are unfrozen to pay it out to delegators, but some do not in order to be more attractive to delegators.
 
 For:
+
 - $Confirmation_{time} \approx \text{20 days}$, delegators have to wait around 20 days after delegating before start staking.
 - $Frozen_{time} \approx \text{14 days}$, bakers' rewards are frozen for 5 cycles.
 - $Cycle_{time} \approx \text{3 days}$, this is the approximate time between two successive cycles.
@@ -160,10 +108,10 @@ This accusation forfeits the entirety of the safety deposit of the accused baker
 
 ## References
 
-[1] https://tezos.gitlab.io/alpha/proof_of_stake.html#rewards
+[1] <https://tezos.gitlab.io/alpha/proof_of_stake.html#rewards>
 
-[2] https://baking-bad.org/docs/tezos-staking-for-beginners/
+[2] <https://baking-bad.org/docs/tezos-staking-for-beginners/>
 
-[3] https://blog.nomadic-labs.com/a-new-reward-formula-for-carthage.html
+[3] <https://blog.nomadic-labs.com/a-new-reward-formula-for-carthage.html>
 
-[4] https://blog.nomadic-labs.com/analysis-of-emmy.html
+[4] <https://blog.nomadic-labs.com/analysis-of-emmy.html>

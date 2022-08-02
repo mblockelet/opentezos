@@ -12,14 +12,18 @@ Most Tezos blockchain explorers have a list of bakers ordered according to diffe
 
 [Baking Bad](https://tzkt.io/bakers/), [TzStats](https://tzstats.com/bakers) or [Tezos Nodes](https://tezos-nodes.com/) allow you to browse through bakers.
 
-![](../../static/img/baking/baking_bad_bakers.png)
+<p align="center">
+
+![baking-bad-bakers](../../static/img/baking/baking_bad_bakers.png)
 <small className="figure">FIGURE 1: Baking Bad Bakers</small>
 
-![](../../static/img/baking/tzstats_bakers.png)
+![tzstats-bakers](../../static/img/baking/tzstats_bakers.png)
 <small className="figure">FIGURE 2: TzStats Bakers</small>
 
-![](../../static/img/baking/tezos_node_bakers.png)
+![tezos-nodes-bakers](../../static/img/baking/tezos_node_bakers.png)
 <small className="figure">FIGURE 3: Tezos Nodes Bakers</small>
+
+</p>
 
 ### What kind of baker?
 
@@ -35,7 +39,11 @@ A private baker doesn’t offer everyone to delegate their stakes. Technically s
 
 These days, it is the centralized exchanges like Coinbase, Binance or Kraken, that hold the biggest stakes. They offer their users an opportunity to stake Tez from their exchange accounts and get profits.
 
-![](../../static/img/baking/tzstats_bakers_top20.png)
+<p align="center">
+
+![tzstats-bakers-top20](../../static/img/baking/tzstats_bakers_top20.png)
+
+</p>
 
 #### Corporate bakers
 
@@ -65,7 +73,7 @@ This is how much Tez you can delegate to the baker. A negative value indicates t
 
 > Each time a baker/endorser creates/confirms a block, they have to lock a certain amount for 5 cycles as a security deposit. _Overdelegation_ is when the available Tez balance is not enough (because the entire balance has already been locked) so, they skip block/endorsement.
 
-#### Minimum delegated amount.
+#### Minimum delegated amount
 
 Bakers can set up a minimum amount they expect to get from a delegator. Some accept stakes starting from 1 Tez while others from 1000 Tez.
 
@@ -83,12 +91,12 @@ Those were the things you should check when choosing a baker. It is up to you to
 
 ## References
 
-[1] https://tzkt.io/bakers
+[1] <https://tzkt.io/bakers>
 
-[2] https://tzstats.com/bakers
+[2] <https://tzstats.com/bakers>
 
-[3] https://tezos-nodes.com/
+[3] <https://tezos-nodes.com/>
 
-[4] https://baking-bad.org/docs/tezos-baker-metrics/
+[4] <https://baking-bad.org/docs/tezos-baker-metrics/>
 
-[5] https://tezos.org.ua/en/blog/how-to-choose-a-baker/
+[5] <https://tezos.org.ua/en/blog/how-to-choose-a-baker/>

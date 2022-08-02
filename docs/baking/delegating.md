@@ -6,7 +6,7 @@ authors: Maxime Sallerin
 
 In this chapter, we will see how to delegate your coins. We'll use command lines or simple wallets' built-in options.
 
-Self-baking lets a baker earn a higher yield but requires technical expertise and time to set up a baker node and run the baking software reliably with as little downtime as possible. By delegating Tezos tokens, a token holder avoids this process altogether but usually earns a lower yield. In the current protocol, token holders with less than 8,000 Tez can only bake by delegating to another baker.
+Self-baking lets a baker earn a higher yield but requires technical expertise and time to set up a baker node and run the baking software reliably with as little downtime as possible. By delegating Tezos tokens, a token holder avoids this process altogether but usually earns a lower yield. In the current protocol, token holders with less than 6,000 Tez can only bake by delegating to another baker.
 
 Delegation is when you delegate your staking/baking rights to another person (the baker) rather than setting your Tezos node. It's a pretty helpful feature as it allows you to participate in staking and receive Tezos staking rewards without the necessity of maintaining a node.
 
@@ -29,6 +29,7 @@ tezos-client set delegate for <implicit_account> to <delegate>
 ```
 
 Where:
+
 - `<implicit_account>` is the address or alias of the implicit account to delegate.
 - `<delegate>` is the address or alias of the delegate (which has to be registered).
 
@@ -68,13 +69,13 @@ The main steps are as follows:
 6. Start earning interests
 
 ![](../../static/img/contribute/delegate.gif)
-<small className="figure">FIGURE 1: Delegating your Tez on _Atomex_.</small>
+<small className="figure">FIGURE 1: Delegating your Tez on *Atomex*.</small>
 
-That's it. The only thing you should worry about is choosing an excellent and reliable Tezos baker or delegation service. 
+That's it. The only thing you should worry about is choosing an excellent and reliable Tezos baker or delegation service.
 
 [Baking Bad](https://tzkt.io/bakers/), [TzStats](https://tzstats.com/bakers) or [Tezos Nodes](https://tezos-nodes.com/) allow you to browse through bakers. There are a few factors to consider when choosing a baker to delegate with:
 
-- *Fees*: How much of the rewards is the baker keeping? 
+- *Fees*: How much of the rewards is the baker keeping?
 
 - *Capacity*: Each baker has a capacity of how many coins it can accept, which is based on how many coins it currently holds itself. A baker is "over-delegated" when it has exceeded the amount of delegation it can take.
 
@@ -86,4 +87,4 @@ That's it. The only thing you should worry about is choosing an excellent and re
 
 ## References
 
-- [1] https://tezos.gitlab.io/introduction/howtorun.html#delegating-your-coins
+- [1] <https://tezos.gitlab.io/introduction/howtorun.html#delegating-your-coins>

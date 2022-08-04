@@ -568,7 +568,7 @@ Then choose the desired protocol for your baker/accuser (you probably want to re
 PtJakart` by the latest protocol version):
 
 ```bash
-PROTOCOL="013-PtJakart"
+PROTOCOL="013-ptjakart"
 ```
 
 Then, to install the binaries, run the following commands:

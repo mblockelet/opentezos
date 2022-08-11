@@ -171,7 +171,7 @@ Run the node in detached mode (`-d`), as instance on the testnet  "jakartanet " 
 history-mode "full" using the following command:
 
 ```bash
-docker run --privileged -v /dev/bus/usb:/dev/bus/usb -v node-data-volume:/var/run/
+docker run --privileged -v /dev/bus/usb:/dev/bus/usb -v node-data-volume:/var/run/tezos/node -d -it -p 8732:8732 --name=tezos-public-node-full tezos/tezos:latest tezos-node --network=jakartanet --history-mode=full
 ```
 
 This command will automatically download the `tezos/tezos:latest` image:
@@ -183,7 +183,7 @@ e.g. Ledger
 - `-v node-data-volume:/var/run/tezos/node` mount node-data-volume to the specified container. It is where blockchain
 data will be stored
 - `--network= NETWORK` selects which network to run. Possible values are: **sandbox**, **mainnet**,
-**[testnet]** (e.g., ghostnet, kathmandunet. Learn more about testnet aliases [here](https://tezos.gitlab.io/introduction/test_networks.html)). **Default is mainnet.**
+**[testnet]** (e.g., ghostnet, kathmandunet, jakartanet. Learn more about testnet aliases [here](https://tezos.gitlab.io/introduction/test_networks.html)). **Default is mainnet.**
 - `--history-mode= MODE` lets you set the mode for the node's blockchain history storage.
 Possible values are **archive** , **full** (default), **full:N** , **rolling** , **rolling:N**.
 
@@ -506,7 +506,6 @@ wget <snapshot_url>
 **2.** Launch the node and baker daemons:
 
 ```bash
-docker-compose stop import
 docker-compose up -d node_full
 docker-compose up -d baker
 sudo docker exec -it tezos-public-node-full sh

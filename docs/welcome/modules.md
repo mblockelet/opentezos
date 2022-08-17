@@ -104,7 +104,7 @@ Welcome Tezos Developers! Explore the technical and economic concepts behind the
     icon="img/icons/baker-big-light.svg"
     iconDark="img/icons/baker-big-dark.svg"
     title="Deploy Bakers"
-    to="/baker"
+    to="/baking/cli-baker"
   />
   <OverlayCard
     description="Automated market maker, stablecoins, flash loans, synthetics, etc."

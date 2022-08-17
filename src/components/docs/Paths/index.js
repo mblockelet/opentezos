@@ -160,7 +160,7 @@ class Paths extends React.Component {
               icon="img/icons/baker-big-light.svg"
               iconDark="img/icons/baker-big-dark.svg"
               title="Deploy Bakers"
-              to="/baker"
+              to="/baking/cli-baker"
             />
           )}
           {[paths.ALL, paths.DEV, paths.C_LEVEL, paths.STARTUPPER].includes(

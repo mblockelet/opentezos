@@ -10,7 +10,7 @@ Becoming a baker or a delegate on Tezos is a great way to contribute to the ecos
 
 Everyone with at least 6,000 Tez can produce, sign and validate blocks and get rewards in proportion to their stake. The only thing you need to exercise your baking rights is to run a node with baking software and keep it online and up to date.
 
-OpenTezos has dedicated modules on [How baking works](/baking) and [How to set up your baker](/contribute/baker). However, this might be pretty complicated for inexperienced users — a more accessible alternative is to delegate instead of baking.
+OpenTezos has dedicated modules on [How baking works](/baking) and [How to set up your baker](/baking/cli-baker). However, this might be pretty complicated for inexperienced users — a more accessible alternative is to delegate instead of baking.
 
 ## Delegation
 

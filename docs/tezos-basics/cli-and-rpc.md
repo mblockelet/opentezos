@@ -4,6 +4,12 @@ title: CLI and RPC
 authors: Thomas Zoughebi, Aymeric Bethencourt, and Maxime Fernandez
 ---
 
+:::info
+A list of community-run nodes can be found [here](https://tezostaquito.io/docs/rpc_nodes/#list-of-community-run-nodes)
+:::
+
+
+
 In this chapter, the reader will learn how to install the official "tezos-client" and "tezos-admin-client" applications and run them using the Command Line Interface. These commands call on the remote procedures of a Tezos node (local or remote). There are many commands, but we'll see some examples.
 
 ## Connecting to the network

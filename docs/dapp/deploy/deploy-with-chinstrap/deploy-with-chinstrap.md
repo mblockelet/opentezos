@@ -4,7 +4,7 @@ title: Deploy with Chinstrap
 authors: ant4g0nist
 ---
 
-[![Chinstrap](../../../static/img/dapp/chinstrap.png)](https://chinstrap.io)
+[![Chinstrap](../../../../static/img/dapp/chinstrap.png)](https://chinstrap.io)
 
 
 *Chinstrap*, developed by [ant4g0nist](https://twitter.com/ant4g0nist), uses python scripts to perform smart contract deployments and makes deployments easier and faster.

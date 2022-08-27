@@ -4,7 +4,7 @@ title: Raffle contract
 authors: Maxime Sallerin and Benjamin Pilia
 ---
 
-import NotificationBar from '../../../src/components/docs/NotificationBar';
+import NotificationBar from '../../../../src/components/docs/NotificationBar';
 
 The language used in smart contracts on Tezos is [Michelson](/michelson/introduction), a stack-based language. However, this kind of language is not commonly used by developers and as the code becomes complex and longer, it gets increasingly harder to keep readable and clean code in Michelson. However, the Tezos ecosystem provides a number of high level languages, which make smart contracts development as easy as any application development. LIGO is one of these languages.
 
@@ -165,7 +165,7 @@ Every LIGO smart contract must define a `main` function. This `main` function de
 
 <br/>
 
-![](../../../static/img/ligo/main_function.svg)
+![](../../../../static/img/ligo/main_function.svg)
 <small className="figure">FIGURE 1: Main function</small>
 
 <br/>

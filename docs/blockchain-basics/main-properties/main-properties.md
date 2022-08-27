@@ -49,7 +49,7 @@ Each new block is linked to the previous one: they are chained. The more blocks 
 The reference to the previous block is inside the new block's *header*. This reference is made with the *SHA256* [hash function](https://en.wikipedia.org/wiki/Hash_function) applied on the previous block's header (more on that in the [next chapter on Proof-of-Work](/blockchain-basics/proof-of-work)).  
 This process is achieved through the [Cipher Block Chaining (CBC)](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_block_chaining_(CBC)) principle from 1976, where instead of a _XOR_ function (plain text additions will match [*nonce*](https://en.wikipedia.org/wiki/Cryptographic_nonce) additions in the next chapter), the _SHA256_ function is used. Twice:
 
-![Chain of blocks](../../static/img/blockchain-basics/blocks-chain.svg "Chain of blocks")
+![Chain of blocks](../../../static/img/blockchain-basics/blocks-chain.svg "Chain of blocks")
 
 More on that in the [next chapter on Proof-of-Work](/blockchain-basics/proof-of-work).
 

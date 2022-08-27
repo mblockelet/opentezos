@@ -72,7 +72,7 @@ The first DAO on Ethereum, simply called "[_The DAO_](https://en.wikipedia.org/w
 
 Today, Bitcoin and Ethereum remain the two main protocols with the most adoption, but many exciting alternatives have been created, notably Tezos in 2018.
 
-![A non-hexaustive timeline](../../static/img/blockchain-basics/timeline.svg "A non-exhaustive timeline")
+![A non-hexaustive timeline](../../../static/img/blockchain-basics/timeline.svg "A non-exhaustive timeline")
 <small className="figure">FIGURE 2: A non-exhaustive timeline</small>
 
 ## Terminology

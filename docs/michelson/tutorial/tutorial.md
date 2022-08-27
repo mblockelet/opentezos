@@ -4,7 +4,7 @@ title: Tutorial
 authors: Frank Hillard
 ---
 
-import NotificationBar from '../../src/components/docs/NotificationBar';
+import NotificationBar from '../../../src/components/docs/NotificationBar';
 
 This section introduces the main concepts of the Michelson language. It begins with the basics of **stack manipulation** then focuses on primitive types and more complex **data structures**. Finally the chapter focuses on specific features related to smart contracts concepts.
 

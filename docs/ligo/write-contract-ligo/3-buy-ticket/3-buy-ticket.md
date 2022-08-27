@@ -4,7 +4,7 @@ title: Buy ticket
 authors: Maxime Sallerin and Benjamin Pilia
 ---
 
-import NotificationBar from '../../../src/components/docs/NotificationBar';
+import NotificationBar from '../../../../src/components/docs/NotificationBar';
 
 ## Smart Contract development: Buy ticket entrypoint
 > LIGO concepts used in this part: 

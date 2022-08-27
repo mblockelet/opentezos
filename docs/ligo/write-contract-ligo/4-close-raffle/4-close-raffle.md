@@ -4,7 +4,7 @@ title: Close raffle
 authors: Maxime Sallerin and Benjamin Pilia
 ---
 
-import NotificationBar from '../../../src/components/docs/NotificationBar';
+import NotificationBar from '../../../../src/components/docs/NotificationBar';
 
 ## Smart Contract development: Close raffle entrypoint
 > LIGO concepts used in this part: with this last entrypoint, you will learn how to use transactions to send the reward to the winner. In addition, this will be the opportunity to warn you about some limitations of the language.

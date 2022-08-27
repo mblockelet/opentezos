@@ -4,7 +4,7 @@ title: Refactoring
 authors: Maxime Sallerin and Benjamin Pilia
 ---
 
-import NotificationBar from '../../../src/components/docs/NotificationBar';
+import NotificationBar from '../../../../src/components/docs/NotificationBar';
 
 ## Smart contract refactoring
 Just as any other project, smart contracts will need refactoring during their development. In this part, the way the winner is chosen will be refactored. 

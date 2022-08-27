@@ -28,7 +28,7 @@ Let's create a new wallet, choose a password and save the mnemonic phrase.
 
 You'll get to the main page:
 
-![](../../static/img/dapp/temple1.png "Temple main page")
+![](../../../static/img/dapp/temple1.png "Temple main page")
 
 ## Faucet import
 
@@ -38,19 +38,19 @@ Then, open the Temple Wallet. Click on the network dropdown bar (1), select _Han
 
 Once the activation is confirmed, you will automatically be redirected to the _Temple_ main page with your activated account.
 
-![](../../static/img/dapp/temple2.png "Temple main page")
+![](../../../static/img/dapp/temple2.png "Temple main page")
 
 ## Send a transaction
 
 Now that you have an account with some funds from the faucet, let's send some of them to our first account. Click on "Send".
 
-![](../../static/img/dapp/temple3.png "Temple send page")
+![](../../../static/img/dapp/temple3.png "Temple send page")
 
 You can send funds to any address by manually filling the recipient, or you can choose from one of your addresses by clicking on the list that appears when you click in the text box.
 
 Send 100 Tez (or another amount) to your first account. A confirmation page will pop up. You can review some information on this page: transaction amount, receiver and fees.
 
-![](../../static/img/dapp/temple4.png "Temple send page")
+![](../../../static/img/dapp/temple4.png "Temple send page")
 
 All the transaction information can be found under the "Raw" tab:
 

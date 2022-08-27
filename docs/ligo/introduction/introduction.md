@@ -7,7 +7,7 @@ authors: Maxime Sallerin, Benjamin Pilia and Frank Hillard
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import NotificationBar from '../../src/components/docs/NotificationBar';
+import NotificationBar from '../../../src/components/docs/NotificationBar';
 
 Tezos smart contracts are written in [Michelson](https://opentezos.com/michelson), which is a stack-based language and the lowest level of language for a Tezos smart contract. Michelson code can be deployed as-is on the Tezos network.
 

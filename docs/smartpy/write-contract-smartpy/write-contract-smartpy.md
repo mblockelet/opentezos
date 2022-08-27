@@ -4,7 +4,7 @@ title: Smart contract development with SmartPy
 authors: Maxime Sallerin
 ---
 
-import NotificationBar from '../../src/components/docs/NotificationBar';
+import NotificationBar from '../../../src/components/docs/NotificationBar';
 
 In this chapter, we will use _SmartPy_ to develop a smart contract based Raffle and cover the most important aspects of the framework. We will use this opportunity to introduce new notions as they appear. For a complete reference of _SmartPy_, please refer to the [Reference Manual](https://smartpy.io/reference.html).
 

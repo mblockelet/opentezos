@@ -5,7 +5,7 @@ title: Smart Contracts
 authors: Thomas Zoughebi
 ---
 
-import NotificationBar from '../../src/components/docs/NotificationBar';
+import NotificationBar from '../../../src/components/docs/NotificationBar';
 
 In this chapter, we're going to explain how and why Bitcoin's programming features are limited. We'll define what _Smart Contracts_ are and how they are already present on Bitcoin. And finally, we'll define what _Gas_ is and why it was introduced on Ethereum.
 

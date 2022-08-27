@@ -5,7 +5,7 @@ title: Private indexer
 authors: Benjamin Pilia
 ---
 
-import NotificationBar from '../../src/components/docs/NotificationBar';
+import NotificationBar from '../../../src/components/docs/NotificationBar';
 
 The tools presented in this module so far are fully public: everyone can use them. However, they are meant
 for public networks, and the user is dependent on the infrastructure and configuration of these services. Some
@@ -252,7 +252,7 @@ This means that there has already been some activity that we can watch on our ne
 
 _TzStats_ is running at http://localhost:3000:
 
-![](../../static/img/explorer/tzstat-1.png "Welcome page of a private tzstats")
+![](../../../static/img/explorer/tzstat-1.png "Welcome page of a private tzstats")
 
 Notice that the frontend is different from its public version on [TzStats.com](https://tzstats.com/) but the inner
 workings are the same.
@@ -260,25 +260,25 @@ workings are the same.
 On top, the search bar allows you to search for transactions, blocks, addresses, etc. The left panel contains various information displayed, such as the number of baked blocks.
 
 Click on it to get more info on that block:
-![](../../static/img/explorer/tzstat-2.png "Block details page")
+![](../../../static/img/explorer/tzstat-2.png "Block details page")
 
 Many block details are displayed; most of them can be clicked on for even more info. The block above only contains one
 operation, which is a call to our smart contracts. Click the hash to open the operation page:
 
-![](../../static/img/explorer/tzstat-3.png "Smart contract call details page")
+![](../../../static/img/explorer/tzstat-3.png "Smart contract call details page")
 
 The sender does match Alice's `pkh` from _scripts/sandbox/account.js_. `pkh` means public key hash: it is an address on a Tezos network.
 Notice the contract address matches the returned address from the migration output logs.
 
 Click on the address to inspect the smart contract:
-![](../../static/img/explorer/tzstat-4.png "Smart contract details page")
+![](../../../static/img/explorer/tzstat-4.png "Smart contract details page")
 
 You can see the history of calls, the entrypoints, the storage, etc. Notice the two calls made by _Truffle_: the
 origination of the contract and the purchase of a ticket.
 
 The storage page displays the storage definition, the type of each field and their associated current value. Note that
 one participant is registered in the raffle and the contract holds one Tez (from selling one ticket).
-![](../../static/img/explorer/tzstat-5.png "Smart contract storage page")
+![](../../../static/img/explorer/tzstat-5.png "Smart contract storage page")
 
 ### About big maps
 
@@ -287,12 +287,12 @@ since _big maps_ are meant to hold unbounded lists of data, they cannot be loade
 performance concerns). Each _big map_ is indexed and the number `1` being displayed is the index number of the _big map_
 . Its data can actually be accessed by clicking on the `Bigmap 1` section.
 
-![](../../static/img/explorer/tzstat-6.png "Big map section")
+![](../../../static/img/explorer/tzstat-6.png "Big map section")
 
 Regular _maps_ are meant to be used with limited data size as the data is directly retrieved from the storage section.
 You can see an example of such a _map_ in the second migrated smart contract (baked in the fourth block):
 
-![](../../static/img/explorer/tzstat-7.png "Storage page")
+![](../../../static/img/explorer/tzstat-7.png "Storage page")
 
 The _TzStats_ interface is user-friendly and every piece of information can easily be read by clicking on each
 element. Remember that all this information is coming from the data retrieved by the indexer: _TzStats_ just displays
@@ -304,7 +304,7 @@ The same pieces of information can be retrieved without the frontend by just usi
 opened on _TzStats_, an API call is made to _TzIndex_. Each API call can be seen in the network explorer by pressing F12
 in the network section.
 
-![](../../static/img/explorer/tzstat-8.png "Retrieving the API call")
+![](../../../static/img/explorer/tzstat-8.png "Retrieving the API call")
 
 The _request URL_ shows the called API endpoints:
 

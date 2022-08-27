@@ -5,7 +5,7 @@ title: Proof-of-work
 author: Aymeric Bethencourt
 ---
 
-import NotificationBar from '../../src/components/docs/NotificationBar';
+import NotificationBar from '../../../src/components/docs/NotificationBar';
 
 _Proof-of-work_ was the first fully functional blockchain consensus mechanism ever created. It is still in use by Bitcoin and many other blockchains. It requires its users to _mine_ to get a chance to earn a reward for validating blocks of transactions. In this chapter, we will look into the technical side of things and how mining works.
 

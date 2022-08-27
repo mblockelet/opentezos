@@ -4,8 +4,8 @@ title: Exam
 author: Aymeric Bethencourt
 ---
 
-import ExamForm from '../../src/components/docs/ExamForm';
-import ExamCheckbox from '../../src/components/docs/ExamCheckbox';
+import ExamForm from '../../../src/components/docs/ExamForm';
+import ExamCheckbox from '../../../src/components/docs/ExamCheckbox';
 
 <ExamForm moduleName="DeFi">
 

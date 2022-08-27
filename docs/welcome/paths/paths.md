@@ -6,7 +6,7 @@ slug: /paths
 authors: Aymeric Bethencourt
 ---
 
-import Paths from '../../src/components/docs/Paths';
+import Paths from '../../../src/components/docs/Paths';
 
 ### Choose your own path
 
